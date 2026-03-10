@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Initiation - Vertrieb | NETGAINS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.cdnfonts.com/css/druk-wide-bold" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700;1,800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+/* =========================================
+   1. BASE THEME: BRUTALIST CYBERPUNK (NETGAINS)
+   ========================================= */
+:root {
+  --bg: #000000;
+  --text: #94a3b8;
+  --white: #ffffff;
+  --teal: #2dd4bf;
+  --teal-glow: rgba(45, 212, 191, 0.4);
+  --cyan: #06b6d4;
+  --glass-bg: rgba(255, 255, 255, 0.015);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --font-head: 'Druk Wide Bold', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+p { margin: 0; margin-bottom: 15px; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--font-body);
+  transition: background-color 0.4s ease;
+}
+
+#presentation-wrapper {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+  transform-origin: center center;
+  transition: transform 0.2s ease-out;
+}
+
+.slide-container {
+  background: var(--bg);
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.slide-container.active {
+  display: flex;
+  z-index: 2;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.slide-container > * { position: relative; z-index: 1; }
+
+/* TYPOGRAPHY */
+h1, h2, h3 {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.meta-label, .subtitle, .number-label, .chart-summary {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--teal);
+  transition: all 0.3s ease;
+}
+
+h1 {
+  font-size: 65px;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.slide-title {
+  font-size: 38px;
+  margin-bottom: 40px;
+  text-align: left;
+  width: 100%;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 15px;
+}
+
+h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+p, li, .bar .label, th, td {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* LAYOUT & GLASSMORPHISM */
+.content-area {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+.tile, .two-column.tiled > div, .quote-layout, .area-chart-container, .full-bg-image .content-overlay, .image-wrapper {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0; /* Brutalist sharp edges */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  transition: all 0.4s ease;
+}
+
+.two-column {
+  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  width: 100%;
+}
+
+.two-column.tiled { align-items: stretch; }
+.two-column.tiled > div { padding: 40px; text-align: left; }
+.two-column.tiled h3 { color: var(--teal); }
+
+.two-column ul { list-style: none; margin: 0; padding: 0; }
+.two-column li { margin-bottom: 20px; padding-left: 30px; position: relative; }
+.two-column li::before {
+  content: '■';
+  color: var(--teal);
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+  top: 6px;
+  text-shadow: 0 0 10px var(--teal-glow);
+}
+
+.image-wrapper {
+  height: 400px;
+  max-width: 100%;
+  overflow: hidden;
+  width: 100%;
+  background: #000;
+}
+
+.image-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.3) brightness(0.6);
+}
+
+.tiled-content {
+  align-items: stretch;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+}
+
+.tile {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 40px 30px;
+  text-align: left;
+  position: relative;
+}
+
+.tile::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 40%; height: 2px;
+  background: var(--teal);
+  box-shadow: 0 0 15px var(--teal);
+}
+
+.tile .icon {
+  color: var(--teal);
+  font-size: 40px;
+  margin-bottom: 25px;
+  text-shadow: 0 0 20px var(--teal-glow);
+}
+
+.image-tile { flex: 1; text-align: left; }
+.image-tile .image-wrapper { height: 220px; margin-bottom: 20px; }
+.image-tile h3 { color: var(--white); font-size: 18px; }
+
+.full-bg-image { background-position: center; background-size: cover; }
+.full-bg-image .content-overlay {
+  text-align: center;
+  padding: 60px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.highlight-numbers-layout > div:first-child { flex: 0 0 45%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+.highlight-numbers-layout .number {
+  color: var(--teal);
+  font-size: 140px;
+  line-height: 1;
+  text-shadow: 0 0 40px var(--teal-glow);
+}
+.highlight-numbers-layout .number-label { margin-top: 20px; }
+
+/* CHARTS */
+.chart-container { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+.bar { align-items: center; display: flex; gap: 20px; }
+.bar .label { color: var(--text); flex: 0 0 220px; text-align: right; font-family: var(--font-head); font-size: 14px; letter-spacing: 1px; }
+.bar .bar-inner {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  flex-grow: 1;
+  height: 40px;
+}
+.bar .bar-fill {
+  align-items: center;
+  color: var(--white);
+  display: flex;
+  font-size: 14px;
+  font-family: var(--font-head);
+  height: 100%;
+  justify-content: flex-end;
+  padding-right: 15px;
+  transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.area-chart-container { padding: 30px; width: 100%; }
+.area-chart-svg { height: auto; overflow: visible; width: 100%; }
+.area-chart-svg .grid line { stroke-width: 1; stroke: var(--glass-border); }
+.area-chart-svg .area-fill { fill: url(#area-gradient); stroke: none; }
+.area-chart-svg .line-stroke { fill: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 3; stroke: var(--teal); filter: drop-shadow(0 0 8px var(--teal-glow)); }
+.area-chart-svg .data-point { fill: var(--bg); stroke-width: 2; stroke: var(--teal); }
+.area-chart-svg .axis-labels { fill: var(--text); font-size: 12px; font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+.area-chart-svg .y-axis-labels { text-anchor: end; }
+.area-chart-svg .x-axis-labels { text-anchor: middle; }
+
+/* QUOTE */
+.quote-layout {
+  margin: 0 auto;
+  text-align: left;
+  width: 90%;
+  padding: 60px;
+  border-left: 4px solid var(--teal);
+}
+.quote-layout blockquote {
+  color: var(--white);
+  font-size: 28px;
+  font-family: var(--font-head);
+  line-height: 1.4;
+  margin: 0 0 30px 0;
+}
+.quote-layout cite {
+  color: var(--teal);
+  font-size: 14px;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Q&A */
+.qa-layout { margin: 0 auto; text-align: center; width: 100%; align-self: center; }
+.qa-layout h2 { font-size: 70px; margin-bottom: 20px; text-shadow: 0 0 40px var(--teal-glow); }
+.qa-layout p { font-size: 20px; color: var(--text); }
+.qa-layout .contact-info {
+  color: var(--teal);
+  margin-top: 50px;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 30px;
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* BLEED IMAGE */
+.slide-container.bleed-image-layout { align-items: start; display: grid; gap: 0; grid-template-columns: 1fr 1fr; padding: 0; }
+.slide-container.bleed-image-layout > .content-container { padding: 60px; display: flex; flex-direction: column; height: 100%; }
+.slide-container.bleed-image-layout > .image-container { height: 100%; overflow: hidden; width: 100%; border-left: 1px solid var(--glass-border); }
+.slide-container.bleed-image-layout img.bleed-image-side { display: block; height: 100%; object-fit: cover; width: 100%; filter: grayscale(100%) contrast(1.2) brightness(0.5); }
+.bleed-text-side { display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
+.bleed-text-side h3 { font-size: 28px; margin-bottom: 20px; color: var(--teal); }
+
+/* CONTROLS */
+.controls { position: absolute; bottom: 30px; right: 30px; display: flex; gap: 15px; z-index: 100; }
+.controls button {
+  background: var(--glass-bg);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  width: 45px;
+  height: 45px;
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+.controls button:hover { border-color: var(--teal); color: var(--teal); box-shadow: 0 0 15px var(--teal-glow); }
+.progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--teal); width: 0%; transition: width 0.3s ease; z-index: 100; box-shadow: 0 0 10px var(--teal); }
+.slide-counter { position: absolute; bottom: 30px; left: 40px; color: var(--text); font-size: 12px; z-index: 100; font-family: var(--font-body); font-weight: 800; letter-spacing: 0.2em; }
+.nav-area { position: absolute; top: 0; height: 100%; width: 15%; z-index: 90; cursor: pointer; }
+.nav-area-left { left: 0; }
+.nav-area-right { right: 0; }
+
+
+/* =========================================
+   2. THEME: SALES FORCE ONE (CYBER DASHBOARD)
+   ========================================= */
+body.theme-sfo {
+  background-color: #060b0d; /* Darker teal/black background */
+}
+
+body.theme-sfo .slide-container {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Cyber Grid Background overlay */
+body.theme-sfo #presentation-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(8, 247, 206, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 247, 206, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body.theme-sfo h1,
+body.theme-sfo h2,
+body.theme-sfo h3,
+body.theme-sfo .slide-title,
+body.theme-sfo .number {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+body.theme-sfo h1 {
+  color: #08f7ce;
+  text-shadow: 0 0 25px rgba(8, 247, 206, 0.5);
+  font-size: 75px;
+}
+
+body.theme-sfo .slide-title {
+  color: #08f7ce;
+  text-shadow: 0 0 15px rgba(8, 247, 206, 0.3);
+  border-bottom-color: rgba(8, 247, 206, 0.2);
+}
+
+body.theme-sfo h3 {
+  color: #ffffff;
+}
+
+body.theme-sfo .meta-label, 
+body.theme-sfo .subtitle, 
+body.theme-sfo .number-label {
+  color: #08f7ce;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+}
+
+body.theme-sfo p, 
+body.theme-sfo li, 
+body.theme-sfo .bar .label {
+  color: #8da6ad;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body.theme-sfo strong {
+  color: #08f7ce;
+  font-weight: 700;
+}
+
+/* Round Panels like in the provided image */
+body.theme-sfo .tile,
+body.theme-sfo .two-column.tiled > div,
+body.theme-sfo .quote-layout,
+body.theme-sfo .area-chart-container,
+body.theme-sfo .full-bg-image .content-overlay,
+body.theme-sfo .image-wrapper {
+  background-color: #0d171a;
+  border: 1px solid #1a2a2e;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* Remove brutalist border treatments */
+body.theme-sfo .tile,
+body.theme-sfo .two-column.tiled > div,
+body.theme-sfo .quote-layout,
+body.theme-sfo .area-chart-container {
+  border-top: 1px solid #1a2a2e;
+  border-left: 1px solid #1a2a2e;
+}
+
+body.theme-sfo .tile::before {
+  background: #08f7ce;
+  box-shadow: 0 0 15px #08f7ce;
+  border-radius: 16px 16px 0 0;
+  height: 3px;
+  width: 100%;
+  left: 0;
+  top: -1px;
+}
+
+body.theme-sfo .icon {
+  color: #08f7ce;
+  text-shadow: 0 0 15px rgba(8, 247, 206, 0.4);
+}
+
+body.theme-sfo .two-column li::before {
+  color: #08f7ce;
+  content: '●';
+  font-size: 14px;
+  top: 3px;
+  text-shadow: 0 0 8px rgba(8, 247, 206, 0.6);
+}
+
+body.theme-sfo .bar .bar-inner {
+  background-color: #0d171a;
+  border: 1px solid #1a2a2e;
+  border-radius: 10px;
+}
+
+body.theme-sfo .bar .bar-fill {
+  background: linear-gradient(90deg, #04826c, #08f7ce) !important;
+  color: #000 !important;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+}
+
+body.theme-sfo .progress-bar {
+  background: #08f7ce;
+  box-shadow: 0 0 10px #08f7ce;
+}
+
+body.theme-sfo .controls button {
+  background: #0d171a;
+  border-color: #1a2a2e;
+  color: #08f7ce;
+  border-radius: 12px;
+}
+
+body.theme-sfo .controls button:hover {
+  background: #08f7ce;
+  color: #000;
+  box-shadow: 0 0 15px rgba(8, 247, 206, 0.5);
+}
+
+body.theme-sfo .contact-info {
+  color: #08f7ce;
+  border-color: rgba(8, 247, 206, 0.2);
+}
+
+/* SVG Chart Override for Theme */
+body.theme-sfo #area-gradient stop { stop-color: #08f7ce !important; }
+body.theme-sfo .line-stroke { stroke: #08f7ce !important; filter: drop-shadow(0 0 6px rgba(8,247,206,0.6)); }
+body.theme-sfo .data-point { stroke: #08f7ce !important; fill: #0d171a !important; }
+
+    </style>
+</head>
+<body>
+
+<div id="presentation-wrapper">
+
+    <!-- Slide 1: Full_Background_Image -->
+    <div class="slide-container active" id="slide1" style="background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop'); background-size: cover;">
+        <div class="content-overlay">
+            <div class="meta-label" style="margin-bottom: 20px;">NetGains System</div>
+            <h1>Die Initiation</h1>
+            <p>Willkommen in der Familie</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Image_Right_Text_Left (NetGains Specific) -->
+    <div class="slide-container" id="slide2">
+        <h2 class="slide-title">Das ist NetGains</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div>
+                        <ul>
+                            <li><strong>Tech-Exzellenz:</strong> Wir sind NetGains. Wir entwickeln die modernsten Websites, Apps und digitalen Systeme am Markt.</li>
+                            <li><strong>Unschlagbare Performance:</strong> Wir sind absolute Marktführer in Sachen Ladezeiten. Überprüfbar durch PageSpeed Insights. Keiner schlägt uns. Messbar.</li>
+                            <li><strong>Skalierbares Einkommen:</strong> Wir bauen einen Vertrieb auf, bei dem ihr direkte, massive Provisionen für jeden Abschluss erhaltet.</li>
+                            <li><strong>Das Ultimative System:</strong> Zusätzlich werdet ihr potenziell <em>für immer</em> monatlich an jedem eurer Kunden beteiligt. Dein Portfolio wächst stetig weiter.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2940&auto=format&fit=crop" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tiled_Text_With_Icons -->
+    <div class="slide-container" id="slide3">
+        <h2 class="slide-title">Unsere Prinzipien</h2>
+        <div class="content-area">
+            <div class="tiled-content">
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Loyalität</h3>
+                    <p>Die Familie steht an erster Stelle. Wir schützen unsere eigenen Leute und das System, das uns alle ernährt. Verrat ist das einzige Vergehen, das nicht vergeben wird.</p>
+                </div>
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-eye"></i></div>
+                    <h3>Fokus</h3>
+                    <p>Scheuklappen aufsetzen. Ignoriere den Lärm der Außenwelt. Die Methoden, die wir dir beibringen, sind das Einzige, was du brauchst, um zu gewinnen.</p>
+                </div>
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-crown"></i></div>
+                    <h3>Reichtum</h3>
+                    <p>Geld ist nicht das primäre Ziel, es ist die logische und unausweichliche Konsequenz deiner unbedingten Umsetzung unserer exakten Vorgaben.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Tiled_Images -->
+    <div class="slide-container" id="slide4">
+        <h2 class="slide-title">Der Pfad der Erleuchtung</h2>
+        <div class="content-area">
+            <div class="tiled-content">
+                <div class="image-tile">
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" alt=""></div>
+                    <h3>Dropshipping</h3>
+                    <p>Extreme Arbeit, winzige Margen. Abhängigkeit von Lieferketten, die man nicht kontrollieren kann.</p>
+                </div>
+                <div class="image-tile">
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2940&auto=format&fit=crop" alt="[Image of Trading Charts]"></div>
+                    <h3>Krypto Trading</h3>
+                    <p>Pures Glücksspiel. Keinerlei echter Wertewandel. Der Markt bestimmt dein Schicksal, nicht du selbst.</p>
+                </div>
+                <div class="image-tile">
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop" alt="[Image of Consulting]"></div>
+                    <h3>Consulting</h3>
+                    <p>Zeit gegen Geld tauschen. Ein goldenes Hamsterrad, aus dem man ohne echtes System nie entkommen kann.</p>
+                </div>
+            </div>
+            <p class="subtitle" style="text-align: center; margin-top: 30px;">David hat alles versucht. Er hat viel Geld gemacht. Aber es war nicht <em>das</em> perfekte System.</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Bleed_Image_Right -->
+    <div class="slide-container bleed-image-layout" id="slide5">
+        <div class="content-container">
+            <h2 class="slide-title">Die Offenbarung</h2>
+            <div class="content-area">
+                <div class="bleed-text-side">
+                    <h3>Das ultimative Konstrukt</h3>
+                    <p>Nach Jahren des Suchens und Analysierens fand David den heiligen Gral: Websites für Unternehmen.</p>
+                    <p>Die Pointe, über die niemand spricht? Er hat noch nie so viel Geld verdient wie in diesem scheinbar "langweiligen" Markt.</p>
+                    <p>Der Cashflow ist extrem. Der Bedarf in der Wirtschaft ist unendlich. Es ist die perfekte Maschinerie, die unaufhaltsam Gewinne generiert.</p>
+                </div>
+            </div>
+        </div>
+        <div class="image-container">
+            <img class="bleed-image-side" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2944&auto=format&fit=crop" alt="">
+        </div>
+    </div>
+
+    <!-- Slide 6: Quote -->
+    <div class="slide-container" id="slide6">
+        <h2 class="slide-title">Das wahre Motiv</h2>
+        <div class="content-area">
+            <div class="quote-layout">
+                <blockquote>MEIN ZIEL IST ES NICHT, FÜR MICH ALLEIN SO VIEL GELD WIE MÖGLICH ZU VERDIENEN. MEIN ZIEL IST ES, DAS MÄCHTIGSTE IMPERIUM AUFZUBAUEN, DAS DIESE BRANCHE JE GESEHEN HAT.</blockquote>
+                <cite>— DAVID</cite>
+            </div>
+            <p class="meta-label" style="margin-top: 40px; font-size: 14px;">Darum öffnen wir genau heute den Vertrieb.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Image_Right_Text_Left -->
+    <div class="slide-container" id="slide7">
+        <h2 class="slide-title">Die alte Welt des Vertriebs</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div>
+                        <ul>
+                            <li>Die traditionelle Vertriebswelt ist darauf ausgelegt, dich klein zu halten.</li>
+                            <li>Großkonzerne behalten 90% der Profite, während du die eigentliche Schwerstarbeit leistest.</li>
+                            <li>Mitarbeiter werden wie austauschbare Bauernfiguren auf einem Schachbrett behandelt.</li>
+                            <li>Du opferst deine Lebenszeit, um den Traum eines anderen aufzubauen, für Brosamen.</li>
+                            <li>Wir haben dieses veraltete, kranke System studiert, nur um es vollständig zu zerstören.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1505664159858-eb21e89b43e8?q=80&w=2864&auto=format&fit=crop" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Bar_Chart_For_Comparisons -->
+    <div class="slide-container" id="slide8">
+        <h2 class="slide-title">Branchen-Vergleich: Provisionen</h2>
+        <div class="content-area">
+            <div class="chart-container">
+                <div class="bar">
+                    <div class="label">Immobilien</div>
+                    <div class="bar-inner"><div class="bar-fill" style="width: 15%; background: rgba(255,255,255,0.05); color: var(--text);">3% - 6%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="label">Versicherungen</div>
+                    <div class="bar-inner"><div class="bar-fill" style="width: 20%; background: rgba(255,255,255,0.08); color: var(--text);">5% - 8%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="label">SaaS Software</div>
+                    <div class="bar-inner"><div class="bar-fill" style="width: 25%; background: rgba(255,255,255,0.12); color: var(--text);">10% - 15%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="label" style="color: var(--teal);">UNSER PAKT</div>
+                    <div class="bar-inner" style="border-color: var(--teal); box-shadow: 0 0 15px rgba(45, 212, 191, 0.2);"><div class="bar-fill" style="width: 90%; background: linear-gradient(90deg, var(--teal), var(--cyan)); color: #000;">50%</div></div>
+                </div>
+            </div>
+            <p class="chart-summary">Seht euch die nackten Zahlen an. Die alte Welt lacht euch aus. Wir ändern die Spielregeln nicht nur ein bisschen – wir stellen das gesamte System auf den Kopf.</p>
+        </div>
+    </div>
+
+    <!-- Slide 9: Highlighted_Numbers -->
+    <div class="slide-container" id="slide9">
+        <h2 class="slide-title">Das unschlagbare Angebot</h2>
+        <div class="content-area">
+            <div class="two-column highlight-numbers-layout">
+                <div>
+                    <div class="number">50%</div>
+                    <div class="number-label">Provision + Hosting</div>
+                </div>
+                <div>
+                    <h3 style="color: var(--teal); font-size: 24px; margin-bottom: 20px;">Das ist unser Pakt.</h3>
+                    <p>Du bringst das Geschäft, du bekommst sofort die Hälfte. Ohne Diskussionen, ohne versteckte Klauseln.</p>
+                    <p>Aber das ist nur der Anfang. Du wirst an jeder monatlichen Hosting-Zahlung beteiligt. Solange der Kunde bei uns bleibt, wirst du bezahlt. Für immer.</p>
+                    <p>Keine Limits nach oben. Keine Ausreden. Nur reine Performance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Two_Column_Tiled_Text -->
+    <div class="slide-container" id="slide10">
+        <h2 class="slide-title">Die Anatomie des Pakts</h2>
+        <div class="content-area">
+            <div class="two-column tiled">
+                <div>
+                    <div class="meta-label" style="margin-bottom: 10px;">50% Provision</div>
+                    <h3 style="color: var(--white);">Die Kapitalspritze</h3>
+                    <p style="margin-top: 20px;">Sofortiger und massiver Cashflow. Wenn du eine Website für 3.000€ abschließt, gehören 1.500€ unmittelbar dir. Dieser Mechanismus sichert dein Überleben und füttert deinen Hunger nach mehr.</p>
+                </div>
+                <div>
+                    <div class="meta-label" style="margin-bottom: 10px;">Hosting Anteil</div>
+                    <h3 style="color: var(--teal);">Das Blut-Einkommen</h3>
+                    <p style="margin-top: 20px;">Der wahre Schlüssel zur Macht: Passives, wiederkehrendes Einkommen. Du baust dir einen unzerstörbaren finanziellen Burggraben, der jeden Monat tiefer wird.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Area_Chart_For_Trends -->
+    <div class="slide-container" id="slide11">
+        <h2 class="slide-title">Der Zinseszins der Treue</h2>
+        <div class="content-area">
+            <div class="area-chart-container">
+                <svg class="area-chart-svg" viewBox="0 0 1000 350">
+                    <defs>
+                        <linearGradient id="area-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:var(--teal);" stop-opacity="0.4"></stop>
+                            <stop offset="100%" style="stop-color:var(--teal);" stop-opacity="0.0"></stop>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Grid Lines -->
+                    <g class="grid">
+                        <line x1="0" y1="300" x2="1000" y2="300"></line>
+                        <line x1="0" y1="50" x2="1000" y2="50" stroke-dasharray="5 5" opacity="0.3"></line>
+                        <line x1="0" y1="133" x2="1000" y2="133" stroke-dasharray="5 5" opacity="0.3"></line>
+                        <line x1="0" y1="216" x2="1000" y2="216" stroke-dasharray="5 5" opacity="0.3"></line>
+                    </g>
+
+                    <!-- Exponential Growth Curve representing recurring hosting revenue -->
+                    <path class="area-fill" d="M 0 300 L 200 280 L 400 220 L 600 130 L 800 60 L 1000 10 L 1000 300 Z"></path>
+                    <polyline class="line-stroke" points="0,300 200,280 400,220 600,130 800,60 1000,10"></polyline>
+
+                    <!-- Data Points -->
+                    <g class="data-points">
+                        <circle class="data-point" cx="0" cy="300" r="6"></circle>
+                        <circle class="data-point" cx="200" cy="280" r="6"></circle>
+                        <circle class="data-point" cx="400" cy="220" r="6"></circle>
+                        <circle class="data-point" cx="600" cy="130" r="6"></circle>
+                        <circle class="data-point" cx="800" cy="60" r="6"></circle>
+                        <circle class="data-point" cx="1000" cy="10" r="6"></circle>
+                    </g>
+
+                    <!-- Axis Labels -->
+                    <g class="axis-labels y-axis-labels">
+                        <text x="-15" y="55">Max</text>
+                        <text x="-15" y="305">0</text>
+                    </g>
+                    <g class="axis-labels x-axis-labels">
+                        <text x="0" y="335">Monat 1</text>
+                        <text x="200" y="335">Monat 3</text>
+                        <text x="400" y="335">Monat 6</text>
+                        <text x="600" y="335">Monat 9</text>
+                        <text x="800" y="335">Monat 12</text>
+                        <text x="1000" y="335">Zukunft</text>
+                    </g>
+                </svg>
+            </div>
+            <p class="chart-summary">Jeder neue Abschluss erhöht unweigerlich dein monatliches Grundeinkommen. Nach 12 Monaten konsequenter Umsetzung des Systems wirst du praktisch schon fürs Atmen bezahlt.</p>
+        </div>
+    </div>
+
+    <!-- Slide 12: Q&A -->
+    <div class="slide-container" id="slide12">
+        <div class="qa-layout">
+            <div class="meta-label" style="margin-bottom: 30px;">Das NetGains Imperium</div>
+            <h2>Bist du bereit?</h2>
+            <p>Der Kreis schließt sich hier. Tritt ein und akzeptiere den Pakt,<br>oder bleib für immer in der Bedeutungslosigkeit draußen.</p>
+            <div class="contact-info">
+                david &nbsp;&bull;&nbsp; florian &nbsp;&bull;&nbsp; cansin<br>
+                <span style="color: var(--white); font-size: 16px; margin-top: 10px; display: inline-block; font-weight: 400; text-transform: lowercase; letter-spacing: 0;">initiation@netgains.de</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI Elements -->
+    <div class="progress-bar" id="progress-bar"></div>
+    <div class="slide-counter" id="slide-counter">1 / 12</div>
+    
+    <div class="controls">
+        <button id="btn-theme" title="Theme wechseln"><i class="fa-solid fa-palette"></i></button>
+        <button id="btn-prev" title="Zurück"><i class="fa-solid fa-chevron-left"></i></button>
+        <button id="btn-next" title="Weiter"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Invisible Click Areas for seamless mouse navigation -->
+    <div class="nav-area nav-area-left" id="area-prev"></div>
+    <div class="nav-area nav-area-right" id="area-next"></div>
+
+</div>
+
+<script>
+    // --- 1. Scaling Logic to make presentation fit window ---
+    function resizePresentation() {
+        const wrapper = document.getElementById('presentation-wrapper');
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        
+        // Native presentation size
+        const targetWidth = 1280;
+        const targetHeight = 720;
+        
+        // Calculate scale needed to fit both width and height
+        const scaleWidth = windowWidth / targetWidth;
+        const scaleHeight = windowHeight / targetHeight;
+        const scale = Math.min(scaleWidth, scaleHeight);
+        
+        wrapper.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', resizePresentation);
+    resizePresentation();
+
+
+    // --- 2. Presentation Navigation Logic ---
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-container');
+    const totalSlides = slides.length;
+    const progressBar = document.getElementById('progress-bar');
+    const counter = document.getElementById('slide-counter');
+
+    function updatePresentation() {
+        slides.forEach((slide, index) => {
+            if (index === currentSlide) {
+                slide.classList.add('active');
+                
+                // Animation trigger for bars
+                const bars = slide.querySelectorAll('.bar-fill');
+                if (bars.length > 0) {
+                    bars.forEach(bar => {
+                        const targetWidth = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => { bar.style.width = targetWidth; }, 100);
+                    });
+                }
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+
+        const progress = ((currentSlide + 1) / totalSlides) * 100;
+        progressBar.style.width = `${progress}%`;
+        counter.innerText = `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updatePresentation();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updatePresentation();
+        }
+    }
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            prevSlide();
+        }
+    });
+
+    // Button controls
+    document.getElementById('btn-next').addEventListener('click', nextSlide);
+    document.getElementById('btn-prev').addEventListener('click', prevSlide);
+    
+    // Theme Switcher Logic
+    document.getElementById('btn-theme').addEventListener('click', () => {
+        document.body.classList.toggle('theme-sfo');
+    });
+
+    // Invisible click areas controls
+    document.getElementById('area-next').addEventListener('click', nextSlide);
+    document.getElementById('area-prev').addEventListener('click', prevSlide);
+
+    // Initialize
+    updatePresentation();
+</script>
+
+</body>
+</html>
+```
