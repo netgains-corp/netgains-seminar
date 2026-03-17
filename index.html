@@ -1,913 +1,1410 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Die Initiation - Vertrieb | NETGAINS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.cdnfonts.com/css/druk-wide-bold" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700;1,800&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-/* =========================================
-   1. BASE THEME: BRUTALIST CYBERPUNK (NETGAINS)
-   ========================================= */
-:root {
-  --bg: #000000;
-  --text: #94a3b8;
-  --white: #ffffff;
-  --teal: #2dd4bf;
-  --teal-glow: rgba(45, 212, 191, 0.4);
-  --cyan: #06b6d4;
-  --glass-bg: rgba(255, 255, 255, 0.015);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --font-head: 'Druk Wide Bold', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NETGAINS Präsentation</title>
+<link href="https://fonts.cdnfonts.com/css/druk-wide-bold" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
 
-* {
-  box-sizing: border-box;
-  user-select: none;
-}
+/* ── RESET & BASE ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
-p { margin: 0; margin-bottom: 15px; }
+@keyframes shine {
+  0%   { background-position: -300% center; }
+  100% { background-position: 300% center; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmerBorder {
+  0%,100% { opacity:.4; } 50% { opacity:1; }
+}
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  margin: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0; height: 100vh; width: 100vw;
+  display: flex; align-items: center; justify-content: center;
   overflow: hidden;
-  font-family: var(--font-body);
-  transition: background-color 0.4s ease;
+  transition: background .5s ease;
 }
 
 #presentation-wrapper {
-  width: 1280px;
-  height: 720px;
-  position: relative;
-  transform-origin: center center;
-  transition: transform 0.2s ease-out;
+  width: 1280px; height: 720px;
+  position: relative; transform-origin: center center;
 }
 
+/* ── SLIDES ───────────────────────────────────── */
 .slide-container {
-  background: var(--bg);
-  display: none;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  overflow: hidden;
-  padding: 60px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-  transition: all 0.4s ease;
+  display: none; flex-direction: column;
+  height: 100%; width: 100%;
+  position: absolute; top: 0; left: 0;
+  overflow: hidden; z-index: 1;
+  padding: 58px 68px;
 }
-
 .slide-container.active {
-  display: flex;
-  z-index: 2;
-  animation: fadeIn 0.5s ease-out forwards;
+  display: flex; z-index: 2;
+  animation: fadeUp .5s cubic-bezier(.22,1,.36,1) both;
+}
+.slide-container > * { position: relative; z-index: 2; }
+
+/* Pattern layer */
+.slide-container::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+}
+/* Vignette */
+.slide-container::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.55) 100%);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
+/* ── CONTROLS ─────────────────────────────────── */
+.controls {
+  position: absolute; bottom: 24px; right: 24px;
+  display: flex; gap: 10px; z-index: 999;
+}
+.controls button {
+  width: 44px; height: 44px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 18px; transition: all .2s ease;
+  position: relative; z-index: 999; border-radius: 2px;
+}
+.progress-bar {
+  position: absolute; bottom: 0; left: 0;
+  height: 3px; width: 0%; transition: width .35s ease; z-index: 999;
+}
+.slide-counter {
+  position: absolute; bottom: 30px; left: 36px;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 10px; letter-spacing: .25em;
+  z-index: 999; opacity: .4;
+}
+.chapter-indicator {
+  position: absolute; top: 24px; right: 36px;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 9px; letter-spacing: .3em;
+  text-transform: uppercase; z-index: 999; opacity: .35;
 }
 
-.slide-container > * { position: relative; z-index: 1; }
+/* ── SHARED TYPOGRAPHY ────────────────────────── */
+h1,h2,h3,h4 {
+  font-family: 'Druk Wide Bold', sans-serif;
+  text-transform: uppercase; line-height: 1.05; letter-spacing: .3px;
+}
+.slide-title {
+  font-family: 'Druk Wide Bold', sans-serif;
+  text-transform: uppercase; font-size: 30px;
+  padding-bottom: 16px; margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  position: relative; width: 100%;
+  text-shadow: 0 2px 18px rgba(0,0,0,.65);
+}
+.slide-title::after {
+  content: ''; position: absolute; bottom: -1px; left: 0;
+  height: 2px; width: 110px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+.chapter-label {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 9px; text-transform: uppercase;
+  letter-spacing: .45em; color: var(--accent);
+  opacity: .65; margin-bottom: 18px;
+  display: block;
+}
+p { margin-bottom: 12px; }
+p:last-child { margin-bottom: 0; }
 
-/* TYPOGRAPHY */
-h1, h2, h3 {
-  font-family: var(--font-head);
-  text-transform: uppercase;
-  color: var(--white);
-  margin: 0;
-  line-height: 1.1;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+/* ── SHARED COMPONENTS ────────────────────────── */
+.stat-grid { display: grid; gap: 18px; width: 100%; }
+.stat-grid.cols-3 { grid-template-columns: repeat(3,1fr); }
+.stat-grid.cols-2 { grid-template-columns: repeat(2,1fr); }
+.stat-grid.cols-4 { grid-template-columns: repeat(4,1fr); }
+
+.stat-card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-top: 2px solid var(--accent); padding: 24px 22px;
+}
+.stat-card .big-num {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 38px; line-height: 1;
+  color: var(--accent-lt); text-shadow: 0 0 28px var(--accent-glow);
+  display: block; margin-bottom: 6px;
+}
+.stat-card .card-label {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 9px; text-transform: uppercase;
+  letter-spacing: .2em; color: var(--accent);
+  opacity: .7; display: block; margin-bottom: 10px;
+}
+.stat-card p { font-size: 14px; line-height: 1.6; }
+
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 30px; width: 100%; align-items: start;
+}
+.three-col {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px; width: 100%;
 }
 
-.meta-label, .subtitle, .number-label, .chart-summary {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: var(--teal);
-  transition: all 0.3s ease;
+.bullet-list { list-style: none; padding: 0; width: 100%; }
+.bullet-list li {
+  padding: 13px 0 13px 26px; position: relative;
+  border-bottom: 1px solid var(--border-faint);
+  font-size: 16px; line-height: 1.6;
 }
+.bullet-list li:last-child { border-bottom: none; }
+.bullet-list li::before {
+  content: '◆'; position: absolute; left: 0; top: 16px;
+  color: var(--accent); font-size: 8px; opacity: .75;
+}
+
+.info-box {
+  background: var(--panel); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); padding: 20px 24px;
+}
+.info-box .box-head {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 9px; letter-spacing: .3em;
+  color: var(--accent); text-transform: uppercase;
+  opacity: .75; margin-bottom: 12px; display: block;
+}
+
+.tag {
+  display: inline-block; padding: 4px 12px;
+  border: 1px solid var(--border); color: var(--accent);
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; margin-right: 8px; margin-bottom: 8px;
+}
+
+/* External link buttons */
+.ext-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 24px; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--panel);
+  color: var(--accent-lt); text-decoration: none;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 11px; letter-spacing: .15em;
+  text-transform: uppercase; transition: all .2s ease;
+}
+.ext-btn:hover {
+  background: var(--accent); color: var(--bg);
+  box-shadow: 0 0 22px var(--accent-glow);
+}
+.ext-btn .btn-icon { font-size: 16px; }
+
+/* Screenshot placeholder */
+.screenshot-placeholder {
+  background: var(--panel); border: 1px solid var(--border);
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px; min-height: 180px;
+}
+.screenshot-placeholder .ph-icon { font-size: 32px; opacity: .3; }
+.screenshot-placeholder p {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 9px; letter-spacing: .3em;
+  opacity: .35; text-transform: uppercase; margin: 0;
+}
+
+/* Bad website image mockups */
+.bad-site-grid { display: flex; gap: 18px; width: 100%; }
+.bad-site-card {
+  flex: 1; background: var(--panel); border: 1px solid var(--border);
+  overflow: hidden; position: relative;
+}
+.bad-site-card img {
+  width: 100%; height: 190px; object-fit: cover; display: block;
+  filter: grayscale(30%) contrast(1.1);
+}
+.bad-site-card .site-label {
+  padding: 10px 14px; font-size: 11px; line-height: 1.5;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+}
+.bad-site-card .warn-tag {
+  position: absolute; top: 10px; right: 10px;
+  background: #b91c1c; color: #fff; padding: 3px 8px;
+  font-family: 'Druk Wide Bold', sans-serif; font-size: 8px;
+  letter-spacing: .15em; text-transform: uppercase;
+}
+
+/* Cover layout */
+.cover-layout {
+  display: flex; flex-direction: column;
+  justify-content: flex-end; height: 100%; padding-bottom: 24px;
+}
+
+/* Achievement card */
+.achievement-card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-top: 2px solid var(--accent); padding: 20px 20px 18px;
+}
+.achievement-card .ach-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+.achievement-card h4 {
+  font-size: 11px; color: var(--accent-lt);
+  margin-bottom: 8px; letter-spacing: .05em;
+  text-shadow: 0 1px 6px rgba(0,0,0,.5);
+}
+.achievement-card p { font-size: 13px; line-height: 1.6; }
+
+
+/* ═══════════════════════════════════════════════
+   THEME 1 — PRESTIGE GOLD
+   ═══════════════════════════════════════════════ */
+:root {
+  --bg:           #0c0a07;
+  --text:         #9e8c72;
+  --white:        #f2e8d8;
+  --accent:       #c9a84c;
+  --accent-lt:    #e4cc82;
+  --accent-dk:    #6b4e18;
+  --accent-glow:  rgba(201,168,76,.4);
+  --border:       rgba(201,168,76,.15);
+  --border-faint: rgba(201,168,76,.07);
+  --panel:        rgba(201,168,76,.04);
+  --font-body:    'EB Garamond', Georgia, serif;
+}
+
+body { background: var(--bg); font-family: var(--font-body); color: var(--text); }
+
+/* Diamond lattice */
+.slide-container::before {
+  background-image:
+    linear-gradient(45deg, rgba(201,168,76,.045) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(201,168,76,.045) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+.slide-container { background: var(--bg); }
 
 h1 {
-  font-size: 65px;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  font-size: 66px;
+  background: linear-gradient(110deg,
+    #6b4e18 0%, #c9a84c 22%, #fff4cc 43%, #fffbe8 50%,
+    #fff4cc 57%, #c9a84c 78%, #6b4e18 100%);
+  background-size: 280% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; animation: shine 4s linear infinite;
+  filter: drop-shadow(0 4px 22px rgba(201,168,76,.5));
 }
+h2 { font-size: 36px; color: var(--white); text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+h3 { font-size: 16px; color: var(--accent-lt); margin-bottom: 12px; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+h4 { font-size: 12px; }
+.slide-title { color: var(--white); }
+.chapter-label,.chapter-indicator { color: var(--accent); }
+p,li { font-size: 16px; line-height: 1.75; color: var(--text); }
+strong { color: var(--white); font-weight: 600; }
+em { color: var(--accent-lt); font-style: italic; }
 
-.slide-title {
-  font-size: 38px;
-  margin-bottom: 40px;
-  text-align: left;
-  width: 100%;
-  border-bottom: 1px solid var(--glass-border);
-  padding-bottom: 15px;
-}
+.info-box li::before { content: '→'; color: var(--accent); position: absolute; left: 0; font-size: 12px; }
 
-h3 {
-  font-size: 22px;
-  margin-bottom: 15px;
-}
-
-p, li, .bar .label, th, td {
-  font-size: 18px;
-  line-height: 1.6;
-  font-weight: 400;
-  color: var(--text);
-  transition: all 0.3s ease;
-}
-
-strong {
-  color: var(--white);
-  font-weight: 700;
-}
-
-/* LAYOUT & GLASSMORPHISM */
-.content-area {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-  width: 100%;
-}
-
-.tile, .two-column.tiled > div, .quote-layout, .area-chart-container, .full-bg-image .content-overlay, .image-wrapper {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-left: 1px solid rgba(255,255,255,0.08);
-  border-radius: 0; /* Brutalist sharp edges */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  transition: all 0.4s ease;
-}
-
-.two-column {
-  align-items: flex-start;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  width: 100%;
-}
-
-.two-column.tiled { align-items: stretch; }
-.two-column.tiled > div { padding: 40px; text-align: left; }
-.two-column.tiled h3 { color: var(--teal); }
-
-.two-column ul { list-style: none; margin: 0; padding: 0; }
-.two-column li { margin-bottom: 20px; padding-left: 30px; position: relative; }
-.two-column li::before {
-  content: '■';
-  color: var(--teal);
-  position: absolute;
-  left: 0;
-  font-size: 12px;
-  top: 6px;
-  text-shadow: 0 0 10px var(--teal-glow);
-}
-
-.image-wrapper {
-  height: 400px;
-  max-width: 100%;
-  overflow: hidden;
-  width: 100%;
-  background: #000;
-}
-
-.image-wrapper img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  filter: grayscale(100%) contrast(1.3) brightness(0.6);
-}
-
-.tiled-content {
-  align-items: stretch;
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  width: 100%;
-}
-
-.tile {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 40px 30px;
-  text-align: left;
-  position: relative;
-}
-
-.tile::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: -1px;
-  width: 40%; height: 2px;
-  background: var(--teal);
-  box-shadow: 0 0 15px var(--teal);
-}
-
-.tile .icon {
-  color: var(--teal);
-  font-size: 40px;
-  margin-bottom: 25px;
-  text-shadow: 0 0 20px var(--teal-glow);
-}
-
-.image-tile { flex: 1; text-align: left; }
-.image-tile .image-wrapper { height: 220px; margin-bottom: 20px; }
-.image-tile h3 { color: var(--white); font-size: 18px; }
-
-.full-bg-image { background-position: center; background-size: cover; }
-.full-bg-image .content-overlay {
-  text-align: center;
-  padding: 60px 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.highlight-numbers-layout > div:first-child { flex: 0 0 45%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;}
-.highlight-numbers-layout .number {
-  color: var(--teal);
-  font-size: 140px;
-  line-height: 1;
-  text-shadow: 0 0 40px var(--teal-glow);
-}
-.highlight-numbers-layout .number-label { margin-top: 20px; }
-
-/* CHARTS */
-.chart-container { display: flex; flex-direction: column; gap: 20px; width: 100%; }
-.bar { align-items: center; display: flex; gap: 20px; }
-.bar .label { color: var(--text); flex: 0 0 220px; text-align: right; font-family: var(--font-head); font-size: 14px; letter-spacing: 1px; }
-.bar .bar-inner {
-  background-color: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  flex-grow: 1;
-  height: 40px;
-}
-.bar .bar-fill {
-  align-items: center;
-  color: var(--white);
-  display: flex;
-  font-size: 14px;
-  font-family: var(--font-head);
-  height: 100%;
-  justify-content: flex-end;
-  padding-right: 15px;
-  transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.area-chart-container { padding: 30px; width: 100%; }
-.area-chart-svg { height: auto; overflow: visible; width: 100%; }
-.area-chart-svg .grid line { stroke-width: 1; stroke: var(--glass-border); }
-.area-chart-svg .area-fill { fill: url(#area-gradient); stroke: none; }
-.area-chart-svg .line-stroke { fill: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 3; stroke: var(--teal); filter: drop-shadow(0 0 8px var(--teal-glow)); }
-.area-chart-svg .data-point { fill: var(--bg); stroke-width: 2; stroke: var(--teal); }
-.area-chart-svg .axis-labels { fill: var(--text); font-size: 12px; font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
-.area-chart-svg .y-axis-labels { text-anchor: end; }
-.area-chart-svg .x-axis-labels { text-anchor: middle; }
-
-/* QUOTE */
-.quote-layout {
-  margin: 0 auto;
-  text-align: left;
-  width: 90%;
-  padding: 60px;
-  border-left: 4px solid var(--teal);
-}
-.quote-layout blockquote {
-  color: var(--white);
-  font-size: 28px;
-  font-family: var(--font-head);
-  line-height: 1.4;
-  margin: 0 0 30px 0;
-}
-.quote-layout cite {
-  color: var(--teal);
-  font-size: 14px;
-  font-style: normal;
-  font-family: var(--font-body);
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-/* Q&A */
-.qa-layout { margin: 0 auto; text-align: center; width: 100%; align-self: center; }
-.qa-layout h2 { font-size: 70px; margin-bottom: 20px; text-shadow: 0 0 40px var(--teal-glow); }
-.qa-layout p { font-size: 20px; color: var(--text); }
-.qa-layout .contact-info {
-  color: var(--teal);
-  margin-top: 50px;
-  border-top: 1px solid var(--glass-border);
-  padding-top: 30px;
-  display: inline-block;
-  font-family: var(--font-body);
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-size: 14px;
-  line-height: 2;
-}
-
-/* BLEED IMAGE */
-.slide-container.bleed-image-layout { align-items: start; display: grid; gap: 0; grid-template-columns: 1fr 1fr; padding: 0; }
-.slide-container.bleed-image-layout > .content-container { padding: 60px; display: flex; flex-direction: column; height: 100%; }
-.slide-container.bleed-image-layout > .image-container { height: 100%; overflow: hidden; width: 100%; border-left: 1px solid var(--glass-border); }
-.slide-container.bleed-image-layout img.bleed-image-side { display: block; height: 100%; object-fit: cover; width: 100%; filter: grayscale(100%) contrast(1.2) brightness(0.5); }
-.bleed-text-side { display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
-.bleed-text-side h3 { font-size: 28px; margin-bottom: 20px; color: var(--teal); }
-
-/* CONTROLS */
-.controls { position: absolute; bottom: 30px; right: 30px; display: flex; gap: 15px; z-index: 100; }
 .controls button {
-  background: var(--glass-bg);
-  backdrop-filter: blur(5px);
-  border: 1px solid var(--glass-border);
+  background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.25); color: var(--accent);
+}
+.controls button:hover { background: var(--accent); color: #0c0a07; box-shadow: 0 0 24px var(--accent-glow); }
+.progress-bar { background: linear-gradient(90deg, var(--accent-dk), var(--accent-lt)); }
+.slide-counter,.chapter-indicator { color: var(--accent-dk); }
+
+
+/* ═══════════════════════════════════════════════
+   THEME 2 — NETGAINS TEAL
+   ═══════════════════════════════════════════════ */
+body.theme-ng {
+  background: #020a08; font-family: 'Plus Jakarta Sans', sans-serif;
+  --bg:           #020a08;
+  --text:         #6db8a8;
+  --white:        #ddfaf4;
+  --accent:       #2dd4bf;
+  --accent-lt:    #67e8d4;
+  --accent-dk:    #0a6056;
+  --accent-glow:  rgba(45,212,191,.45);
+  --border:       rgba(45,212,191,.13);
+  --border-faint: rgba(45,212,191,.06);
+  --panel:        rgba(45,212,191,.03);
+  --font-body:    'Plus Jakarta Sans', sans-serif;
   color: var(--text);
-  width: 45px;
-  height: 45px;
-  border-radius: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  transition: all 0.2s ease;
-}
-.controls button:hover { border-color: var(--teal); color: var(--teal); box-shadow: 0 0 15px var(--teal-glow); }
-.progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--teal); width: 0%; transition: width 0.3s ease; z-index: 100; box-shadow: 0 0 10px var(--teal); }
-.slide-counter { position: absolute; bottom: 30px; left: 40px; color: var(--text); font-size: 12px; z-index: 100; font-family: var(--font-body); font-weight: 800; letter-spacing: 0.2em; }
-.nav-area { position: absolute; top: 0; height: 100%; width: 15%; z-index: 90; cursor: pointer; }
-.nav-area-left { left: 0; }
-.nav-area-right { right: 0; }
-
-
-/* =========================================
-   2. THEME: SALES FORCE ONE (CYBER DASHBOARD)
-   ========================================= */
-body.theme-sfo {
-  background-color: #060b0d; /* Darker teal/black background */
 }
 
-body.theme-sfo .slide-container {
-  background: transparent;
-  border: none;
-  box-shadow: none;
+/* Dual-grid: coarse + fine */
+body.theme-ng .slide-container::before {
+  background-image:
+    linear-gradient(rgba(45,212,191,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,191,.07) 1px, transparent 1px),
+    linear-gradient(rgba(45,212,191,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,191,.025) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
 }
+body.theme-ng .slide-container { background: var(--bg); }
 
-/* Cyber Grid Background overlay */
-body.theme-sfo #presentation-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: 
-    linear-gradient(rgba(8, 247, 206, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8, 247, 206, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  z-index: 0;
-  pointer-events: none;
+body.theme-ng h1 {
+  background: linear-gradient(110deg,
+    #0a6056 0%, #2dd4bf 22%, #adfff4 43%, #ffffff 50%,
+    #adfff4 57%, #2dd4bf 78%, #0a6056 100%);
+  background-size: 280% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; animation: shine 3.5s linear infinite;
+  filter: drop-shadow(0 4px 22px rgba(45,212,191,.55));
 }
+body.theme-ng h2 { color: var(--white); text-shadow: 0 2px 18px rgba(0,0,0,.8),0 0 30px rgba(45,212,191,.1); }
+body.theme-ng h3 { color: var(--accent-lt); }
+body.theme-ng p,body.theme-ng li { font-family: 'Plus Jakarta Sans',sans-serif; font-size: 15px; }
+body.theme-ng strong { color: var(--white); }
+body.theme-ng em { color: var(--accent-lt); font-style: italic; }
+body.theme-ng .stat-card p { font-family: 'Plus Jakarta Sans',sans-serif; font-size: 13px; }
+body.theme-ng .bullet-list li { font-family: 'Plus Jakarta Sans',sans-serif; font-size: 15px; }
+body.theme-ng .bullet-list li::before { content: '▶'; font-size: 7px; top: 17px; }
+body.theme-ng .info-box li { font-family: 'Plus Jakarta Sans',sans-serif; font-size: 15px; }
+body.theme-ng .info-box li::before { content: '→'; color: var(--accent); position: absolute; left: 0; font-size: 12px; }
 
-body.theme-sfo h1,
-body.theme-sfo h2,
-body.theme-sfo h3,
-body.theme-sfo .slide-title,
-body.theme-sfo .number {
-  font-family: 'Montserrat', sans-serif;
-  font-style: italic;
-  font-weight: 800;
-  letter-spacing: 1px;
+body.theme-ng .controls button {
+  background: rgba(45,212,191,.06); border: 1px solid rgba(45,212,191,.2);
+  color: var(--accent); border-radius: 0;
 }
+body.theme-ng .controls button:hover { background: var(--accent); color: #020a08; box-shadow: 0 0 24px var(--accent-glow); }
+body.theme-ng .progress-bar { background: linear-gradient(90deg,var(--accent-dk),var(--accent-lt)); box-shadow: 0 0 8px var(--accent-glow); }
+body.theme-ng .slide-counter,body.theme-ng .chapter-indicator { color: rgba(45,212,191,.35); }
+body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
-body.theme-sfo h1 {
-  color: #08f7ce;
-  text-shadow: 0 0 25px rgba(8, 247, 206, 0.5);
-  font-size: 75px;
-}
-
-body.theme-sfo .slide-title {
-  color: #08f7ce;
-  text-shadow: 0 0 15px rgba(8, 247, 206, 0.3);
-  border-bottom-color: rgba(8, 247, 206, 0.2);
-}
-
-body.theme-sfo h3 {
-  color: #ffffff;
-}
-
-body.theme-sfo .meta-label, 
-body.theme-sfo .subtitle, 
-body.theme-sfo .number-label {
-  color: #08f7ce;
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-}
-
-body.theme-sfo p, 
-body.theme-sfo li, 
-body.theme-sfo .bar .label {
-  color: #8da6ad;
-  font-family: 'Montserrat', sans-serif;
-}
-
-body.theme-sfo strong {
-  color: #08f7ce;
-  font-weight: 700;
-}
-
-/* Round Panels like in the provided image */
-body.theme-sfo .tile,
-body.theme-sfo .two-column.tiled > div,
-body.theme-sfo .quote-layout,
-body.theme-sfo .area-chart-container,
-body.theme-sfo .full-bg-image .content-overlay,
-body.theme-sfo .image-wrapper {
-  background-color: #0d171a;
-  border: 1px solid #1a2a2e;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-}
-
-/* Remove brutalist border treatments */
-body.theme-sfo .tile,
-body.theme-sfo .two-column.tiled > div,
-body.theme-sfo .quote-layout,
-body.theme-sfo .area-chart-container {
-  border-top: 1px solid #1a2a2e;
-  border-left: 1px solid #1a2a2e;
-}
-
-body.theme-sfo .tile::before {
-  background: #08f7ce;
-  box-shadow: 0 0 15px #08f7ce;
-  border-radius: 16px 16px 0 0;
-  height: 3px;
-  width: 100%;
-  left: 0;
-  top: -1px;
-}
-
-body.theme-sfo .icon {
-  color: #08f7ce;
-  text-shadow: 0 0 15px rgba(8, 247, 206, 0.4);
-}
-
-body.theme-sfo .two-column li::before {
-  color: #08f7ce;
-  content: '●';
-  font-size: 14px;
-  top: 3px;
-  text-shadow: 0 0 8px rgba(8, 247, 206, 0.6);
-}
-
-body.theme-sfo .bar .bar-inner {
-  background-color: #0d171a;
-  border: 1px solid #1a2a2e;
-  border-radius: 10px;
-}
-
-body.theme-sfo .bar .bar-fill {
-  background: linear-gradient(90deg, #04826c, #08f7ce) !important;
-  color: #000 !important;
-  border-radius: 8px;
-  font-family: 'Montserrat', sans-serif;
-  font-style: italic;
-  font-weight: 800;
-}
-
-body.theme-sfo .progress-bar {
-  background: #08f7ce;
-  box-shadow: 0 0 10px #08f7ce;
-}
-
-body.theme-sfo .controls button {
-  background: #0d171a;
-  border-color: #1a2a2e;
-  color: #08f7ce;
-  border-radius: 12px;
-}
-
-body.theme-sfo .controls button:hover {
-  background: #08f7ce;
-  color: #000;
-  box-shadow: 0 0 15px rgba(8, 247, 206, 0.5);
-}
-
-body.theme-sfo .contact-info {
-  color: #08f7ce;
-  border-color: rgba(8, 247, 206, 0.2);
-}
-
-/* SVG Chart Override for Theme */
-body.theme-sfo #area-gradient stop { stop-color: #08f7ce !important; }
-body.theme-sfo .line-stroke { stroke: #08f7ce !important; filter: drop-shadow(0 0 6px rgba(8,247,206,0.6)); }
-body.theme-sfo .data-point { stroke: #08f7ce !important; fill: #0d171a !important; }
-
-    </style>
+</style>
 </head>
 <body>
-
 <div id="presentation-wrapper">
 
-    <!-- Slide 1: Full_Background_Image -->
-    <div class="slide-container active" id="slide1" style="background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop'); background-size: cover;">
-        <div class="content-overlay">
-            <div class="meta-label" style="margin-bottom: 20px;">NetGains System</div>
-            <h1>Die Initiation</h1>
-            <p>Willkommen in der Familie</p>
-        </div>
-    </div>
 
-    <!-- Slide 2: Image_Right_Text_Left (NetGains Specific) -->
-    <div class="slide-container" id="slide2">
-        <h2 class="slide-title">Das ist NetGains</h2>
-        <div class="content-area">
-            <div class="two-column">
-                <div>
-                    <div>
-                        <ul>
-                            <li><strong>Tech-Exzellenz:</strong> Wir sind NetGains. Wir entwickeln die modernsten Websites, Apps und digitalen Systeme am Markt.</li>
-                            <li><strong>Unschlagbare Performance:</strong> Wir sind absolute Marktführer in Sachen Ladezeiten. Überprüfbar durch PageSpeed Insights. Keiner schlägt uns. Messbar.</li>
-                            <li><strong>Skalierbares Einkommen:</strong> Wir bauen einen Vertrieb auf, bei dem ihr direkte, massive Provisionen für jeden Abschluss erhaltet.</li>
-                            <li><strong>Das Ultimative System:</strong> Zusätzlich werdet ihr potenziell <em>für immer</em> monatlich an jedem eurer Kunden beteiligt. Dein Portfolio wächst stetig weiter.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2940&auto=format&fit=crop" alt=""></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 3: Tiled_Text_With_Icons -->
-    <div class="slide-container" id="slide3">
-        <h2 class="slide-title">Unsere Prinzipien</h2>
-        <div class="content-area">
-            <div class="tiled-content">
-                <div class="tile">
-                    <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3>Loyalität</h3>
-                    <p>Die Familie steht an erster Stelle. Wir schützen unsere eigenen Leute und das System, das uns alle ernährt. Verrat ist das einzige Vergehen, das nicht vergeben wird.</p>
-                </div>
-                <div class="tile">
-                    <div class="icon"><i class="fa-solid fa-eye"></i></div>
-                    <h3>Fokus</h3>
-                    <p>Scheuklappen aufsetzen. Ignoriere den Lärm der Außenwelt. Die Methoden, die wir dir beibringen, sind das Einzige, was du brauchst, um zu gewinnen.</p>
-                </div>
-                <div class="tile">
-                    <div class="icon"><i class="fa-solid fa-crown"></i></div>
-                    <h3>Reichtum</h3>
-                    <p>Geld ist nicht das primäre Ziel, es ist die logische und unausweichliche Konsequenz deiner unbedingten Umsetzung unserer exakten Vorgaben.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 4: Tiled_Images -->
-    <div class="slide-container" id="slide4">
-        <h2 class="slide-title">Der Pfad der Erleuchtung</h2>
-        <div class="content-area">
-            <div class="tiled-content">
-                <div class="image-tile">
-                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" alt=""></div>
-                    <h3>Dropshipping</h3>
-                    <p>Extreme Arbeit, winzige Margen. Abhängigkeit von Lieferketten, die man nicht kontrollieren kann.</p>
-                </div>
-                <div class="image-tile">
-                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2940&auto=format&fit=crop" alt="[Image of Trading Charts]"></div>
-                    <h3>Krypto Trading</h3>
-                    <p>Pures Glücksspiel. Keinerlei echter Wertewandel. Der Markt bestimmt dein Schicksal, nicht du selbst.</p>
-                </div>
-                <div class="image-tile">
-                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop" alt="[Image of Consulting]"></div>
-                    <h3>Consulting</h3>
-                    <p>Zeit gegen Geld tauschen. Ein goldenes Hamsterrad, aus dem man ohne echtes System nie entkommen kann.</p>
-                </div>
-            </div>
-            <p class="subtitle" style="text-align: center; margin-top: 30px;">David hat alles versucht. Er hat viel Geld gemacht. Aber es war nicht <em>das</em> perfekte System.</p>
-        </div>
-    </div>
-
-    <!-- Slide 5: Bleed_Image_Right -->
-    <div class="slide-container bleed-image-layout" id="slide5">
-        <div class="content-container">
-            <h2 class="slide-title">Die Offenbarung</h2>
-            <div class="content-area">
-                <div class="bleed-text-side">
-                    <h3>Das ultimative Konstrukt</h3>
-                    <p>Nach Jahren des Suchens und Analysierens fand David den heiligen Gral: Websites für Unternehmen.</p>
-                    <p>Die Pointe, über die niemand spricht? Er hat noch nie so viel Geld verdient wie in diesem scheinbar "langweiligen" Markt.</p>
-                    <p>Der Cashflow ist extrem. Der Bedarf in der Wirtschaft ist unendlich. Es ist die perfekte Maschinerie, die unaufhaltsam Gewinne generiert.</p>
-                </div>
-            </div>
-        </div>
-        <div class="image-container">
-            <img class="bleed-image-side" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2944&auto=format&fit=crop" alt="">
-        </div>
-    </div>
-
-    <!-- Slide 6: Quote -->
-    <div class="slide-container" id="slide6">
-        <h2 class="slide-title">Das wahre Motiv</h2>
-        <div class="content-area">
-            <div class="quote-layout">
-                <blockquote>MEIN ZIEL IST ES NICHT, FÜR MICH ALLEIN SO VIEL GELD WIE MÖGLICH ZU VERDIENEN. MEIN ZIEL IST ES, DAS MÄCHTIGSTE IMPERIUM AUFZUBAUEN, DAS DIESE BRANCHE JE GESEHEN HAT.</blockquote>
-                <cite>— DAVID</cite>
-            </div>
-            <p class="meta-label" style="margin-top: 40px; font-size: 14px;">Darum öffnen wir genau heute den Vertrieb.</p>
-        </div>
-    </div>
-
-    <!-- Slide 7: Image_Right_Text_Left -->
-    <div class="slide-container" id="slide7">
-        <h2 class="slide-title">Die alte Welt des Vertriebs</h2>
-        <div class="content-area">
-            <div class="two-column">
-                <div>
-                    <div>
-                        <ul>
-                            <li>Die traditionelle Vertriebswelt ist darauf ausgelegt, dich klein zu halten.</li>
-                            <li>Großkonzerne behalten 90% der Profite, während du die eigentliche Schwerstarbeit leistest.</li>
-                            <li>Mitarbeiter werden wie austauschbare Bauernfiguren auf einem Schachbrett behandelt.</li>
-                            <li>Du opferst deine Lebenszeit, um den Traum eines anderen aufzubauen, für Brosamen.</li>
-                            <li>Wir haben dieses veraltete, kranke System studiert, nur um es vollständig zu zerstören.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1505664159858-eb21e89b43e8?q=80&w=2864&auto=format&fit=crop" alt=""></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 8: Bar_Chart_For_Comparisons -->
-    <div class="slide-container" id="slide8">
-        <h2 class="slide-title">Branchen-Vergleich: Provisionen</h2>
-        <div class="content-area">
-            <div class="chart-container">
-                <div class="bar">
-                    <div class="label">Immobilien</div>
-                    <div class="bar-inner"><div class="bar-fill" style="width: 15%; background: rgba(255,255,255,0.05); color: var(--text);">3% - 6%</div></div>
-                </div>
-                <div class="bar">
-                    <div class="label">Versicherungen</div>
-                    <div class="bar-inner"><div class="bar-fill" style="width: 20%; background: rgba(255,255,255,0.08); color: var(--text);">5% - 8%</div></div>
-                </div>
-                <div class="bar">
-                    <div class="label">SaaS Software</div>
-                    <div class="bar-inner"><div class="bar-fill" style="width: 25%; background: rgba(255,255,255,0.12); color: var(--text);">10% - 15%</div></div>
-                </div>
-                <div class="bar">
-                    <div class="label" style="color: var(--teal);">UNSER PAKT</div>
-                    <div class="bar-inner" style="border-color: var(--teal); box-shadow: 0 0 15px rgba(45, 212, 191, 0.2);"><div class="bar-fill" style="width: 90%; background: linear-gradient(90deg, var(--teal), var(--cyan)); color: #000;">50%</div></div>
-                </div>
-            </div>
-            <p class="chart-summary">Seht euch die nackten Zahlen an. Die alte Welt lacht euch aus. Wir ändern die Spielregeln nicht nur ein bisschen – wir stellen das gesamte System auf den Kopf.</p>
-        </div>
-    </div>
-
-    <!-- Slide 9: Highlighted_Numbers -->
-    <div class="slide-container" id="slide9">
-        <h2 class="slide-title">Das unschlagbare Angebot</h2>
-        <div class="content-area">
-            <div class="two-column highlight-numbers-layout">
-                <div>
-                    <div class="number">50%</div>
-                    <div class="number-label">Provision + Hosting</div>
-                </div>
-                <div>
-                    <h3 style="color: var(--teal); font-size: 24px; margin-bottom: 20px;">Das ist unser Pakt.</h3>
-                    <p>Du bringst das Geschäft, du bekommst sofort die Hälfte. Ohne Diskussionen, ohne versteckte Klauseln.</p>
-                    <p>Aber das ist nur der Anfang. Du wirst an jeder monatlichen Hosting-Zahlung beteiligt. Solange der Kunde bei uns bleibt, wirst du bezahlt. Für immer.</p>
-                    <p>Keine Limits nach oben. Keine Ausreden. Nur reine Performance.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 10: Two_Column_Tiled_Text -->
-    <div class="slide-container" id="slide10">
-        <h2 class="slide-title">Die Anatomie des Pakts</h2>
-        <div class="content-area">
-            <div class="two-column tiled">
-                <div>
-                    <div class="meta-label" style="margin-bottom: 10px;">50% Provision</div>
-                    <h3 style="color: var(--white);">Die Kapitalspritze</h3>
-                    <p style="margin-top: 20px;">Sofortiger und massiver Cashflow. Wenn du eine Website für 3.000€ abschließt, gehören 1.500€ unmittelbar dir. Dieser Mechanismus sichert dein Überleben und füttert deinen Hunger nach mehr.</p>
-                </div>
-                <div>
-                    <div class="meta-label" style="margin-bottom: 10px;">Hosting Anteil</div>
-                    <h3 style="color: var(--teal);">Das Blut-Einkommen</h3>
-                    <p style="margin-top: 20px;">Der wahre Schlüssel zur Macht: Passives, wiederkehrendes Einkommen. Du baust dir einen unzerstörbaren finanziellen Burggraben, der jeden Monat tiefer wird.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 11: Area_Chart_For_Trends -->
-    <div class="slide-container" id="slide11">
-        <h2 class="slide-title">Der Zinseszins der Treue</h2>
-        <div class="content-area">
-            <div class="area-chart-container">
-                <svg class="area-chart-svg" viewBox="0 0 1000 350">
-                    <defs>
-                        <linearGradient id="area-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:var(--teal);" stop-opacity="0.4"></stop>
-                            <stop offset="100%" style="stop-color:var(--teal);" stop-opacity="0.0"></stop>
-                        </linearGradient>
-                    </defs>
-
-                    <!-- Grid Lines -->
-                    <g class="grid">
-                        <line x1="0" y1="300" x2="1000" y2="300"></line>
-                        <line x1="0" y1="50" x2="1000" y2="50" stroke-dasharray="5 5" opacity="0.3"></line>
-                        <line x1="0" y1="133" x2="1000" y2="133" stroke-dasharray="5 5" opacity="0.3"></line>
-                        <line x1="0" y1="216" x2="1000" y2="216" stroke-dasharray="5 5" opacity="0.3"></line>
-                    </g>
-
-                    <!-- Exponential Growth Curve representing recurring hosting revenue -->
-                    <path class="area-fill" d="M 0 300 L 200 280 L 400 220 L 600 130 L 800 60 L 1000 10 L 1000 300 Z"></path>
-                    <polyline class="line-stroke" points="0,300 200,280 400,220 600,130 800,60 1000,10"></polyline>
-
-                    <!-- Data Points -->
-                    <g class="data-points">
-                        <circle class="data-point" cx="0" cy="300" r="6"></circle>
-                        <circle class="data-point" cx="200" cy="280" r="6"></circle>
-                        <circle class="data-point" cx="400" cy="220" r="6"></circle>
-                        <circle class="data-point" cx="600" cy="130" r="6"></circle>
-                        <circle class="data-point" cx="800" cy="60" r="6"></circle>
-                        <circle class="data-point" cx="1000" cy="10" r="6"></circle>
-                    </g>
-
-                    <!-- Axis Labels -->
-                    <g class="axis-labels y-axis-labels">
-                        <text x="-15" y="55">Max</text>
-                        <text x="-15" y="305">0</text>
-                    </g>
-                    <g class="axis-labels x-axis-labels">
-                        <text x="0" y="335">Monat 1</text>
-                        <text x="200" y="335">Monat 3</text>
-                        <text x="400" y="335">Monat 6</text>
-                        <text x="600" y="335">Monat 9</text>
-                        <text x="800" y="335">Monat 12</text>
-                        <text x="1000" y="335">Zukunft</text>
-                    </g>
-                </svg>
-            </div>
-            <p class="chart-summary">Jeder neue Abschluss erhöht unweigerlich dein monatliches Grundeinkommen. Nach 12 Monaten konsequenter Umsetzung des Systems wirst du praktisch schon fürs Atmen bezahlt.</p>
-        </div>
-    </div>
-
-    <!-- Slide 12: Q&A -->
-    <div class="slide-container" id="slide12">
-        <div class="qa-layout">
-            <div class="meta-label" style="margin-bottom: 30px;">Das NetGains Imperium</div>
-            <h2>Bist du bereit?</h2>
-            <p>Der Kreis schließt sich hier. Tritt ein und akzeptiere den Pakt,<br>oder bleib für immer in der Bedeutungslosigkeit draußen.</p>
-            <div class="contact-info">
-                david &nbsp;&bull;&nbsp; florian &nbsp;&bull;&nbsp; cansin<br>
-                <span style="color: var(--white); font-size: 16px; margin-top: 10px; display: inline-block; font-weight: 400; text-transform: lowercase; letter-spacing: 0;">initiation@netgains.de</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- UI Elements -->
-    <div class="progress-bar" id="progress-bar"></div>
-    <div class="slide-counter" id="slide-counter">1 / 12</div>
-    
-    <div class="controls">
-        <button id="btn-theme" title="Theme wechseln"><i class="fa-solid fa-palette"></i></button>
-        <button id="btn-prev" title="Zurück"><i class="fa-solid fa-chevron-left"></i></button>
-        <button id="btn-next" title="Weiter"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
-
-    <!-- Invisible Click Areas for seamless mouse navigation -->
-    <div class="nav-area nav-area-left" id="area-prev"></div>
-    <div class="nav-area nav-area-right" id="area-next"></div>
-
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 1 — TITELBLATT (original)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container active" id="slide1"
+     style="background-image:linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.94)),url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop');background-size:cover;">
+  <div class="cover-layout">
+    <span class="chapter-label">NetGains System</span>
+    <h1>Die Initiation</h1>
+    <p style="margin-top:24px;font-size:21px;font-style:italic;opacity:.8;">Willkommen in der Familie</p>
+    <div style="margin-top:44px;height:1px;width:180px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+  </div>
 </div>
 
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 2 — KAPITEL 1 COVER: WIRTSCHAFT
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide2">
+  <div class="chapter-indicator">Kapitel 1</div>
+  <div class="cover-layout">
+    <span class="chapter-label">Kapitel 1</span>
+    <h1>Die Aktuelle<br>Wirtschaft</h1>
+    <p style="margin-top:26px;font-size:19px;max-width:620px;">Was wirklich passiert — und warum genau jetzt der richtige Moment ist,<br>das eigene Einkommen neu aufzubauen.</p>
+    <div style="margin-top:44px;height:1px;width:180px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+    <p style="margin-top:16px;font-size:12px;opacity:.4;font-style:italic;">Quellen: Bundesministerium für Gesundheit · Walter Homm</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 3 — WIRTSCHAFTSFAKTEN I: DEUTSCHLAND
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide3">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Das System bricht</h2>
+
+  <div class="stat-grid cols-3" style="margin-bottom:20px;">
+    <div class="stat-card">
+      <span class="big-num">6 Mio</span>
+      <span class="card-label">Pflegebedürftige heute</span>
+      <p>Für 2050 prognostiziert — bereits <strong>2025 erreicht</strong>. Bundesministerium für Gesundheit rechnete mit 25 Jahren mehr Zeit.</p>
+    </div>
+    <div class="stat-card">
+      <span class="big-num">83 Mrd.</span>
+      <span class="card-label">€ Pflegekosten pro Jahr</span>
+      <p>14.000 € pro Person. Steigt auf <strong>120–130 Milliarden €</strong> — der Staat kann es nicht mehr stemmen.</p>
+    </div>
+    <div class="stat-card">
+      <span class="big-num">+142%</span>
+      <span class="card-label">Krankentage seit 2020</span>
+      <p>Volkswirtschaftlicher Schaden: <strong>100–150 Mrd. €</strong> jährlich durch Arbeitsausfälle.</p>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <span class="box-head">Konsequenz — Bundesministerium für Gesundheit</span>
+    <ul class="bullet-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+      <li>Das Kollaps-Szenario ist <strong>jetzt</strong>, nicht in einer fernen Zukunft</li>
+      <li>Mit 1 Billion € Steuereinnahmen kann Deutschland die Kosten bald nicht mehr decken</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 4 — WIRTSCHAFTSFAKTEN II: INTERNATIONAL + FOLGEN
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide4">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Kein deutsches Problem</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>Internationale Signale</h3>
+      <ul class="bullet-list">
+        <li><strong>USA:</strong> Seit 2021 <em>38% mehr Schwerbehinderte</em> — statistisch unwahrscheinlicher als ein Blitzeinschlag</li>
+        <li><strong>UK:</strong> Erwerbstätige mit Einschränkungen um <em>95% gestiegen</em></li>
+        <li><strong>USA:</strong> Beschäftigungszahlen seit 2023 <em>monatlich rückläufig</em></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Was laut Walter Homm folgt</h3>
+      <div class="info-box">
+        <span class="box-head">Die Konsequenzen für jeden Einzelnen</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Betrifft nicht nur das Vermögen — sondern das <strong>gesamte Leben</strong> durch schlechtere Versorgung</li>
+          <li>PKV & GKV Beiträge um <strong>+20%</strong> gestiegen, Leistungen sinken weiter</li>
+          <li>Höhere Steuern — der Staat braucht Kapital, das er nicht hat</li>
+          <li><strong>Reallöhne sinken</strong>, Kaufkraft wird systematisch abgebaut</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 5 — ÜBERLEITUNG: MEIN BISHERIGER WEG
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide5">
+  <div class="chapter-indicator">Überleitung</div>
+  <h2 class="slide-title">Mein bisheriger Weg</h2>
+  <div class="three-col" style="height:calc(100% - 110px);">
+    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
+      <div style="flex:1;overflow:hidden;background:var(--panel);">
+        <img src="d1.webp" alt="Bisheriger Weg 1" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
+      <div style="flex:1;overflow:hidden;background:var(--panel);">
+        <img src="d2.webp" alt="Bisheriger Weg 2" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
+      <div style="flex:1;overflow:hidden;background:var(--panel);">
+        <img src="d3.webp" alt="Bisheriger Weg 3" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 6 — KAPITEL 2 COVER: VERTRIEB
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide6">
+  <div class="chapter-indicator">Kapitel 3</div>
+  <div class="cover-layout">
+    <span class="chapter-label">Kapitel 3</span>
+    <h1>Vertrieb</h1>
+    <p style="margin-top:26px;font-size:20px;max-width:660px;">Das älteste Geschäftsmodell der Welt —<br>neu gedacht, fair gemacht.</p>
+    <div style="margin-top:44px;height:1px;width:180px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 7 — VERTRIEB: DEFINITION + STRUKTURVERTRIEB
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide7">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Was Vertrieb wirklich ist</h2>
+  <div class="two-col" style="gap:32px;align-items:start;">
+    <div>
+      <h3>Definition</h3>
+      <ul class="bullet-list">
+        <li>Vertrieb ist das <strong>älteste Geschäftsmodell der Welt</strong> — es hat Zivilisationen ernährt</li>
+        <li><strong>Heutige Definition:</strong> Produkte oder Dienstleistungen gezielt an die richtigen Menschen bringen</li>
+        <li><strong>Strukturvertrieb:</strong> Zwei Fundamente — Produkte verkaufen <em>und</em> ein Team aufbauen, das dasselbe tut</li>
+        <li>Komplett <strong>ohne eigenes Risiko</strong> — kein Kapital, keine Haftung, kein Lager</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Der schlechte Ruf — und warum er stimmt</h3>
+      <div class="info-box">
+        <span class="box-head">Das Problem mit klassischem Strukturvertrieb</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Wir haben das Modell <strong>nicht erfunden</strong> — aber wir haben es repariert</li>
+          <li>Klassisch: Vertriebler werden durch versteckte Strukturen <em>abgezockt</em></li>
+          <li>Provisionen verschwinden in Ebenen, die du nie siehst</li>
+          <li>Unser Ansatz: <strong>Strukturvertrieb auf Augenhöhe</strong> — volle Transparenz, volle Beteiligung</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 8 — DIE ZWEI FUNDAMENTE + DAVIDS ROLLE
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide8">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Wie das System funktioniert</h2>
+  <div class="two-col" style="gap:32px;align-items:start;">
+    <div>
+      <h3>Die zwei Fundamente</h3>
+      <div class="stat-grid cols-2" style="margin-bottom:18px;">
+        <div class="stat-card">
+          <span class="big-num" style="font-size:28px;">01</span>
+          <span class="card-label">Produkte verkaufen</span>
+          <p>Websites und digitale Systeme an Unternehmen — mit direkter, sofortiger Provision.</p>
+        </div>
+        <div class="stat-card">
+          <span class="big-num" style="font-size:28px;">02</span>
+          <span class="card-label">Team führen</span>
+          <p>Andere einführen, die dasselbe tun — und an jedem ihrer Abschlüsse beteiligt werden.</p>
+        </div>
+      </div>
+      <div class="info-box" style="border-left-color:var(--accent);">
+        <span class="box-head">Cansins Vater — Beweis, dass es funktioniert</span>
+        <p style="font-size:14px;line-height:1.6;"><strong>1 Million Euro in einem Jahr</strong> im Strukturvertrieb. Mit einem eigenen Business ist das statistisch deutlich unwahrscheinlicher — im richtigen System nicht.</p>
+      </div>
+    </div>
+    <div>
+      <h3>Was David übernimmt — damit ihr es nicht müsst</h3>
+      <ul class="bullet-list">
+        <li>David haftet mit seinem Namen und seinem Unternehmen</li>
+        <li>Nervige Kunden, Nachbesserungen, Reklamationen — <strong>Davids Problem</strong></li>
+        <li>Buchhaltung, Verträge, Steuern, Papierkram — <strong>alles David</strong></li>
+        <li><strong>Ihr verkauft. Ihr führt. Ihr verdient.</strong> — ohne das ganze Unternehmerrisiko zu tragen</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 9 — PIONEER STATUS + UNSER MOTTO
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide9">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Pioneer-Status & Unser Motto</h2>
+  <div class="two-col" style="gap:32px;align-items:stretch;">
+    <div>
+      <h3>Warum jetzt der beste Zeitpunkt ist</h3>
+      <ul class="bullet-list">
+        <li><strong>Pioneer-Status:</strong> Wir bauen die Struktur von oben auf — die ersten Ebenen profitieren am stärksten</li>
+        <li>Enormer <em>Vertrauensboost</em>: Du wirst nicht von Fremden geworben — du wirst von uns persönlich eingeführt</li>
+        <li>Strukturvertrieb auf Augenhöhe bedeutet: <strong>keine versteckten Hierarchien</strong>, keine Ausbeutung</li>
+        <li>Je früher du einsteigst, desto tiefer reicht dein Netzwerk</li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="info-box" style="border-left-color:var(--accent);flex:1;">
+        <span class="box-head">Unser Motto</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;color:var(--accent-lt);line-height:1.3;letter-spacing:.03em;text-shadow:0 0 20px var(--accent-glow);margin-top:10px;">Strukturvertrieb<br>auf Augenhöhe</p>
+      </div>
+      <div class="info-box" style="flex:1;">
+        <span class="box-head">Was das bedeutet</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Jeder darf <strong>Ideen einwerfen</strong> und mitbestimmen</li>
+          <li>Wir ziehen <strong>an einem Strang</strong> — kein oben und unten</li>
+          <li>Dein Erfolg ist unser Erfolg</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 10 — EURE ROLLE (Bar-Reveal + CTA Button)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-eure-rolle">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Eure Rolle</h2>
+
+  <div style="display:flex;flex-direction:column;gap:14px;flex:1;justify-content:center;">
+
+    <div class="reveal-bar" data-reveal="0" style="opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;">
+      <div class="info-box" style="display:flex;align-items:center;gap:20px;padding:16px 24px;border-left-width:3px;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:28px;color:var(--accent);opacity:.5;min-width:40px;">01</span>
+        <div><strong>Kunden akquirieren</strong> — Unternehmen finden, die eine neue Website oder ein digitales System brauchen</div>
+      </div>
+    </div>
+
+    <div class="reveal-bar" data-reveal="1" style="opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;">
+      <div class="info-box" style="display:flex;align-items:center;gap:20px;padding:16px 24px;border-left-width:3px;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:28px;color:var(--accent);opacity:.5;min-width:40px;">02</span>
+        <div><strong>Abschluss übergeben</strong> — ihr bringt den Lead, NetGains übernimmt Produktion, Haftung, Support</div>
+      </div>
+    </div>
+
+    <div class="reveal-bar" data-reveal="2" style="opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;">
+      <div class="info-box" style="display:flex;align-items:center;gap:20px;padding:16px 24px;border-left-width:3px;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:28px;color:var(--accent);opacity:.5;min-width:40px;">03</span>
+        <div><strong>50% Provision kassieren</strong> — sofort, ohne Diskussion. Dein Anteil landet direkt bei dir</div>
+      </div>
+    </div>
+
+    <div class="reveal-bar" data-reveal="3" style="opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;">
+      <div class="info-box" style="display:flex;align-items:center;gap:20px;padding:16px 24px;border-left-width:3px;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:28px;color:var(--accent);opacity:.5;min-width:40px;">04</span>
+        <div><strong>Team aufbauen</strong> — bring andere rein, werde an deren Abschlüssen dauerhaft beteiligt</div>
+      </div>
+    </div>
+
+    <div class="reveal-bar" data-reveal="4" style="opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;">
+      <div style="margin-top:6px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
+        <div class="info-box" style="flex:1;padding:14px 20px;border-left-color:var(--accent);background:var(--panel);">
+          <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-lt);">Hosting-Anteil läuft für immer — solange der Kunde dabei ist</p>
+        </div>
+        <a href="https://netgains-provision.pages.dev" target="_blank" class="ext-btn" style="white-space:nowrap;flex-shrink:0;">
+          <span class="btn-icon">◈</span>
+          Provisions-Rechner öffnen
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 11 — WO IST DER HAKEN?
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide11-haken">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Wo ist der Haken?</h2>
+  <div class="two-col" style="gap:32px;align-items:center;">
+    <div>
+      <div class="info-box" style="border-left-color:#e2c97e;margin-bottom:18px;">
+        <span class="box-head">Die ehrliche Antwort</span>
+        <p style="font-size:17px;line-height:1.7;margin-top:8px;">Ganz einfach: Die meisten Menschen kommen entweder <strong>nicht ins Handeln</strong> — oder sie bleiben <strong>nicht lange genug am Ball</strong>.</p>
+      </div>
+      <div class="info-box">
+        <span class="box-head">Was das bedeutet</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Euer Erfolg ist <strong>einzig und allein von euch</strong> abhängig — niemand kann das für euch tun</li>
+          <li>Das System funktioniert — aber nur, wenn ihr es konsequent anwendet</li>
+          <li>Kein Erfolg ohne Umsetzung — <em>das ist der einzige Haken</em></li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <div style="padding:36px;border:1px solid var(--border);background:var(--panel);position:relative;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:32px;text-transform:uppercase;color:var(--accent-lt);line-height:1.25;text-shadow:0 0 30px var(--accent-glow);">NetGains ist<br>ein<br>Cheatcode</p>
+        <div style="margin:24px auto;height:1px;width:80px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
+        <p style="font-size:14px;opacity:.55;font-style:italic;">Aber auch ein Cheatcode bringt nichts,<br>wenn du das Spiel nicht spielst.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 12 — SEMINARE
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide12-seminare">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Seminare & Ausbildung</h2>
+  <div class="three-col">
+    <div class="stat-card" style="border-top-color:var(--accent);">
+      <span class="big-num" style="font-size:36px;">01</span>
+      <span class="card-label">Einstiegsseminare</span>
+      <p>Regelmäßige Seminare speziell für <strong>Neuankömmlinge</strong> — strukturierter Einstieg, keine Überforderung, klare Schritte vom ersten Tag an.</p>
+    </div>
+    <div class="stat-card" style="border-top-color:var(--accent);">
+      <span class="big-num" style="font-size:36px;">02</span>
+      <span class="card-label">Dein Netzwerk wächst</span>
+      <p>Wenn ihr <strong>Freunde oder Bekannte mitbringt</strong>, werden sie euch direkt unterstellt — ihr profitiert dauerhaft von deren Abschlüssen.</p>
+    </div>
+    <div class="stat-card" style="border-top-color:var(--accent);">
+      <span class="big-num" style="font-size:36px;">03</span>
+      <span class="card-label">Ausbildungsseminare</span>
+      <p><strong>Regelmäßige Weiterbildung</strong> — Verkaufstechniken, Produktkenntnisse, Teamführung. Wer sich entwickelt, verdient mehr.</p>
+    </div>
+  </div>
+  <div class="info-box" style="margin-top:20px;border-left-color:var(--accent);">
+    <span class="box-head">Das Fazit</span>
+    <p style="font-size:15px;">Ihr seid nie allein. Das System ist darauf ausgelegt, euch <strong>schnell produktiv</strong> zu machen — und dauerhaft erfolgreich zu halten.</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — RECHNUNG 1: 50% PROVISION → 10K/MONAT
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-rechnung1">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">50% Provision — Wann ist 10K erreicht?</h2>
+
+  <div class="two-col" style="gap:28px;align-items:start;">
+    <div>
+      <h3>Die Rechnung</h3>
+      <p style="font-size:15px;margin-bottom:16px;opacity:.8;">Nebenberuflich, <strong>2–3 Abschlüsse pro Woche</strong> — was bedeutet das in Euro?</p>
+
+      <!-- Table -->
+      <div style="border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--panel);">
+          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">Preis</div>
+          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">Provision</div>
+          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">10K bei</div>
+          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">= pro Woche</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;">
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">1.500 €</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);color:var(--white);">750 €</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">14 Deals</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">~3–4 / Woche</div>
+
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">2.000 €</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);color:var(--white);">1.000 €</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">10 Deals</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">~2–3 / Woche</div>
+
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">3.000 €</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);color:var(--white);">1.500 €</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">7 Deals</div>
+          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">~2 / Woche</div>
+
+          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);">5.000 €</div>
+          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">2.500 €</div>
+          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);color:var(--white);font-family:'Druk Wide Bold',sans-serif;">4 Deals</div>
+          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">1 / Woche</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="info-box" style="border-left-color:var(--accent);padding:22px 24px;">
+        <span class="box-head">Realistischer Monat — Nebenberuflich</span>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-faint);">
+            <span style="font-size:15px;">2 Abschlüsse à 3.000 €</span>
+            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:16px;color:var(--white);">3.000 €</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-faint);">
+            <span style="font-size:15px;">4 Abschlüsse à 3.000 €</span>
+            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:16px;color:var(--white);">6.000 €</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-faint);">
+            <span style="font-size:15px;">7 Abschlüsse à 3.000 €</span>
+            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:16px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">10.500 €</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;">
+            <span style="font-size:14px;opacity:.6;font-style:italic;">2 Abschlüsse / Woche</span>
+            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);">10K+</span>
+          </div>
+        </div>
+      </div>
+      <div style="padding:14px 18px;border:1px solid var(--border);background:var(--panel);text-align:center;">
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-lt);">Nebenberuflich. Ohne Vorwissen. Ohne Risiko.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — RECHNUNG 2: FÜHRUNGSKRAFT-DIFFERENZ
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-rechnung2">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Als Führungskraft — die Differenz</h2>
+
+  <div class="two-col" style="gap:28px;align-items:start;">
+    <div>
+      <h3>Pro Abschluss in deiner Struktur</h3>
+      <div style="border:1px solid var(--border);margin-bottom:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--panel);border-bottom:1px solid var(--border);">
+          <div style="padding:10px 16px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;">Empfänger</div>
+          <div style="padding:10px 16px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;">Pro Deal (2.000 € Website)</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:12px 16px;font-size:15px;">Dein Vertriebler</div>
+          <div style="padding:12px 16px;font-size:15px;color:var(--white);">350 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border-faint);background:rgba(201,168,76,.05);">
+          <div style="padding:12px 16px;font-size:15px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">Du (Führungskraft)</div>
+          <div style="padding:12px 16px;font-size:17px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">150 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;">
+          <div style="padding:12px 16px;font-size:15px;">NetGains</div>
+          <div style="padding:12px 16px;font-size:15px;">500 €</div>
+        </div>
+      </div>
+      <p style="font-size:14px;opacity:.6;font-style:italic;">Du verdienst 150 € pro Abschluss — <strong>ohne selbst zu verkaufen.</strong></p>
+    </div>
+
+    <div>
+      <h3>10 Leute unter dir, je 5 Deals/Monat</h3>
+      <div style="border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--panel);border-bottom:1px solid var(--border);">
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Team</div>
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Deals/Mo.</div>
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Dein Anteil</div>
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">+ Eigene</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:10px 12px;font-size:14px;">1 Person</div>
+          <div style="padding:10px 12px;font-size:14px;">5</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--white);">750 €</div>
+          <div style="padding:10px 12px;font-size:14px;">+5.000 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:10px 12px;font-size:14px;">3 Leute</div>
+          <div style="padding:10px 12px;font-size:14px;">15</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--white);">2.250 €</div>
+          <div style="padding:10px 12px;font-size:14px;">+5.000 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:10px 12px;font-size:14px;">5 Leute</div>
+          <div style="padding:10px 12px;font-size:14px;">25</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--white);">3.750 €</div>
+          <div style="padding:10px 12px;font-size:14px;">+5.000 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:rgba(201,168,76,.06);">
+          <div style="padding:10px 12px;font-size:14px;font-family:'Druk Wide Bold',sans-serif;">10 Leute</div>
+          <div style="padding:10px 12px;font-size:14px;">50</div>
+          <div style="padding:10px 12px;font-size:16px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">7.500 €</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">+5.000 €</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:12px 16px;border:1px solid var(--border);background:var(--panel);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:14px;opacity:.7;">Mit 10 Leuten im Team total:</span>
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:26px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);">12.500 € / Monat</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — RECHNUNG 3: PASSIVES EINKOMMEN
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-rechnung3">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Passives Einkommen — Jahr für Jahr</h2>
+
+  <div class="two-col" style="gap:28px;align-items:start;">
+    <div>
+      <h3>Das Modell</h3>
+      <div class="info-box" style="margin-bottom:16px;">
+        <span class="box-head">Annahmen</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li><strong>10 Abschlüsse pro Monat</strong> (Eigenproduktion)</li>
+          <li>Jeder Kunde zahlt <strong>10 €/Monat Hosting</strong> — du erhältst deinen Anteil dauerhaft</li>
+          <li>Kunden bleiben im Schnitt langfristig — realistisch 5–10+ Jahre</li>
+        </ul>
+      </div>
+      <p style="font-size:14px;opacity:.65;font-style:italic;">Die Passiveinnahmen wachsen jeden Monat weiter — unabhängig davon, ob du gerade aktiv verkaufst oder nicht.</p>
+    </div>
+
+    <div>
+      <h3>Dein wachsendes Passiveinkommen</h3>
+      <div style="border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--panel);border-bottom:1px solid var(--border);">
+          <div style="padding:9px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Zeitraum</div>
+          <div style="padding:9px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Kunden total</div>
+          <div style="padding:9px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Passiv/Monat</div>
+          <div style="padding:9px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Im Jahr</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:11px 14px;font-size:15px;">1 Jahr</div>
+          <div style="padding:11px 14px;font-size:15px;">120</div>
+          <div style="padding:11px 14px;font-size:15px;color:var(--white);">1.200 €</div>
+          <div style="padding:11px 14px;font-size:15px;">14.400 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:11px 14px;font-size:15px;">2 Jahre</div>
+          <div style="padding:11px 14px;font-size:15px;">240</div>
+          <div style="padding:11px 14px;font-size:15px;color:var(--white);">2.400 €</div>
+          <div style="padding:11px 14px;font-size:15px;">28.800 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:11px 14px;font-size:15px;">5 Jahre</div>
+          <div style="padding:11px 14px;font-size:15px;">600</div>
+          <div style="padding:11px 14px;font-size:15px;color:var(--white);">6.000 €</div>
+          <div style="padding:11px 14px;font-size:15px;">72.000 €</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:rgba(201,168,76,.06);">
+          <div style="padding:11px 14px;font-size:15px;font-family:'Druk Wide Bold',sans-serif;">10 Jahre</div>
+          <div style="padding:11px 14px;font-size:15px;">1.200</div>
+          <div style="padding:11px 14px;font-size:17px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">12.000 €</div>
+          <div style="padding:11px 14px;font-size:15px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">144.000 €</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border:1px solid var(--border);background:var(--panel);">
+        <span style="font-size:14px;opacity:.6;">Kumuliert über 10 Jahre passiv verdient:</span>
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;color:var(--accent-lt);text-shadow:0 0 18px var(--accent-glow);">726.000 €</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — RECHNUNG 4: STRUKTURWACHSTUM
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-rechnung4">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">100-Mann-Struktur — wie schnell?</h2>
+
+  <div class="two-col" style="gap:28px;align-items:start;">
+    <div>
+      <h3>Das Wachstumsmodell</h3>
+      <div class="info-box" style="margin-bottom:16px;">
+        <span class="box-head">Annahmen</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li><strong>2 Seminare pro Woche</strong> — jeder Teilnehmer bringt im nächsten Seminar <strong>3 neue Leute</strong> mit</li>
+          <li>Diese bringen beim übernächsten Mal wieder je 3 mit — und so weiter</li>
+          <li>Jede Runde = ca. <strong>1–2 Wochen</strong></li>
+        </ul>
+      </div>
+
+      <div style="border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--panel);border-bottom:1px solid var(--border);">
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Runde</div>
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Neue Leute</div>
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Struktur total</div>
+          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Zeitraum</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:10px 12px;font-size:14px;">Start</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--white);">3</div>
+          <div style="padding:10px 12px;font-size:14px;">4 (du + 3)</div>
+          <div style="padding:10px 12px;font-size:14px;opacity:.6;">Woche 1–2</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:10px 12px;font-size:14px;">Runde 2</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--white);">9</div>
+          <div style="padding:10px 12px;font-size:14px;">13</div>
+          <div style="padding:10px 12px;font-size:14px;opacity:.6;">Woche 3–4</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
+          <div style="padding:10px 12px;font-size:14px;">Runde 3</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--white);">27</div>
+          <div style="padding:10px 12px;font-size:14px;">40</div>
+          <div style="padding:10px 12px;font-size:14px;opacity:.6;">Woche 5–6</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:rgba(201,168,76,.06);">
+          <div style="padding:10px 12px;font-size:14px;font-family:'Druk Wide Bold',sans-serif;">Runde 4</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">81</div>
+          <div style="padding:10px 12px;font-size:16px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">121</div>
+          <div style="padding:10px 12px;font-size:14px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">Woche 7–8</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;justify-content:center;height:100%;">
+      <div style="text-align:center;padding:32px 24px;border:1px solid var(--border);background:var(--panel);position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:80px;line-height:1;color:var(--accent-lt);text-shadow:0 0 50px var(--accent-glow);">121</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.3em;color:var(--accent);margin-top:10px;opacity:.7;">Personen in der Struktur</p>
+        <div style="margin:18px auto;height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
+        <p style="font-size:16px;font-family:'Druk Wide Bold',sans-serif;text-transform:uppercase;color:var(--white);letter-spacing:.05em;">Nach 2 Monaten</p>
+        <p style="font-size:13px;opacity:.5;margin-top:8px;font-style:italic;">Wenn jeder nur 3 Leute mitbringt</p>
+      </div>
+      <div style="padding:14px 18px;border:1px solid var(--border);background:var(--panel);text-align:center;">
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-lt);">Pioneer-Vorteil: Du stehst oben in dieser Struktur.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 13 — KAPITEL 2 COVER: NETGAINS USPs
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide5">
+  <div class="chapter-indicator">Kapitel 2</div>
+  <div class="cover-layout">
+    <span class="chapter-label">Kapitel 2</span>
+    <h1>NetGains<br>USPs</h1>
+    <p style="margin-top:26px;font-size:19px;max-width:600px;">Was uns von jedem anderen Anbieter auf dem Markt unterscheidet —<br>und warum es messbar wichtig ist.</p>
+    <div style="margin-top:44px;height:1px;width:180px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 6 — USP: GEWISSENHAFTIGKEIT (Text)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide6">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Gewissenhaftigkeit</h2>
+  <div class="two-col" style="align-items:center;gap:40px;">
+    <div>
+      <p style="font-size:17px;margin-bottom:20px;">Wir lernten den Chef eines Marketingunternehmens kennen — verantwortlich für Kampagnen von <strong>SebaMed, Globus</strong> und <strong>Porsche</strong>.</p>
+      <div class="info-box">
+        <span class="box-head">Die entscheidende Lektion</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Effekte und Ladezeiten waren ihm <em>fast schon egal</em></li>
+          <li>Ihm war nur eines wichtig: dass <strong>nichts verschoben</strong> ist</li>
+          <li>Kein einziger <strong>Rechtschreibfehler</strong>, kein Pixel-Fehler</li>
+          <li>Gewissenhaftigkeit ist der <strong>unsichtbare Standard</strong> der Großen</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="info-box" style="padding:28px;text-align:center;">
+        <span class="box-head">Unser Versprechen</span>
+        <p style="font-size:28px;font-family:'Druk Wide Bold',sans-serif;color:var(--accent-lt);text-transform:uppercase;line-height:1.2;margin-top:16px;text-shadow:0 0 20px var(--accent-glow);">Kein Pixel.<br>Kein Wort.<br>Kein Fehler.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 7 — USP: GEWISSENHAFTIGKEIT (Beispiele schlechter Sites)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide7">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Was da draußen passiert</h2>
+
+  <div class="bad-site-grid">
+    <div class="bad-site-card">
+      <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1200&auto=format&fit=crop" alt="Bad website example">
+      <div class="warn-tag">Verschoben</div>
+      <div class="site-label">Text überlappt Navigation, Abstände inkonsistent</div>
+    </div>
+    <div class="bad-site-card">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop" alt="Bad mobile website">
+      <div class="warn-tag">Nicht Mobil</div>
+      <div class="site-label">Desktop-Layout auf Handy — 65% aller Besucher sehen das</div>
+    </div>
+    <div class="bad-site-card">
+      <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop" alt="Outdated website">
+      <div class="warn-tag">Veraltet</div>
+      <div class="site-label">Fonts fehlen, Bilder nicht geladen, Rechtschreibfehler sichtbar</div>
+    </div>
+  </div>
+
+  <p style="margin-top:18px;font-size:14px;text-align:center;opacity:.5;font-style:italic;">Das ist die Konkurrenz unserer Kunden. Und die Chance, die wir für sie nutzen.</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 8 — USP: DESIGN
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide8">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Design</h2>
+
+  <div class="two-col" style="gap:36px;align-items:start;">
+    <div>
+      <h3>Unser Designansatz</h3>
+      <ul class="bullet-list">
+        <li>Wir sehen uns als <strong>Trendsetter</strong> im Card-Based Design und bei <em>3D-Logos</em></li>
+        <li><strong>Card-Based Design</strong>: modular, klar, hochwertig — jedes Element hat seinen Platz</li>
+        <li><strong>Green Phantasies</strong> zeigt den eleganten Kompromiss — modern ohne zu überfordern</li>
+        <li>Jedes Projekt wird von Grund auf <em>individuell</em> gestaltet, kein Template</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Live ansehen</h3>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:4px;">
+        <a href="https://netgains-showcase.pages.dev" target="_blank" class="ext-btn">
+          <span class="btn-icon">◈</span>
+          NetGains Showcase
+          <span style="opacity:.5;font-size:9px;margin-left:auto;">netgains-showcase.pages.dev</span>
+        </a>
+        <a href="https://green-phantasies.pages.dev" target="_blank" class="ext-btn">
+          <span class="btn-icon">◈</span>
+          Green Phantasies
+          <span style="opacity:.5;font-size:9px;margin-left:auto;">green-phantasies.pages.dev</span>
+        </a>
+      </div>
+      <div class="info-box" style="margin-top:18px;">
+        <span class="box-head">Was das bedeutet</span>
+        <p style="font-size:14px;">Websites die <strong>auffallen</strong>, weil sie tatsächlich besser sind — nicht weil sie lauter sind.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 9 — USP: MOBILOPTIMIERUNG
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide9">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Mobiloptimierung</h2>
+
+  <div class="two-col" style="align-items:center;">
+    <div>
+      <div class="stat-grid cols-2" style="margin-bottom:20px;">
+        <div class="stat-card">
+          <span class="big-num">65%</span>
+          <span class="card-label">Mobile Nutzer</span>
+          <p>Ca. 2 von 3 Besuchern kommen über ihr Smartphone zur Website.</p>
+        </div>
+        <div class="stat-card">
+          <span class="big-num">80%</span>
+          <span class="card-label">Manche Quellen</span>
+          <p>In manchen Branchen liegt die Mobile-Quote sogar noch höher.</p>
+        </div>
+      </div>
+      <div class="info-box">
+        <span class="box-head">Was passiert ohne Mobiloptimierung</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Buttons zu klein zum Tippen, Text kaum lesbar</li>
+          <li>Google straft nicht-responsive Sites im Ranking ab</li>
+          <li>Potenzielle Kunden springen sofort ab</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:100px;line-height:1;filter:drop-shadow(0 0 30px var(--accent-glow));">📱</div>
+      <p style="margin-top:20px;font-family:'Druk Wide Bold',sans-serif;font-size:20px;text-transform:uppercase;color:var(--accent-lt);letter-spacing:.05em;text-shadow:0 0 20px var(--accent-glow);">Responsiv.<br>Standardmäßig.</p>
+      <p style="margin-top:12px;font-size:13px;opacity:.55;font-style:italic;">Fachbegriff: "Responsives Design" —<br>auch bekannt als "fürs Handy optimiert"</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 10 — USP: BARRIEREFREIHEIT
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide10">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Barrierefreiheitsstärkungsgesetz</h2>
+
+  <div class="two-col" style="gap:36px;">
+    <div>
+      <div class="info-box" style="margin-bottom:18px;border-left-color:#b91c1c;border-top-color:#b91c1c;">
+        <span class="box-head" style="color:#f87171;">⚠ Seit 28. Juni 2025 in Kraft</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Mittelgroße & große Unternehmen müssen Barrierefreiheitsanforderungen <strong>vollumfänglich</strong> erfüllen</li>
+          <li>Der Staat plant eine <strong>Ausweitung auf immer mehr Unternehmen</strong></li>
+          <li><strong>Teure Abmahnungen</strong> durch Konkurrenten, Verbraucherschutzzentralen und Behindertenverbände möglich</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="info-box" style="border-left-color:var(--accent);">
+        <span class="box-head">Unsere Lösung</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Unsere Websites sind <strong>standardmäßig barrierefrei</strong> — kein Aufpreis, kein Nacharbeiten</li>
+          <li>Auf Wunsch: erweiterte <em>Zusatzfunktionen</em> wie Vorlesemodus, Kontrastanpassung, Schriftgrößenregler</li>
+          <li>Kunden sind damit <strong>rechtssicher aufgestellt</strong> — und das ist ein echtes Verkaufsargument</li>
+        </ul>
+      </div>
+      <div style="margin-top:16px;padding:16px 20px;border:1px solid var(--border);background:var(--panel);">
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-lt);">Im Prinzip eine gute Sache — für uns eine Chance.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 11 — USP: LADEZEITEN / PAGESPEED
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide11">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Ladezeiten & PageSpeed</h2>
+
+  <div class="two-col" style="gap:30px;align-items:start;">
+    <div>
+      <h3>PageSpeed Insights</h3>
+      <p style="margin-bottom:18px;">Google's offizielles Messwerkzeug für Website-Performance. Ein Score von 90+ ist selten — bei uns ist er Standard.</p>
+      <ul class="bullet-list">
+        <li><strong>Schnellere Ladezeiten</strong> = bessere Google-Rankings = mehr Besucher</li>
+        <li>Jede Sekunde Ladezeit kostet <em>7% Conversion</em></li>
+        <li>Wir sind <strong>nachweislich messbar schneller</strong> als die Konkurrenz</li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="screenshot-placeholder">
+        <div class="ph-icon">📊</div>
+        <p>Screenshot PageSpeed — Kunde A</p>
+        <p style="opacity:.2;font-size:8px;">Hier Screenshot einfügen</p>
+      </div>
+      <div class="screenshot-placeholder">
+        <div class="ph-icon">📊</div>
+        <p>Screenshot PageSpeed — Kunde B</p>
+        <p style="opacity:.2;font-size:8px;">Hier Screenshot einfügen</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 12 — USP: SMART WEBSITES
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide12">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center;gap:28px;">
+    <span class="chapter-label" style="font-size:10px;letter-spacing:.5em;">Kommt als nächstes</span>
+    <h2 style="font-size:54px;line-height:1.1;">Smart<br>Websites</h2>
+    <div style="width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
+    <p style="font-size:20px;max-width:500px;font-style:italic;opacity:.7;">Seid gespannt.</p>
+    <div style="margin-top:20px;padding:20px 40px;border:1px solid var(--border);background:var(--panel);">
+      <p style="font-family:'Druk Wide Bold',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-lt);">Details folgen in Kürze ◈</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 13 — BISHERIGE ERFOLGE
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide13">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Bisherige Erfolge</h2>
+
+  <div class="three-col" style="margin-bottom:20px;">
+    <div class="achievement-card">
+      <span class="ach-icon">🎬</span>
+      <h4>Film & Entertainment</h4>
+      <p>Zusammenarbeit mit einem Filmstudio, das für <strong>Coca Cola</strong> und <strong>Disney</strong> produziert</p>
+    </div>
+    <div class="achievement-card">
+      <span class="ach-icon">📣</span>
+      <h4>Marketing & Marken</h4>
+      <p>Agentur für <strong>Globus</strong> und <strong>SebaMed</strong> — Marken mit nationaler Reichweite</p>
+    </div>
+    <div class="achievement-card">
+      <span class="ach-icon">🤝</span>
+      <h4>Non-Profit</h4>
+      <p>Wohltätige Organisationen, die echten gesellschaftlichen Impact erzielen</p>
+    </div>
+  </div>
+
+  <div class="stat-grid cols-2">
+    <div class="achievement-card">
+      <span class="ach-icon">🏗</span>
+      <h4>Deutschlands zweitgrößte Dachdecker-Firma</h4>
+      <p>Aktives Interesse an unseren Produkten</p>
+    </div>
+    <div class="achievement-card">
+      <span class="ach-icon">⚓</span>
+      <h4>Europas größte Schiffsantriebsproduktion</h4>
+      <p>Interesse an unserer Lösung — in Gesprächen</p>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;padding:14px 22px;border:1px solid var(--border);background:var(--panel);border-left:3px solid var(--accent);">
+    <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-lt);">Wenn das keine perfekten Voraussetzungen sind — weiß ich auch nicht.</p>
+  </div>
+</div>
+
+
+<!-- ── UI CHROME ──────────────────────────────── -->
+<div class="progress-bar" id="progress-bar"></div>
+<div class="slide-counter" id="slide-counter">1 / 21</div>
+<div class="controls">
+  <button id="btn-theme" title="Theme">◑</button>
+  <button id="btn-prev"  title="Zurück">‹</button>
+  <button id="btn-next"  title="Weiter">›</button>
+</div>
+
+</div><!-- /wrapper -->
+
 <script>
-    // --- 1. Scaling Logic to make presentation fit window ---
-    function resizePresentation() {
-        const wrapper = document.getElementById('presentation-wrapper');
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        
-        // Native presentation size
-        const targetWidth = 1280;
-        const targetHeight = 720;
-        
-        // Calculate scale needed to fit both width and height
-        const scaleWidth = windowWidth / targetWidth;
-        const scaleHeight = windowHeight / targetHeight;
-        const scale = Math.min(scaleWidth, scaleHeight);
-        
-        wrapper.style.transform = `scale(${scale})`;
-    }
+  function resize() {
+    const s = Math.min(window.innerWidth/1280, window.innerHeight/720);
+    document.getElementById('presentation-wrapper').style.transform = `scale(${s})`;
+  }
+  window.addEventListener('resize', resize);
+  resize();
 
-    window.addEventListener('resize', resizePresentation);
-    resizePresentation();
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide-container');
+  const total  = slides.length;
+  const bar    = document.getElementById('progress-bar');
+  const ctr    = document.getElementById('slide-counter');
 
+  // --- Eure Rolle reveal logic ---
+  const EURE_ROLLE_ID = 'slide-eure-rolle';
+  const EURE_ROLLE_BARS = 5;
+  let eureRolleRevealed = 0;
 
-    // --- 2. Presentation Navigation Logic ---
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide-container');
-    const totalSlides = slides.length;
-    const progressBar = document.getElementById('progress-bar');
-    const counter = document.getElementById('slide-counter');
+  function getEureRolleIndex() {
+    return Array.from(slides).findIndex(s => s.id === EURE_ROLLE_ID);
+  }
 
-    function updatePresentation() {
-        slides.forEach((slide, index) => {
-            if (index === currentSlide) {
-                slide.classList.add('active');
-                
-                // Animation trigger for bars
-                const bars = slide.querySelectorAll('.bar-fill');
-                if (bars.length > 0) {
-                    bars.forEach(bar => {
-                        const targetWidth = bar.style.width;
-                        bar.style.width = '0%';
-                        setTimeout(() => { bar.style.width = targetWidth; }, 100);
-                    });
-                }
-            } else {
-                slide.classList.remove('active');
-            }
-        });
-
-        const progress = ((currentSlide + 1) / totalSlides) * 100;
-        progressBar.style.width = `${progress}%`;
-        counter.innerText = `${currentSlide + 1} / ${totalSlides}`;
-    }
-
-    function nextSlide() {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide++;
-            updatePresentation();
-        }
-    }
-
-    function prevSlide() {
-        if (currentSlide > 0) {
-            currentSlide--;
-            updatePresentation();
-        }
-    }
-
-    // Keyboard controls
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
-            nextSlide();
-        } else if (e.key === 'ArrowLeft') {
-            prevSlide();
-        }
+  function resetEureRolle() {
+    eureRolleRevealed = 0;
+    document.querySelectorAll('#' + EURE_ROLLE_ID + ' .reveal-bar').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateX(-20px)';
     });
+  }
 
-    // Button controls
-    document.getElementById('btn-next').addEventListener('click', nextSlide);
-    document.getElementById('btn-prev').addEventListener('click', prevSlide);
-    
-    // Theme Switcher Logic
-    document.getElementById('btn-theme').addEventListener('click', () => {
-        document.body.classList.toggle('theme-sfo');
-    });
+  function revealNextBar() {
+    const bars = document.querySelectorAll('#' + EURE_ROLLE_ID + ' .reveal-bar');
+    if (eureRolleRevealed < bars.length) {
+      const el = bars[eureRolleRevealed];
+      el.style.opacity = '1';
+      el.style.transform = 'translateX(0)';
+      eureRolleRevealed++;
+      return true;
+    }
+    return false;
+  }
 
-    // Invisible click areas controls
-    document.getElementById('area-next').addEventListener('click', nextSlide);
-    document.getElementById('area-prev').addEventListener('click', prevSlide);
+  function go(n) {
+    const erIdx = getEureRolleIndex();
+    // Going forward on Eure Rolle: reveal bars one by one first
+    if (n > cur && cur === erIdx && eureRolleRevealed < EURE_ROLLE_BARS) {
+      revealNextBar();
+      updateUI();
+      return;
+    }
+    // Going backward onto Eure Rolle: reset bars
+    if (n === erIdx && n < cur) {
+      resetEureRolle();
+    }
+    // Going forward past Eure Rolle, reset for re-entry
+    if (n > erIdx && cur < erIdx) {
+      // already handled
+    }
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(total-1, n));
+    slides[cur].classList.add('active');
+    // Reset Eure Rolle if we jumped past it forward
+    if (cur === erIdx) resetEureRolle();
+    updateUI();
+  }
 
-    // Initialize
-    updatePresentation();
+  function updateUI() {
+    const erIdx = getEureRolleIndex();
+    // Progress: count eure-rolle bars as sub-steps
+    const totalSteps = total - 1 + EURE_ROLLE_BARS;
+    let step;
+    if (cur < erIdx) step = cur;
+    else if (cur === erIdx) step = erIdx + eureRolleRevealed;
+    else step = erIdx + EURE_ROLLE_BARS + (cur - erIdx);
+    bar.style.width = ((step / totalSteps) * 100) + '%';
+    ctr.textContent = (cur + 1) + ' / ' + total;
+  }
+
+  document.getElementById('btn-next').addEventListener('click', () => go(cur+1));
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    const erIdx = getEureRolleIndex();
+    if (cur === erIdx && eureRolleRevealed > 0) {
+      eureRolleRevealed--;
+      const bars = document.querySelectorAll('#' + EURE_ROLLE_ID + ' .reveal-bar');
+      bars[eureRolleRevealed].style.opacity = '0';
+      bars[eureRolleRevealed].style.transform = 'translateX(-20px)';
+      updateUI();
+    } else {
+      go(cur-1);
+    }
+  });
+  document.getElementById('btn-theme').addEventListener('click', () => document.body.classList.toggle('theme-ng'));
+
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key===' '||e.key==='Enter') document.getElementById('btn-next').click();
+    else if (e.key==='ArrowLeft') document.getElementById('btn-prev').click();
+  });
+
+  go(0);
 </script>
-
 </body>
 </html>
-```
