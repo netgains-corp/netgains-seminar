@@ -544,7 +544,7 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
       </div>
       <div class="info-box" style="padding:22px;text-align:center;">
         <span class="box-head">Unser Versprechen</span>
-        <p style="font-size:24px;font-family:'Druk Wide Bold',sans-serif;color:var(--accent-lt);text-transform:uppercase;line-height:1.2;margin-top:12px;text-shadow:0 0 20px var(--accent-glow);">Kein Pixel.<br>Kein Wort.<br>Kein Fehler.</p>
+        <p style="font-size:24px;font-family:'Druk Wide Bold',sans-serif;color:var(--accent-lt);text-transform:uppercase;line-height:1.2;margin-top:12px;text-shadow:0 0 20px var(--accent-glow);">Alles sitzt.<br>Alles stimmt.<br>Immer.</p>
       </div>
     </div>
   </div>
@@ -711,8 +711,8 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
   <div class="chapter-indicator">Kapitel 2 — USPs</div>
   <h2 class="slide-title">Ladezeiten & PageSpeed</h2>
 
-  <div class="two-col" style="gap:30px;align-items:start;">
-    <div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;flex:1;min-height:0;align-items:stretch;">
+    <div style="display:flex;flex-direction:column;justify-content:center;">
       <h3>PageSpeed Insights</h3>
       <p style="margin-bottom:18px;">Google's offizielles Messwerkzeug für Website-Performance. Ein Score von 90+ ist selten — bei uns ist er Standard.</p>
       <ul class="bullet-list">
@@ -721,12 +721,12 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
         <li>Wir sind <strong>nachweislich messbar schneller</strong> als die Konkurrenz</li>
       </ul>
     </div>
-    <div style="display:flex;flex-direction:column;gap:14px;">
-      <div style="overflow:hidden;border:1px solid var(--border);flex:1;">
-        <img src="ex_seo1.webp" alt="PageSpeed Beispiel 1" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="display:flex;flex-direction:column;gap:12px;min-height:0;">
+      <div style="border:1px solid var(--border);flex:1;min-height:0;overflow:hidden;background:var(--panel);display:flex;align-items:center;">
+        <img src="ex_seo1.webp" alt="PageSpeed Beispiel 1" style="width:100%;height:auto;max-height:100%;object-fit:contain;display:block;">
       </div>
-      <div style="overflow:hidden;border:1px solid var(--border);flex:1;">
-        <img src="ex_seo2.webp" alt="PageSpeed Beispiel 2" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="border:1px solid var(--border);flex:1;min-height:0;overflow:hidden;background:var(--panel);display:flex;align-items:center;">
+        <img src="ex_seo2.webp" alt="PageSpeed Beispiel 2" style="width:100%;height:auto;max-height:100%;object-fit:contain;display:block;">
       </div>
     </div>
   </div>
