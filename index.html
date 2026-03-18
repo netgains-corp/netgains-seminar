@@ -287,7 +287,7 @@ h1 {
     #fff4cc 57%, #c9a84c 78%, #6b4e18 100%);
   background-size: 280% auto;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; animation: shine 4s linear infinite;
+  background-clip: text; animation: shine 10s ease-in-out infinite;
   filter: drop-shadow(0 4px 22px rgba(201,168,76,.5));
 }
 h2 { font-size: 36px; color: var(--white); text-shadow: 0 2px 18px rgba(0,0,0,.6); }
@@ -345,7 +345,7 @@ body.theme-ng h1 {
     #adfff4 57%, #2dd4bf 78%, #0a6056 100%);
   background-size: 280% auto;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; animation: shine 3.5s linear infinite;
+  background-clip: text; animation: shine 10s ease-in-out infinite;
   filter: drop-shadow(0 4px 22px rgba(45,212,191,.55));
 }
 body.theme-ng h2 { color: var(--white); text-shadow: 0 2px 18px rgba(0,0,0,.8),0 0 30px rgba(45,212,191,.1); }
@@ -400,6 +400,23 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
     <div style="margin-top:44px;height:1px;width:180px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
     <p style="margin-top:16px;font-size:12px;opacity:.4;font-style:italic;">Quellen: Bundesministerium für Gesundheit · Walter Homm</p>
   </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 2b — HEALTH1 VOLLBILD
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-health1" style="padding:0;">
+  <img src="health1.webp" alt="Gesundheitssystem" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:0;">
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 2b — HEALTH IMAGE FULLSCREEN
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-health1" style="padding:0;">
+  <img src="health1.webp" alt="Gesundheitskrise" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(12,10,7,0.6) 0%, transparent 50%);z-index:1;"></div>
 </div>
 
 
@@ -469,32 +486,6 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
       <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(12,10,7,0.85) 0%, transparent 60%);"></div>
       <div style="position:absolute;bottom:20px;left:20px;right:20px;">
         <p style="font-family:'Druk Wide Bold',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);opacity:.8;">Globale Systemkrise</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE 5 — ÜBERLEITUNG: MEIN BISHERIGER WEG
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide5">
-  <div class="chapter-indicator">Überleitung</div>
-  <h2 class="slide-title">Mein bisheriger Weg</h2>
-  <div class="three-col" style="height:calc(100% - 110px);">
-    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
-      <div style="flex:1;overflow:hidden;background:var(--panel);">
-        <img src="d1.webp" alt="Bisheriger Weg 1" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
-      <div style="flex:1;overflow:hidden;background:var(--panel);">
-        <img src="d2.webp" alt="Bisheriger Weg 2" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
-      <div style="flex:1;overflow:hidden;background:var(--panel);">
-        <img src="d3.webp" alt="Bisheriger Weg 3" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
       </div>
     </div>
   </div>
@@ -792,6 +783,32 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
   <div style="margin-top:18px;padding:14px 22px;border:1px solid var(--border);background:var(--panel);border-left:3px solid var(--accent);">
     <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-lt);">Wenn das keine perfekten Voraussetzungen sind — weiß ich auch nicht.</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 5 — ÜBERLEITUNG: MEIN BISHERIGER WEG
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide5">
+  <div class="chapter-indicator">Überleitung</div>
+  <h2 class="slide-title">Mein bisheriger Weg</h2>
+  <div class="three-col" style="height:calc(100% - 110px);">
+    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
+      <div style="flex:1;overflow:hidden;background:var(--panel);">
+        <img src="d1.webp" alt="Bisheriger Weg 1" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
+      <div style="flex:1;overflow:hidden;background:var(--panel);">
+        <img src="d2.webp" alt="Bisheriger Weg 2" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid var(--border);">
+      <div style="flex:1;overflow:hidden;background:var(--panel);">
+        <img src="d3.webp" alt="Bisheriger Weg 3" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1) brightness(0.85);">
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1351,9 +1368,106 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 </div>
 
 
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — SALES FORCE ONE
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-sfo" style="background-image:linear-gradient(110deg, rgba(12,10,7,0.98) 52%, rgba(12,10,7,0.6) 100%), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:right center;">
+  <div class="chapter-indicator">Tools & Infrastruktur</div>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:660px;">
+    <span class="chapter-label" style="margin-bottom:16px;">Euer Cockpit</span>
+    <h2 style="font-size:48px;margin-bottom:8px;line-height:1.05;">Sales Force One</h2>
+    <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.25em;color:var(--accent);opacity:.7;margin-bottom:28px;">Das Verkäufer-Dashboard</p>
+
+    <div class="two-col" style="gap:20px;margin-bottom:32px;">
+      <div class="info-box" style="padding:18px 20px;">
+        <span class="box-head">Was ihr seht</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Eure Abschlüsse & Provisionen in Echtzeit</li>
+          <li>Status jedes Kunden auf einen Blick</li>
+          <li>Eure Struktur — wer ist unter wem</li>
+        </ul>
+      </div>
+      <div class="info-box" style="padding:18px 20px;">
+        <span class="box-head">Was das bedeutet</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Volle Transparenz — keine Überraschungen</li>
+          <li>Jederzeit abrufbar, von überall</li>
+          <li>Euer Erfolg ist messbar & sichtbar</li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="https://sales-force-one.pages.dev/" target="_blank" class="ext-btn" style="align-self:flex-start;padding:16px 32px;font-size:12px;">
+      <span class="btn-icon">◈</span>
+      Sales Force One öffnen
+      <span style="opacity:.45;font-size:9px;margin-left:12px;">sales-force-one.pages.dev</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — GEMEINNÜTZIGKEIT
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-gemeinnuetzig" style="background-image:linear-gradient(rgba(12,10,7,0.9) 0%, rgba(12,10,7,0.95) 100%), url('https://images.unsplash.com/photo-1593113630400-ea4288922559?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center;">
+  <div class="chapter-indicator">Werte & Mission</div>
+  <h2 class="slide-title">Gemeinnützigkeit</h2>
+
+  <div class="two-col" style="gap:32px;align-items:stretch;">
+
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div class="info-box" style="border-left-color:var(--accent);padding:24px 26px;flex:1;">
+        <span class="box-head">1% für das Gute</span>
+        <p style="font-size:17px;line-height:1.75;margin-top:10px;">Von jeder Zahlung, die über <strong>Stripe</strong> abgewickelt wird, gehen automatisch <em>1%</em> an gemeinnützige Organisationen und Vereine.</p>
+        <p style="font-size:15px;margin-top:10px;opacity:.7;">Kein Aufwand für euch — es passiert im Hintergrund, bei jedem Abschluss, bei jeder Hosting-Zahlung.</p>
+      </div>
+
+      <div style="padding:16px 20px;border:1px solid var(--border);background:var(--panel);display:flex;align-items:center;gap:16px;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);line-height:1;">1%</span>
+        <div>
+          <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:4px;">Automatisch. Immer.</p>
+          <p style="font-size:14px;opacity:.65;">Von jeder Stripe-Transaktion — ohne extra Klick.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <h3 style="margin-bottom:4px;">Unterstützte Organisationen</h3>
+
+      <div style="border:1px solid var(--border);overflow:hidden;flex:1;">
+        <div style="height:130px;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2940&auto=format&fit=crop" alt="Gemeinnützig" style="width:100%;height:100%;object-fit:cover;filter:grayscale(30%) brightness(0.45) contrast(1.1);">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(12,10,7,0.9));"></div>
+          <div style="position:absolute;bottom:12px;left:16px;">
+            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);opacity:.9;">Echte Menschen. Echter Impact.</p>
+          </div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid var(--border-faint);">
+            <span style="font-size:20px;line-height:1;margin-top:2px;">🌱</span>
+            <div>
+              <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--white);margin-bottom:3px;">Zusammen Wachsen</p>
+              <p style="font-size:13px;opacity:.65;">Soziale Integration, Chancengleichheit, Gemeinschaftsprojekte</p>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 0;">
+            <span style="font-size:20px;line-height:1;margin-top:2px;">＋</span>
+            <div>
+              <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:3px;">Weitere Partner folgen</p>
+              <p style="font-size:13px;opacity:.65;">Ihr könnt Organisationen vorschlagen — wir entscheiden gemeinsam</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <!-- ── UI CHROME ──────────────────────────────── -->
 <div class="progress-bar" id="progress-bar"></div>
-<div class="slide-counter" id="slide-counter">1 / 25</div>
+<div class="slide-counter" id="slide-counter">1 / 28</div>
 <div class="controls">
   <button id="btn-theme" title="Theme">◑</button>
   <button id="btn-prev"  title="Zurück">‹</button>
