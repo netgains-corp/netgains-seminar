@@ -376,15 +376,12 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
 
 <!-- ══════════════════════════════════════════════════════
-     SLIDE 1 — TITELBLATT (original)
+     SLIDE 1 — NETGAINS LOGO
      ══════════════════════════════════════════════════════ -->
-<div class="slide-container active" id="slide1"
-     style="background-image:linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.94)),url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop');background-size:cover;">
-  <div class="cover-layout">
-    <span class="chapter-label">NetGains System</span>
-    <h1>Die Initiation</h1>
-    <p style="margin-top:24px;font-size:21px;font-style:italic;opacity:.8;">Willkommen in der Familie</p>
-    <div style="margin-top:44px;height:1px;width:180px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+<div class="slide-container active" id="slide1" style="display:flex;align-items:center;justify-content:center;">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:32px;">
+    <img src="logo_transparent.webp" alt="NetGains Logo" style="max-width:540px;max-height:380px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 0 40px var(--accent-glow));">
+    <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.5em;color:var(--accent);opacity:.5;margin:0;">netgains.de</p>
   </div>
 </div>
 
@@ -404,31 +401,172 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 </div>
 
 
-
 <!-- ══════════════════════════════════════════════════════
-     SLIDE 2b — HEALTH IMAGE FULLSCREEN
+     SLIDE — INFLATION AKTUELL
      ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-health1" style="padding:0;">
-  <img src="health1.webp" alt="Gesundheitskrise" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
-  <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(12,10,7,0.6) 0%, transparent 50%);z-index:1;"></div>
+<div class="slide-container" id="slide-inflation" style="background-image:linear-gradient(rgba(12,10,7,0.91) 0%,rgba(12,10,7,0.96) 100%),url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center;">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Die Inflation — was wirklich passiert</h2>
+  <div class="two-col" style="gap:28px;align-items:start;">
+    <div>
+      <div class="stat-grid cols-2" style="margin-bottom:18px;">
+        <div class="stat-card">
+          <span class="big-num">+2,2%</span>
+          <span class="card-label">Inflationsrate 2025</span>
+          <p>Jahresdurchschnitt 2025 laut <strong>Statistischem Bundesamt (Destatis)</strong> — offiziell "stabil".</p>
+        </div>
+        <div class="stat-card">
+          <span class="big-num">+39%</span>
+          <span class="card-label">Nahrungsmittel seit 2019</span>
+          <p>Das Preisniveau für Lebensmittel stieg seit 2019 um fast <strong>40%</strong> — das spürt jeder täglich.</p>
+        </div>
+      </div>
+      <div class="stat-grid cols-2">
+        <div class="stat-card">
+          <span class="big-num">+37%</span>
+          <span class="card-label">Energie seit 2019</span>
+          <p>Trotz aktueller Rückgänge bleibt das Energiepreisniveau dauerhaft <strong>deutlich erhöht</strong>.</p>
+        </div>
+        <div class="stat-card">
+          <span class="big-num">+6,9%</span>
+          <span class="card-label">Inflationsspitze 2022</span>
+          <p>Der Höhepunkt der Inflationswelle — Familien mit niedrigem Einkommen litten am stärksten.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="info-box" style="border-left-color:var(--accent);margin-bottom:16px;">
+        <span class="box-head">Was die Zahlen verschweigen</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li>Die offizielle Rate sagt <em>2,2%</em> — dein Einkaufszettel erzählt eine andere Geschichte</li>
+          <li>Dienstleistungen wurden 2025 um <strong>+3,7%</strong> teurer — Handwerker, Gesundheit, Gastronomie</li>
+          <li>Mieten stiegen <strong>+2,1%</strong> — auf bereits extrem hohem Niveau</li>
+          <li>Kumuliert seit 2019: die Kaufkraft ist für Durchschnittshaushalte um <strong>20–30%</strong> gesunken</li>
+        </ul>
+      </div>
+      <div style="padding:12px 16px;border:1px solid var(--border);background:var(--panel);">
+        <p style="font-size:12px;opacity:.5;font-style:italic;">Quelle: Statistisches Bundesamt (Destatis), Januar 2026 · IMK Inflationsmonitor, Hans-Böckler-Stiftung</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 
 <!-- ══════════════════════════════════════════════════════
-     SLIDE 2c — HEALTH2 VOLLBILD
+     SLIDE — ALLES WIRD TEURER
      ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-health2" style="padding:0;">
-  <img src="health2.webp" alt="Gesundheitskrise 2" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
-  <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(12,10,7,0.6) 0%, transparent 50%);z-index:1;"></div>
+<div class="slide-container" id="slide-teurer" style="background-image:linear-gradient(rgba(12,10,7,0.9) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=2940&auto=format&fit=crop');background-size:cover;">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Alles wird teurer. Löhne bleiben gleich.</h2>
+  <div class="stat-grid cols-4" style="margin-bottom:20px;">
+    <div class="stat-card" style="text-align:center;align-items:center;">
+      <span style="font-size:36px;display:block;margin-bottom:8px;">⛽</span>
+      <span class="big-num" style="font-size:28px;">+48%</span>
+      <span class="card-label">Benzin seit 2020</span>
+      <p>Volltanken kostet heute fast doppelt so viel wie vor 5 Jahren.</p>
+    </div>
+    <div class="stat-card" style="text-align:center;align-items:center;">
+      <span style="font-size:36px;display:block;margin-bottom:8px;">⚡</span>
+      <span class="big-num" style="font-size:28px;">+60%</span>
+      <span class="card-label">Strom seit 2021</span>
+      <p>Deutschland hat einen der höchsten Strompreise weltweit.</p>
+    </div>
+    <div class="stat-card" style="text-align:center;align-items:center;">
+      <span style="font-size:36px;display:block;margin-bottom:8px;">🏠</span>
+      <span class="big-num" style="font-size:28px;">+35%</span>
+      <span class="card-label">Miete seit 2018</span>
+      <p>In Großstädten sind Wohnungen für Normalverdiener kaum noch finanzierbar.</p>
+    </div>
+    <div class="stat-card" style="text-align:center;align-items:center;">
+      <span style="font-size:36px;display:block;margin-bottom:8px;">🛒</span>
+      <span class="big-num" style="font-size:28px;">+39%</span>
+      <span class="card-label">Lebensmittel seit 2019</span>
+      <p>Der tägliche Einkauf hat sich dauerhaft und massiv verteuert.</p>
+    </div>
+  </div>
+  <div style="padding:18px 24px;border:1px solid var(--border);background:var(--panel);border-left:3px solid var(--accent);display:flex;align-items:center;justify-content:space-between;gap:30px;">
+    <p style="font-family:'Druk Wide Bold',sans-serif;font-size:20px;text-transform:uppercase;color:var(--white);letter-spacing:.03em;margin:0;">Die Löhne?</p>
+    <p style="font-size:17px;margin:0;flex:1;">Nominal leicht gestiegen. <strong>Real — also nach Inflation — gesunken.</strong> Wer heute das gleiche verdient wie 2019, ist de facto ärmer geworden.</p>
+  </div>
 </div>
 
 
 <!-- ══════════════════════════════════════════════════════
-     SLIDE 2d — HEALTH3 VOLLBILD
+     SLIDE — DER URLAUB
      ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-health3" style="padding:0;">
-  <img src="health3.webp" alt="Gesundheitskrise 3" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
-  <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(12,10,7,0.6) 0%, transparent 50%);z-index:1;"></div>
+<div class="slide-container" id="slide-urlaub" style="padding:0;">
+  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2940&auto=format&fit=crop" alt="Urlaub" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(12,10,7,0.97) 40%,rgba(12,10,7,0.55) 100%);z-index:1;"></div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100%;padding:64px 72px;max-width:640px;">
+    <span class="chapter-label" style="margin-bottom:20px;">Kapitel 1 — Wirtschaft</span>
+    <h2 style="font-size:36px;margin-bottom:28px;">Früher vs. heute</h2>
+    <div class="info-box" style="border-left-color:var(--accent-lt);margin-bottom:18px;padding:20px 24px;">
+      <span class="box-head" style="color:var(--accent-lt);">Früher</span>
+      <p style="font-size:17px;line-height:1.7;margin-top:8px;">Ein Mann arbeitete. Die Familie hatte ein Haus. <strong>Einmal im Jahr</strong> — Familienurlaub. Möglich. Normal.</p>
+    </div>
+    <div class="info-box" style="border-left-color:#b91c1c;padding:20px 24px;">
+      <span class="box-head" style="color:#f87171;">Heute</span>
+      <p style="font-size:17px;line-height:1.7;margin-top:8px;"><strong>Beide arbeiten.</strong> Vollzeit. Das Geld reicht trotzdem kaum. Der Urlaub? Luxus. Das eigene Haus? Ein Traum.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — RENTE
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-rente" style="background-image:linear-gradient(rgba(12,10,7,0.92) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1580894908361-967195033215?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center;">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Die Rente</h2>
+  <div class="two-col" style="gap:28px;align-items:stretch;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="stat-card" style="border-top-color:#b91c1c;flex:1;">
+        <span class="big-num" style="font-size:32px;color:#f87171;">67</span>
+        <span class="card-label">Renteneintrittsalter</span>
+        <p>Wer heute 40 ist, geht frühestens mit <strong>67 in Rente</strong> — Tendenz steigend. Die Politik diskutiert bereits 70.</p>
+      </div>
+      <div class="stat-card" style="flex:1;">
+        <span class="big-num" style="font-size:32px;">~48%</span>
+        <span class="card-label">Durchschnittliche Rente</span>
+        <p>Rund die Hälfte des letzten Nettolohns. <strong>Nach 45 Jahren Arbeit.</strong> Davon werden Miete, Krankenversicherung und Leben bezahlt.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="info-box" style="border-left-color:var(--accent);flex:1;">
+        <span class="box-head">Die Realität im Alter</span>
+        <ul class="bullet-list" style="padding:0;">
+          <li><strong>Flaschen sammeln</strong> — kein Klischee, sondern Alltag für Hunderttausende Rentner</li>
+          <li><strong>Weiterarbeiten</strong> im Rentenalter — weil das Geld vorne und hinten nicht reicht</li>
+          <li><strong>Zwiebel-Portmonnaie-Effekt:</strong> Man schält Lage für Lage ab — und weint dabei</li>
+          <li>GKV-Beiträge steigen, Leistungen sinken — im Alter trifft das doppelt hart</li>
+        </ul>
+      </div>
+      <div style="padding:14px 18px;border:1px solid var(--border);background:var(--panel);border-left:3px solid var(--accent);">
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--accent-lt);">40 Jahre arbeiten — und dann Flaschen sammeln. Das kann nicht die Antwort sein.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — HEALTH TRIPTYCH
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-health-triptych" style="padding:0;gap:0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;height:100%;gap:2px;background:var(--bg);">
+    <div style="overflow:hidden;position:relative;">
+      <img src="health1.webp" alt="Gesundheitskrise 1" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.5) 0%,transparent 50%);"></div>
+    </div>
+    <div style="overflow:hidden;position:relative;">
+      <img src="health2.webp" alt="Gesundheitskrise 2" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.5) 0%,transparent 50%);"></div>
+    </div>
+    <div style="overflow:hidden;position:relative;">
+      <img src="health3.webp" alt="Gesundheitskrise 3" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.5) 0%,transparent 50%);"></div>
+    </div>
+  </div>
 </div>
 
 
@@ -791,6 +929,137 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
   <div style="margin-top:18px;padding:14px 22px;border:1px solid var(--border);background:var(--panel);border-left:3px solid var(--accent);">
     <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-lt);">Wenn das keine perfekten Voraussetzungen sind — weiß ich auch nicht.</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — WELCHE MÖGLICHKEITEN GIBT ES?
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-moeglichkeiten-frage" style="background-image:linear-gradient(rgba(12,10,7,0.93) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2940&auto=format&fit=crop');background-size:cover;">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Welche Möglichkeiten gibt es?</h2>
+  <div class="two-col" style="gap:28px;align-items:stretch;">
+    <div class="info-box" style="border-left-color:var(--accent);padding:32px;">
+      <span class="box-head" style="margin-bottom:20px;">Lotto 6 aus 49 — Jackpot</span>
+      <div style="text-align:center;margin:20px 0;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:52px;color:var(--accent-lt);text-shadow:0 0 30px var(--accent-glow);line-height:1;display:block;">1 : 140 Mio.</span>
+        <p style="font-size:13px;margin-top:8px;opacity:.55;font-style:italic;">Wahrscheinlichkeit, den Jackpot zu knacken</p>
+      </div>
+      <ul class="bullet-list" style="padding:0;">
+        <li>Jeder zweite Deutsche hat schon mal Lotto gespielt</li>
+        <li>Rund <strong>6,5 Millionen</strong> spielen regelmäßig</li>
+        <li>Ein Gewinner pro Jahr im Schnitt — bei Millionen Spielern</li>
+      </ul>
+    </div>
+    <div class="info-box" style="border-left-color:rgba(201,168,76,0.3);padding:32px;">
+      <span class="box-head" style="margin-bottom:20px;">Blitzeinschlag — Ein Leben lang</span>
+      <div style="text-align:center;margin:20px 0;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:52px;color:var(--white);text-shadow:0 0 20px rgba(255,255,255,0.2);line-height:1;display:block;">1 : 15.300</span>
+        <p style="font-size:13px;margin-top:8px;opacity:.55;font-style:italic;">Lebenszeit-Wahrscheinlichkeit, vom Blitz getroffen zu werden</p>
+      </div>
+      <div style="padding:14px 18px;background:rgba(201,168,76,0.06);border:1px solid var(--border);margin-top:12px;">
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);">Vom Blitz getroffen zu werden ist <em style="color:var(--white);">9.000× wahrscheinlicher</em> als der Lotto-Jackpot.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — DIE SELBSTSTÄNDIGKEIT (INSOLVENZEN)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-insolvenzen" style="background-image:linear-gradient(rgba(12,10,7,0.91) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center top;">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Die Selbstständigkeit</h2>
+  <div class="stat-grid cols-3" style="margin-bottom:20px;">
+    <div class="stat-card">
+      <span class="big-num">24.064</span>
+      <span class="card-label">Unternehmensinsolvenzen 2025</span>
+      <p>Der höchste Wert seit <strong>2014</strong>. Zum dritten Jahr in Folge ein starker Anstieg.</p>
+    </div>
+    <div class="stat-card">
+      <span class="big-num">~2.000</span>
+      <span class="card-label">Firmenpleiten pro Monat</span>
+      <p>Monatlich scheitern rund <strong>2.000 Unternehmen</strong> in Deutschland — und die Kurve zeigt weiter nach oben.</p>
+    </div>
+    <div class="stat-card">
+      <span class="big-num">77.219</span>
+      <span class="card-label">Verbraucherinsolvenzen 2025</span>
+      <p>Privatpersonen, die zahlungsunfähig wurden — <strong>+8,4%</strong> gegenüber dem Vorjahr.</p>
+    </div>
+  </div>
+  <div class="info-box" style="border-left-color:#b91c1c;">
+    <span class="box-head" style="color:#f87171;">Die Realität der Selbstständigkeit</span>
+    <ul class="bullet-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0;">
+      <li>Kapital, Haftung, Risiko — alles auf deinen Schultern</li>
+      <li>+10,3% mehr Insolvenzen 2025 gegenüber 2024 (Destatis)</li>
+      <li>Drei Jahre in Folge starke Anstiege: 2023: +22%, 2024: +22%, 2025: +10%</li>
+      <li>320.000 Arbeitsplätze 2024 durch Insolvenzen gefährdet oder verloren</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — W.T.H.Z.
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-wthz">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:20px;">
+    <h2 style="font-size:54px;letter-spacing:.08em;text-shadow:0 0 40px var(--accent-glow);">W.T.H.Z.</h2>
+    <div class="stat-grid cols-5" style="gap:14px;">
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">⌚</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Uhr</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">🚗</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Auto</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">✈️</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Reise</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">🏠</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Haus</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">👔</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Klamotten</p>
+      </div>
+    </div>
+    <div style="margin-top:6px;padding:20px 28px;border:1px solid var(--border);background:var(--panel);position:relative;">
+      <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
+      <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--white);text-shadow:0 2px 12px rgba(0,0,0,0.6);margin:0;">Ist normal — aber warum erreichen nur wenige ihre Ziele?</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — MÖGLICHKEITEN (ÜBERBLICK)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-moeglichkeiten-liste">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px;">
+    <h2 style="font-size:44px;">Möglichkeiten</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:600px;">
+      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--border-faint);background:var(--panel);border-left:3px solid rgba(201,168,76,0.2);">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent);opacity:.35;min-width:50px;line-height:1;">01</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--text);margin:0;">Arbeiten</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--border-faint);background:var(--panel);border-left:3px solid rgba(201,168,76,0.2);">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent);opacity:.35;min-width:50px;line-height:1;">02</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--text);margin:0;">Lotto</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--accent);background:rgba(201,168,76,0.05);border-left:3px solid var(--accent);position:relative;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent-lt);min-width:50px;line-height:1;text-shadow:0 0 20px var(--accent-glow);">03</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--accent-lt);margin:0;text-shadow:0 0 15px var(--accent-glow);">Selbstständigkeit</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1529,7 +1798,7 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
 <!-- ── UI CHROME ──────────────────────────────── -->
 <div class="progress-bar" id="progress-bar"></div>
-<div class="slide-counter" id="slide-counter">1 / 31</div>
+<div class="slide-counter" id="slide-counter">1 / 38</div>
 <div class="controls">
   <button id="btn-theme" title="Theme">◑</button>
   <button id="btn-prev"  title="Zurück">‹</button>
