@@ -412,13 +412,6 @@ body.theme-ng .progress-bar { background: linear-gradient(90deg,var(--accent-dk)
 body.theme-ng .slide-counter,body.theme-ng .chapter-indicator { color: rgba(45,212,191,.35); }
 body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
-/* Mindmap teal overrides */
-body.theme-ng #slide-usp-mindmap svg rect { fill: rgba(45,212,191,0.04) !important; stroke: rgba(45,212,191,0.25) !important; }
-body.theme-ng #slide-usp-mindmap svg rect:first-of-type { fill: rgba(45,212,191,0.1) !important; stroke: rgba(45,212,191,0.5) !important; }
-body.theme-ng #slide-usp-mindmap svg line { stroke: rgba(45,212,191,0.2) !important; }
-body.theme-ng #slide-usp-mindmap svg text[font-family*="Druk"] { fill: rgba(45,212,191,0.65) !important; }
-body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8a8 !important; }
-
 </style>
 </head>
 <body>
@@ -1151,106 +1144,89 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
   <div class="chapter-indicator">Kapitel 2 — USPs</div>
   <h2 class="slide-title">Alle USPs auf einen Blick</h2>
 
-  <div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0;">
-    <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible;">
-      <defs>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
+  <div style="flex:1;display:grid;grid-template-columns:1fr 140px 1fr;gap:0;align-items:center;min-height:0;">
 
-      <!-- Center node — drawn last to cover lines -->
-      <g>
-        <rect x="388" y="193" width="324" height="94" rx="2" fill="var(--bg)" stroke="none"/>
-        <rect x="390" y="195" width="320" height="90" rx="2" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
-        <text x="550" y="233" text-anchor="middle" font-family="'Druk Wide Bold',sans-serif" font-size="15" fill="#e4cc82" letter-spacing="1">NETGAINS</text>
-        <text x="550" y="257" text-anchor="middle" font-family="'Druk Wide Bold',sans-serif" font-size="11" fill="rgba(201,168,76,0.6)" letter-spacing="3">USPs</text>
-      </g>
+    <!-- LEFT NODES -->
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
+      <div class="usp-node">Gewissenhaftigkeit</div>
+      <div class="usp-node">Design</div>
+      <div class="usp-node">Mobiloptimierung</div>
+      <div class="usp-node">Barrierefreiheit</div>
+      <div class="usp-node">Pflege</div>
+    </div>
 
-      <!-- Connector lines — drawn first, nodes render on top -->
-      <g opacity="0.4">
-        <line x1="390" y1="215" x2="295" y2="160" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="390" y1="215" x2="200" y2="90" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="390" y1="215" x2="130" y2="175" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="390" y1="265" x2="280" y2="320" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="390" y1="265" x2="155" y2="355" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="710" y1="215" x2="810" y2="130" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="710" y1="215" x2="900" y2="200" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="710" y1="265" x2="820" y2="330" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-        <line x1="710" y1="265" x2="780" y2="410" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-      </g>
+    <!-- CENTER HUB -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;position:relative;height:100%;">
+      <!-- Lines from left nodes -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left connectors: from center left edge to right edge of left col -->
+        <line x1="0" y1="10%" x2="100%" y2="10%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="0" y1="28%" x2="100%" y2="28%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="0" y1="46%" x2="100%" y2="50%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="0" y1="66%" x2="100%" y2="50%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="0" y1="84%" x2="100%" y2="84%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <!-- Right connectors -->
+        <line x1="100%" y1="10%" x2="0" y2="10%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="100%" y1="28%" x2="0" y2="28%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="100%" y1="46%" x2="0" y2="50%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="100%" y1="66%" x2="0" y2="50%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="100%" y1="84%" x2="0" y2="84%" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+      </svg>
+      <!-- Center box on top of lines -->
+      <div style="position:relative;z-index:2;background:var(--bg);padding:4px;">
+        <div style="border:1.5px solid var(--accent);background:rgba(201,168,76,0.1);padding:16px 14px;text-align:center;box-shadow:0 0 20px rgba(201,168,76,0.15);">
+          <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;letter-spacing:2px;color:var(--accent-lt);margin:0;text-shadow:0 0 15px var(--accent-glow);">NET<br>GAINS</p>
+        </div>
+      </div>
+    </div>
 
-      <!-- USP Nodes — left side -->
+    <!-- RIGHT NODES -->
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
+      <div class="usp-node">Ladezeiten</div>
+      <div class="usp-node">Smart Websites</div>
+      <div class="usp-node">Preiswert</div>
+      <div class="usp-node">Gemeinnützigkeit</div>
+      <div class="usp-node">Grünes Hosting</div>
+    </div>
 
-      <!-- Gewissenhaftigkeit -->
-      <g>
-        <rect x="180" y="128" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
-        <text x="195" y="148" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">GEWISSENHAFTIGKEIT</text>
-        <text x="195" y="168" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Kein Pixel. Kein Fehler.</text>
-      </g>
-
-      <!-- Design -->
-      <g>
-        <rect x="40" y="58" width="200" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
-        <text x="55" y="78" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">DESIGN</text>
-        <text x="55" y="98" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Trendsetter. Individuell.</text>
-      </g>
-
-      <!-- Mobiloptimierung -->
-      <g>
-        <rect x="20" y="148" width="200" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
-        <text x="35" y="168" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">MOBILOPTIMIERUNG</text>
-        <text x="35" y="188" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Responsiv. Immer.</text>
-      </g>
-
-      <!-- Barrierefreiheit -->
-      <g>
-        <rect x="150" y="295" width="220" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
-        <text x="165" y="315" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">BARRIEREFREIHEIT</text>
-        <text x="165" y="335" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Rechtssicher. Standard.</text>
-      </g>
-
-      <!-- Pflege -->
-      <g>
-        <rect x="20" y="325" width="190" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
-        <text x="35" y="345" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">PFLEGE</text>
-        <text x="35" y="365" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Support. Langfristig.</text>
-      </g>
-
-      <!-- USP Nodes — right side -->
-
-      <!-- Ladezeiten / PageSpeed -->
-      <g>
-        <rect x="720" y="100" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
-        <text x="735" y="120" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">LADEZEITEN</text>
-        <text x="735" y="140" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Nr. 1 in PageSpeed.</text>
-      </g>
-
-      <!-- Smart Websites -->
-      <g>
-        <rect x="810" y="168" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
-        <text x="825" y="188" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">SMART WEBSITES</text>
-        <text x="825" y="208" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">KI-gestützt. Zukunft.</text>
-      </g>
-
-      <!-- Preiswert -->
-      <g>
-        <rect x="730" y="300" width="200" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.55)" stroke-width="1.5" filter="url(#glow)"/>
-        <text x="745" y="320" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(228,204,130,0.9)" letter-spacing="2">PREISWERT</text>
-        <text x="745" y="340" font-family="'EB Garamond',serif" font-size="13" fill="#b8a070">Kein Aufpreis. Fair.</text>
-      </g>
-
-      <!-- Gemeinnützigkeit -->
-      <g>
-        <rect x="690" y="378" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.55)" stroke-width="1.5" filter="url(#glow)"/>
-        <text x="705" y="398" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(228,204,130,0.9)" letter-spacing="2">GEMEINNÜTZIGKEIT</text>
-        <text x="705" y="418" font-family="'EB Garamond',serif" font-size="13" fill="#b8a070">1% für das Gute.</text>
-      </g>
-
-    </svg>
   </div>
 </div>
+
+<style>
+.usp-node {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-lt);
+  background: var(--bg);
+  border: 1px solid rgba(201,168,76,0.45);
+  padding: 10px 18px;
+  text-align: center;
+  width: 220px;
+  text-shadow: 0 0 12px var(--accent-glow);
+  box-shadow: 0 0 10px rgba(201,168,76,0.08), inset 0 1px 0 rgba(201,168,76,0.08);
+  position: relative;
+  z-index: 2;
+}
+.usp-node::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), transparent);
+}
+body.theme-ng .usp-node {
+  color: #67e8d4;
+  border-color: rgba(45,212,191,0.45);
+  text-shadow: 0 0 12px rgba(45,212,191,0.4);
+  box-shadow: 0 0 10px rgba(45,212,191,0.06), inset 0 1px 0 rgba(45,212,191,0.08);
+}
+body.theme-ng .usp-node::before {
+  background: linear-gradient(90deg, transparent, rgba(45,212,191,0.5), transparent);
+}
+</style>
+
 
 
 <!-- ══════════════════════════════════════════════════════
@@ -1571,77 +1547,267 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 
 
 <!-- ══════════════════════════════════════════════════════
-     SLIDE — RECHNUNG 1: 50% PROVISION → 10K/MONAT
+     SLIDE — PROVISIONSMODELL
      ══════════════════════════════════════════════════════ -->
 <div class="slide-container" id="slide-rechnung1">
   <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
-  <h2 class="slide-title">50% Provision — Wann ist 10K erreicht?</h2>
+  <h2 class="slide-title">Das Provisionsmodell</h2>
 
-  <div class="two-col" style="gap:28px;align-items:start;">
-    <div>
-      <h3>Die Rechnung</h3>
-      <p style="font-size:15px;margin-bottom:16px;opacity:.8;">Nebenberuflich, <strong>2–3 Abschlüsse pro Woche</strong> — was bedeutet das in Euro?</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;flex:1;align-items:start;">
 
-      <!-- Table -->
-      <div style="border:1px solid var(--border);overflow:hidden;">
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--panel);">
-          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">Preis</div>
-          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">Provision</div>
-          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">10K bei</div>
-          <div style="padding:10px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;border-bottom:1px solid var(--border);">= pro Woche</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;">
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">1.500 €</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);color:var(--white);">750 €</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">14 Deals</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">~3–4 / Woche</div>
+    <!-- LEFT: Tier cascade -->
+    <div style="display:flex;flex-direction:column;gap:0;">
 
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">2.000 €</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);color:var(--white);">1.000 €</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">10 Deals</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">~2–3 / Woche</div>
+      <!-- Basis label -->
+      <div style="text-align:center;margin-bottom:14px;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:var(--accent);opacity:.6;">Beispiel: Angebot 1.490 €</span>
+      </div>
 
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">3.000 €</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);color:var(--white);">1.500 €</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">7 Deals</div>
-          <div style="padding:12px 14px;font-size:15px;border-bottom:1px solid var(--border-faint);">~2 / Woche</div>
-
-          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);">5.000 €</div>
-          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">2.500 €</div>
-          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);color:var(--white);font-family:'Druk Wide Bold',sans-serif;">4 Deals</div>
-          <div style="padding:12px 14px;font-size:15px;background:rgba(201,168,76,.06);color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">1 / Woche</div>
+      <!-- Tier 1: Berater -->
+      <div style="border:1px solid var(--accent);background:rgba(201,168,76,0.07);position:relative;padding:16px 20px 16px 20px;margin-bottom:2px;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:4px;">Stufe 1 — Berater</p>
+            <p style="font-size:14px;margin:0;opacity:.75;">Qualifikation nach <strong>10 Website-Verkäufen</strong></p>
+          </div>
+          <span style="font-family:'Druk Wide Bold',sans-serif;font-size:34px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);line-height:1;">400 €</span>
         </div>
       </div>
+
+      <!-- Arrow -->
+      <div style="text-align:center;font-size:16px;color:var(--accent);opacity:.4;line-height:1.2;margin:0;">↓</div>
+
+      <!-- Tier 2: Teamleader -->
+      <div style="border:1px solid var(--accent);background:rgba(201,168,76,0.07);position:relative;padding:16px 20px;margin-bottom:2px;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:4px;">Stufe 2 — Teamleader</p>
+            <p style="font-size:14px;margin:0;opacity:.75;">+ <strong>100 €</strong> zur nächsten Qualifikation</p>
+          </div>
+          <span style="font-family:'Druk Wide Bold',sans-serif;font-size:34px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);line-height:1;">200 €</span>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align:center;font-size:16px;color:var(--accent);opacity:.4;line-height:1.2;margin:0;">↓</div>
+
+      <!-- Tier 3: Direktor -->
+      <div style="border:1px solid var(--accent);background:rgba(201,168,76,0.07);position:relative;padding:16px 20px;margin-bottom:2px;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:4px;">Stufe 3 — Direktor</p>
+            <p style="font-size:14px;margin:0;opacity:.75;">Führungsebene</p>
+          </div>
+          <span style="font-family:'Druk Wide Bold',sans-serif;font-size:34px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);line-height:1;">100 €</span>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align:center;font-size:16px;color:var(--accent);opacity:.4;line-height:1.2;margin:0;">↓</div>
+
+      <!-- Tier 4: Senior Direktor / Pool -->
+      <div style="border:1px solid var(--accent);background:rgba(201,168,76,0.07);position:relative;padding:16px 20px;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:4px;">Stufe 4 — Senior Direktor</p>
+            <p style="font-size:14px;margin:0;opacity:.75;">oder Pool-Beteiligung</p>
+          </div>
+          <span style="font-family:'Druk Wide Bold',sans-serif;font-size:34px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);line-height:1;">50 €</span>
+        </div>
+      </div>
+
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:14px;">
-      <div class="info-box" style="border-left-color:var(--accent);padding:22px 24px;">
-        <span class="box-head">Realistischer Monat — Nebenberuflich</span>
-        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-faint);">
-            <span style="font-size:15px;">2 Abschlüsse à 3.000 €</span>
-            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:16px;color:var(--white);">3.000 €</span>
+    <!-- RIGHT: Breakdown + payout info -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <div>
+        <h3 style="margin-bottom:14px;">Verteilung pro Abschluss</h3>
+        <!-- Bar breakdown -->
+        <div style="border:1px solid var(--border);overflow:hidden;">
+          <div style="display:grid;grid-template-columns:160px 1fr 80px;background:var(--panel);border-bottom:1px solid var(--border);">
+            <div style="padding:8px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.65;">Stufe</div>
+            <div style="padding:8px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.65;">Anteil</div>
+            <div style="padding:8px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.65;">Betrag</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-faint);">
-            <span style="font-size:15px;">4 Abschlüsse à 3.000 €</span>
-            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:16px;color:var(--white);">6.000 €</span>
+          <div style="display:grid;grid-template-columns:160px 1fr 80px;border-bottom:1px solid var(--border-faint);">
+            <div style="padding:11px 14px;font-size:14px;">Berater</div>
+            <div style="padding:11px 14px;"><div style="height:8px;background:var(--accent-lt);width:54%;border-radius:1px;opacity:.7;"></div></div>
+            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--accent-lt);">400 €</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-faint);">
-            <span style="font-size:15px;">7 Abschlüsse à 3.000 €</span>
-            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:16px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">10.500 €</span>
+          <div style="display:grid;grid-template-columns:160px 1fr 80px;border-bottom:1px solid var(--border-faint);">
+            <div style="padding:11px 14px;font-size:14px;">Teamleader</div>
+            <div style="padding:11px 14px;"><div style="height:8px;background:var(--accent);width:27%;border-radius:1px;opacity:.6;"></div></div>
+            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--white);">200 €</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;">
-            <span style="font-size:14px;opacity:.6;font-style:italic;">2 Abschlüsse / Woche</span>
-            <span style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);">10K+</span>
+          <div style="display:grid;grid-template-columns:160px 1fr 80px;border-bottom:1px solid var(--border-faint);">
+            <div style="padding:11px 14px;font-size:14px;">Direktor</div>
+            <div style="padding:11px 14px;"><div style="height:8px;background:var(--accent-dk);width:13%;border-radius:1px;opacity:.8;"></div></div>
+            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--text);">100 €</div>
+          </div>
+          <div style="display:grid;grid-template-columns:160px 1fr 80px;background:rgba(201,168,76,0.04);">
+            <div style="padding:11px 14px;font-size:14px;opacity:.6;">NetGains</div>
+            <div style="padding:11px 14px;"><div style="height:8px;background:rgba(201,168,76,0.2);width:53%;border-radius:1px;"></div></div>
+            <div style="padding:11px 14px;font-size:14px;opacity:.55;">790 €</div>
           </div>
         </div>
       </div>
-      <div style="padding:14px 18px;border:1px solid var(--border);background:var(--panel);text-align:center;">
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-lt);">Nebenberuflich. Ohne Vorwissen. Ohne Risiko.</p>
+
+      <!-- Payout rhythm -->
+      <div class="info-box" style="border-left-color:var(--accent);">
+        <span class="box-head">Auszahlung passive Provisionen</span>
+        <div style="display:flex;gap:16px;margin-top:12px;">
+          <div style="flex:1;text-align:center;padding:12px 8px;border:1px solid var(--border);background:var(--panel);">
+            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:20px;color:var(--accent-lt);margin-bottom:4px;">3 Mt.</p>
+            <p style="font-size:12px;opacity:.6;margin:0;">Quartal</p>
+          </div>
+          <div style="display:flex;align-items:center;font-size:18px;opacity:.4;">oder</div>
+          <div style="flex:1;text-align:center;padding:12px 8px;border:1px solid var(--border);background:var(--panel);">
+            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:20px;color:var(--accent-lt);margin-bottom:4px;">6 Mt.</p>
+            <p style="font-size:12px;opacity:.6;margin:0;">Halbjahr</p>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — WACHSTUMSTABELLE (row reveal)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-wachstum">
+  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
+  <h2 class="slide-title">Dein Wachstum — Monat für Monat</h2>
+
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0;overflow:hidden;">
+
+    <!-- Table header -->
+    <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;gap:0;background:var(--panel);border:1px solid var(--border);border-bottom:none;">
+      <div class="wtcell wth">Monat</div>
+      <div class="wtcell wth">Abschl.</div>
+      <div class="wtcell wth">Provision</div>
+      <div class="wtcell wth">Mitarb.</div>
+      <div class="wtcell wth">MA Provision</div>
+      <div class="wtcell wth" style="color:var(--accent-lt);">Gesamt</div>
+    </div>
+
+    <!-- Rows — each hidden, revealed one by one -->
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);">
+      <div class="wtcell">1</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell wthl">1.600 €</div>
+      <div class="wtcell">1</div>
+      <div class="wtcell">—</div>
+      <div class="wtcell wttotal">1.600 €</div>
+    </div>
+
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);">
+      <div class="wtcell">2</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell wthl">1.600 €</div>
+      <div class="wtcell">1</div>
+      <div class="wtcell">—</div>
+      <div class="wtcell wttotal">1.600 €</div>
+    </div>
+
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);">
+      <div class="wtcell">3</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell wthl">800 + 1.200 €</div>
+      <div class="wtcell">1</div>
+      <div class="wtcell">—</div>
+      <div class="wtcell wttotal">2.000 €</div>
+    </div>
+
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);">
+      <div class="wtcell">4</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell wthl">2.400 €</div>
+      <div class="wtcell">1</div>
+      <div class="wtcell">800 €</div>
+      <div class="wtcell wttotal">3.200 €</div>
+    </div>
+
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);">
+      <div class="wtcell">5</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell wthl">2.400 €</div>
+      <div class="wtcell">2</div>
+      <div class="wtcell">1.600 €</div>
+      <div class="wtcell wttotal">4.000 €</div>
+    </div>
+
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);">
+      <div class="wtcell">6</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell wthl">2.400 €</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell">3.200 €</div>
+      <div class="wtcell wttotal">5.600 €</div>
+    </div>
+
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);">
+      <div class="wtcell">7</div>
+      <div class="wtcell">4</div>
+      <div class="wtcell wthl">2.400 €</div>
+      <div class="wtcell">5</div>
+      <div class="wtcell">4.000 €</div>
+      <div class="wtcell wttotal">6.400 €</div>
+    </div>
+
+    <div class="wt-row" style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(8px);background:rgba(201,168,76,0.05);">
+      <div class="wtcell">8</div>
+      <div class="wtcell" style="color:var(--text);opacity:.5;">0</div>
+      <div class="wtcell" style="color:var(--text);opacity:.5;">0 €</div>
+      <div class="wtcell">5</div>
+      <div class="wtcell">4.000 €</div>
+      <div class="wtcell wttotal" style="font-size:20px;">6.400 €</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:14px;padding:13px 20px;border:1px solid var(--border);background:var(--panel);border-left:3px solid var(--accent);">
+    <p style="font-size:13px;line-height:1.6;margin:0;">Basis: <strong>1.490 € Website.</strong> &nbsp;·&nbsp; Bei einer <strong>doppelt so teuren</strong> Website verdoppeln sich die Provisionen. &nbsp;·&nbsp; Bei einer <strong>4× so teuren</strong> Website vervierfachen sie sich.</p>
+  </div>
+</div>
+
+<style>
+.wtcell {
+  padding: 13px 14px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 16px;
+  color: var(--text);
+  border-right: 1px solid var(--border-faint);
+  border-bottom: 1px solid var(--border-faint);
+}
+.wtcell:last-child { border-right: none; }
+.wth {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  color: var(--accent);
+  opacity: .7;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.wthl { color: var(--white); font-weight: 500; }
+.wttotal {
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 17px;
+  color: var(--accent-lt);
+  text-shadow: 0 0 14px var(--accent-glow);
+}
+body.theme-ng .wtcell { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; }
+body.theme-ng .wth { font-family: 'Druk Wide Bold', sans-serif; }
+body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
+</style>
 
 
 <!-- ══════════════════════════════════════════════════════
@@ -1834,27 +2000,27 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
     <div>
       <h3 style="margin-bottom:16px;">Für den Kunden</h3>
       <ul class="bullet-list">
-        <li>Gewissenhaftigkeit — kein Pixel, kein Fehler</li>
-        <li>Individuelles Design — kein Template</li>
-        <li>Mobiloptimierung — responsiv. Immer.</li>
-        <li>Barrierefreiheit — rechtssicher, Standard</li>
-        <li>Schnellste Ladezeiten — Nr. 1 in PageSpeed</li>
-        <li>Smart Websites — KI-gestützt, Zukunft</li>
-        <li>Pflege & Support — langfristig, verlässlich</li>
-        <li>Preiswert — kein Aufpreis, faire Preise</li>
-        <li>Gemeinnützigkeit — 1% geht an das Gute</li>
-        <li>Grünes Hosting — erneuerbare Energie</li>
+        <li>Gewissenhaftigkeit</li>
+        <li>Individuelles Design</li>
+        <li>Mobiloptimierung</li>
+        <li>Barrierefreiheit</li>
+        <li>Schnellste Ladezeiten</li>
+        <li>Smart Websites</li>
+        <li>Pflege & Support</li>
+        <li>Preiswert</li>
+        <li>Gemeinnützigkeit</li>
+        <li>Grünes Hosting</li>
       </ul>
     </div>
 
     <div>
       <h3 style="margin-bottom:16px;">Für den Vertriebler</h3>
       <ul class="bullet-list">
-        <li>Eigenes Dashboard — Sales Force One</li>
-        <li>Seminar-Schulungen — regelmäßig, strukturiert</li>
-        <li>Aktive Provision — 50% sofort bei Abschluss</li>
-        <li>Passives Einkommen — monatlicher Hosting-Anteil, für immer</li>
-        <li>Digitale Unterlagen — immer aktuell, jederzeit abrufbar</li>
+        <li>Dashboard — Sales Force One</li>
+        <li>Seminar-Schulungen</li>
+        <li>Aktive Provision</li>
+        <li>Passives Einkommen</li>
+        <li>Digitale Unterlagen</li>
         <li style="border-bottom:none;">
           <strong style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;color:var(--accent-lt);text-shadow:0 0 15px var(--accent-glow);letter-spacing:.03em;text-transform:uppercase;">Kostenlos.</strong>
         </li>
@@ -1869,13 +2035,12 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
      SLIDE — HAKEN STOCKBILD
      ══════════════════════════════════════════════════════ -->
 <div class="slide-container" id="slide-haken-bild" style="padding:0;">
-  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop" alt="Haken" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:grayscale(20%) brightness(0.7);">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(12,10,7,0.7) 100%);z-index:1;"></div>
-  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;">
-    <div style="text-align:center;">
-      <span style="font-size:120px;line-height:1;filter:drop-shadow(0 0 40px rgba(201,168,76,0.6)) drop-shadow(0 4px 20px rgba(0,0,0,0.8));">✓</span>
-      <p style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.3em;color:var(--accent);margin-top:24px;text-shadow:0 0 20px var(--accent-glow);opacity:.9;">NetGains</p>
-    </div>
+  <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2940&auto=format&fit=crop" alt="Angelhaken" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(12,10,7,0.92) 35%,rgba(12,10,7,0.3) 100%);z-index:1;"></div>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:64px 72px;z-index:2;max-width:600px;">
+    <h2 style="font-size:52px;margin-bottom:20px;">Wo ist der Haken?</h2>
+    <div style="height:2px;width:80px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:28px;"></div>
+    <p style="font-size:22px;line-height:1.7;font-style:italic;opacity:.8;">Ganz einfach: Die meisten kommen entweder <strong>nicht ins Handeln</strong> — oder bleiben <strong>nicht lange genug am Ball.</strong></p>
   </div>
 </div>
 
@@ -1959,6 +2124,34 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
   const bar    = document.getElementById('progress-bar');
   const ctr    = document.getElementById('slide-counter');
 
+  // --- Wachstum table row reveal ---
+  const WACHSTUM_ID = 'slide-wachstum';
+  let wachstumRevealed = 0;
+
+  function getWachstumIndex() {
+    return Array.from(slides).findIndex(s => s.id === WACHSTUM_ID);
+  }
+
+  function resetWachstum() {
+    wachstumRevealed = 0;
+    document.querySelectorAll('#' + WACHSTUM_ID + ' .wt-row').forEach(r => {
+      r.style.opacity = '0';
+      r.style.transform = 'translateY(8px)';
+    });
+  }
+
+  function revealWachstumRow() {
+    const rows = document.querySelectorAll('#' + WACHSTUM_ID + ' .wt-row');
+    if (wachstumRevealed < rows.length) {
+      const r = rows[wachstumRevealed];
+      r.style.opacity = '1';
+      r.style.transform = 'translateY(0)';
+      wachstumRevealed++;
+      return true;
+    }
+    return false;
+  }
+
   // --- NonPlusUltra reveal ---
   const NPU_ID = 'slide-nonplusultra';
   let npuRevealed = false;
@@ -2035,28 +2228,29 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
     const erIdx = getEureRolleIndex();
     const scIdx = getSchererIndex();
     const npuIdx = getNpuIndex();
+    const wtIdx  = getWachstumIndex();
 
-    // NPU slide: first forward click reveals dream text
+    // Wachstum: reveal rows one by one before advancing
+    if (n > cur && cur === wtIdx) {
+      if (revealWachstumRow()) { updateUI(); return; }
+    }
+    if (n === wtIdx && n < cur) resetWachstum();
+
+    // NPU reveal
     if (n > cur && cur === npuIdx && !npuRevealed) {
-      revealNpu();
-      updateUI();
-      return;
+      revealNpu(); updateUI(); return;
     }
     if (n === npuIdx && n < cur) resetNpu();
 
-    // Scherer slide: first forward click reveals good example
+    // Scherer reveal
     if (n > cur && cur === scIdx && !schererRevealed) {
-      revealScherer();
-      updateUI();
-      return;
+      revealScherer(); updateUI(); return;
     }
     if (n === scIdx && n < cur) resetScherer();
 
-    // Going forward on Eure Rolle: reveal bars one by one first
+    // Eure Rolle reveal
     if (n > cur && cur === erIdx && eureRolleRevealed < EURE_ROLLE_BARS) {
-      revealNextBar();
-      updateUI();
-      return;
+      revealNextBar(); updateUI(); return;
     }
     if (n === erIdx && n < cur) resetEureRolle();
 
@@ -2066,6 +2260,7 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
     if (cur === erIdx) resetEureRolle();
     if (cur === scIdx) resetScherer();
     if (cur === npuIdx) resetNpu();
+    if (cur === wtIdx) resetWachstum();
     updateUI();
   }
 
@@ -2089,7 +2284,14 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
   document.getElementById('btn-next').addEventListener('click', () => go(cur+1));
   document.getElementById('btn-prev').addEventListener('click', () => {
     const erIdx = getEureRolleIndex();
-    if (cur === erIdx && eureRolleRevealed > 0) {
+    const wtIdx  = getWachstumIndex();
+    if (cur === wtIdx && wachstumRevealed > 0) {
+      wachstumRevealed--;
+      const rows = document.querySelectorAll('#' + WACHSTUM_ID + ' .wt-row');
+      rows[wachstumRevealed].style.opacity = '0';
+      rows[wachstumRevealed].style.transform = 'translateY(8px)';
+      updateUI();
+    } else if (cur === erIdx && eureRolleRevealed > 0) {
       eureRolleRevealed--;
       const bars = document.querySelectorAll('#' + EURE_ROLLE_ID + ' .reveal-bar');
       bars[eureRolleRevealed].style.opacity = '0';
