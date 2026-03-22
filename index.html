@@ -607,7 +607,7 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
      SLIDE — HEALTH TRIPTYCH
      ══════════════════════════════════════════════════════ -->
 <div class="slide-container" id="slide-health-triptych" style="padding:0;gap:0;">
-  <div style="display:grid;grid-template-rows:1fr 1fr;grid-template-columns:1fr 1fr;height:100%;gap:2px;background:var(--bg);">
+  <div style="display:grid;grid-template-rows:360px 360px;grid-template-columns:1fr 1fr;height:720px;gap:2px;background:var(--bg);">
     <div style="overflow:hidden;position:relative;grid-column:1;grid-row:1;">
       <img src="health1.webp" alt="Gesundheitskrise 1" style="width:100%;height:100%;object-fit:cover;display:block;">
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(12,10,7,0.45));"></div>
@@ -943,15 +943,15 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
   <div class="chapter-indicator">Kapitel 2 — USPs</div>
   <h2 class="slide-title">Was da draußen passiert</h2>
 
-  <!-- Three bad site images — equal size, 4:3 ratio -->
-  <div style="display:flex;gap:18px;flex:1;min-height:0;align-items:stretch;">
-    <div style="flex:1;overflow:hidden;border:1px solid var(--border);position:relative;aspect-ratio:4/3;">
+  <!-- Three bad site images — equal size, fixed 4:3 height -->
+  <div style="display:flex;gap:18px;margin-top:4px;">
+    <div style="flex:1;height:350px;overflow:hidden;border:1px solid var(--border);position:relative;flex-shrink:0;">
       <img src="ex_bad1.webp" alt="Schlechte Website 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
-    <div style="flex:1;overflow:hidden;border:1px solid var(--border);position:relative;aspect-ratio:4/3;">
+    <div style="flex:1;height:350px;overflow:hidden;border:1px solid var(--border);position:relative;flex-shrink:0;">
       <img src="ex_bad2.webp" alt="Schlechte Website 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
-    <div style="flex:1;overflow:hidden;border:1px solid var(--border);position:relative;aspect-ratio:4/3;">
+    <div style="flex:1;height:350px;overflow:hidden;border:1px solid var(--border);position:relative;flex-shrink:0;">
       <img src="ex_bad3.webp" alt="Schlechte Website 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
   </div>
@@ -1185,35 +1185,35 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 
       <!-- Gewissenhaftigkeit -->
       <g>
-        <rect x="180" y="128" width="230" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <rect x="180" y="128" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
         <text x="195" y="148" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">GEWISSENHAFTIGKEIT</text>
         <text x="195" y="168" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Kein Pixel. Kein Fehler.</text>
       </g>
 
       <!-- Design -->
       <g>
-        <rect x="40" y="58" width="200" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <rect x="40" y="58" width="200" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
         <text x="55" y="78" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">DESIGN</text>
         <text x="55" y="98" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Trendsetter. Individuell.</text>
       </g>
 
       <!-- Mobiloptimierung -->
       <g>
-        <rect x="20" y="148" width="200" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <rect x="20" y="148" width="200" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
         <text x="35" y="168" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">MOBILOPTIMIERUNG</text>
         <text x="35" y="188" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Responsiv. Immer.</text>
       </g>
 
       <!-- Barrierefreiheit -->
       <g>
-        <rect x="150" y="295" width="220" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <rect x="150" y="295" width="220" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
         <text x="165" y="315" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">BARRIEREFREIHEIT</text>
         <text x="165" y="335" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Rechtssicher. Standard.</text>
       </g>
 
       <!-- Pflege -->
       <g>
-        <rect x="20" y="325" width="190" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <rect x="20" y="325" width="190" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
         <text x="35" y="345" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">PFLEGE</text>
         <text x="35" y="365" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Support. Langfristig.</text>
       </g>
@@ -1222,28 +1222,28 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 
       <!-- Ladezeiten / PageSpeed -->
       <g>
-        <rect x="720" y="100" width="230" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <rect x="720" y="100" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
         <text x="735" y="120" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">LADEZEITEN</text>
         <text x="735" y="140" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Nr. 1 in PageSpeed.</text>
       </g>
 
       <!-- Smart Websites -->
       <g>
-        <rect x="810" y="168" width="230" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <rect x="810" y="168" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
         <text x="825" y="188" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">SMART WEBSITES</text>
         <text x="825" y="208" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">KI-gestützt. Zukunft.</text>
       </g>
 
       <!-- Preiswert -->
       <g>
-        <rect x="730" y="300" width="200" height="52" rx="1" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.45)" stroke-width="1.5" filter="url(#glow)"/>
+        <rect x="730" y="300" width="200" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.55)" stroke-width="1.5" filter="url(#glow)"/>
         <text x="745" y="320" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(228,204,130,0.9)" letter-spacing="2">PREISWERT</text>
         <text x="745" y="340" font-family="'EB Garamond',serif" font-size="13" fill="#b8a070">Kein Aufpreis. Fair.</text>
       </g>
 
       <!-- Gemeinnützigkeit -->
       <g>
-        <rect x="690" y="378" width="230" height="52" rx="1" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.45)" stroke-width="1.5" filter="url(#glow)"/>
+        <rect x="690" y="378" width="230" height="52" rx="1" fill="#0c0a07" stroke="rgba(201,168,76,0.55)" stroke-width="1.5" filter="url(#glow)"/>
         <text x="705" y="398" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(228,204,130,0.9)" letter-spacing="2">GEMEINNÜTZIGKEIT</text>
         <text x="705" y="418" font-family="'EB Garamond',serif" font-size="13" fill="#b8a070">1% für das Gute.</text>
       </g>
@@ -1645,80 +1645,6 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 
 
 <!-- ══════════════════════════════════════════════════════
-     SLIDE — RECHNUNG 2: FÜHRUNGSKRAFT-DIFFERENZ
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-rechnung2">
-  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
-  <h2 class="slide-title">Als Führungskraft — die Differenz</h2>
-
-  <div class="two-col" style="gap:28px;align-items:start;">
-    <div>
-      <h3>Pro Abschluss in deiner Struktur</h3>
-      <div style="border:1px solid var(--border);margin-bottom:16px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--panel);border-bottom:1px solid var(--border);">
-          <div style="padding:10px 16px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;">Empfänger</div>
-          <div style="padding:10px 16px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.7;">Pro Deal (2.000 € Website)</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border-faint);">
-          <div style="padding:12px 16px;font-size:15px;">Dein Vertriebler</div>
-          <div style="padding:12px 16px;font-size:15px;color:var(--white);">350 €</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border-faint);background:rgba(201,168,76,.05);">
-          <div style="padding:12px 16px;font-size:15px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">Du (Führungskraft)</div>
-          <div style="padding:12px 16px;font-size:17px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">150 €</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;">
-          <div style="padding:12px 16px;font-size:15px;">NetGains</div>
-          <div style="padding:12px 16px;font-size:15px;">500 €</div>
-        </div>
-      </div>
-      <p style="font-size:14px;opacity:.6;font-style:italic;">Du verdienst 150 € pro Abschluss — <strong>ohne selbst zu verkaufen.</strong></p>
-    </div>
-
-    <div>
-      <h3>10 Leute unter dir, je 5 Deals/Monat</h3>
-      <div style="border:1px solid var(--border);overflow:hidden;">
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--panel);border-bottom:1px solid var(--border);">
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Team</div>
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Deals/Mo.</div>
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Dein Anteil</div>
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">+ Eigene</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
-          <div style="padding:10px 12px;font-size:14px;">1 Person</div>
-          <div style="padding:10px 12px;font-size:14px;">5</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--white);">750 €</div>
-          <div style="padding:10px 12px;font-size:14px;">+5.000 €</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
-          <div style="padding:10px 12px;font-size:14px;">3 Leute</div>
-          <div style="padding:10px 12px;font-size:14px;">15</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--white);">2.250 €</div>
-          <div style="padding:10px 12px;font-size:14px;">+5.000 €</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
-          <div style="padding:10px 12px;font-size:14px;">5 Leute</div>
-          <div style="padding:10px 12px;font-size:14px;">25</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--white);">3.750 €</div>
-          <div style="padding:10px 12px;font-size:14px;">+5.000 €</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:rgba(201,168,76,.06);">
-          <div style="padding:10px 12px;font-size:14px;font-family:'Druk Wide Bold',sans-serif;">10 Leute</div>
-          <div style="padding:10px 12px;font-size:14px;">50</div>
-          <div style="padding:10px 12px;font-size:16px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">7.500 €</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">+5.000 €</div>
-        </div>
-      </div>
-      <div style="margin-top:12px;padding:12px 16px;border:1px solid var(--border);background:var(--panel);display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:14px;opacity:.7;">Mit 10 Leuten im Team total:</span>
-        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:26px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);">12.500 € / Monat</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════
      SLIDE — RECHNUNG 3: PASSIVES EINKOMMEN
      ══════════════════════════════════════════════════════ -->
 <div class="slide-container" id="slide-rechnung3">
@@ -1783,76 +1709,6 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 
 
 <!-- ══════════════════════════════════════════════════════
-     SLIDE — RECHNUNG 4: STRUKTURWACHSTUM
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-rechnung4" style="background-image:linear-gradient(rgba(12,10,7,0.93) 0%,rgba(12,10,7,0.96) 100%), url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center top;">
-  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
-  <h2 class="slide-title">100-Mann-Struktur — wie schnell?</h2>
-
-  <div class="two-col" style="gap:28px;align-items:start;">
-    <div>
-      <h3>Das Wachstumsmodell</h3>
-      <div class="info-box" style="margin-bottom:16px;">
-        <span class="box-head">Annahmen</span>
-        <ul class="bullet-list" style="padding:0;">
-          <li><strong>2 Seminare pro Woche</strong> — jeder Teilnehmer bringt im nächsten Seminar <strong>3 neue Leute</strong> mit</li>
-          <li>Diese bringen beim übernächsten Mal wieder je 3 mit — und so weiter</li>
-          <li>Jede Runde = ca. <strong>1–2 Wochen</strong></li>
-        </ul>
-      </div>
-
-      <div style="border:1px solid var(--border);overflow:hidden;">
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--panel);border-bottom:1px solid var(--border);">
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Runde</div>
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Neue Leute</div>
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Struktur total</div>
-          <div style="padding:9px 12px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.7;">Zeitraum</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
-          <div style="padding:10px 12px;font-size:14px;">Start</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--white);">3</div>
-          <div style="padding:10px 12px;font-size:14px;">4 (du + 3)</div>
-          <div style="padding:10px 12px;font-size:14px;opacity:.6;">Woche 1–2</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
-          <div style="padding:10px 12px;font-size:14px;">Runde 2</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--white);">9</div>
-          <div style="padding:10px 12px;font-size:14px;">13</div>
-          <div style="padding:10px 12px;font-size:14px;opacity:.6;">Woche 3–4</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-faint);">
-          <div style="padding:10px 12px;font-size:14px;">Runde 3</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--white);">27</div>
-          <div style="padding:10px 12px;font-size:14px;">40</div>
-          <div style="padding:10px 12px;font-size:14px;opacity:.6;">Woche 5–6</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:rgba(201,168,76,.06);">
-          <div style="padding:10px 12px;font-size:14px;font-family:'Druk Wide Bold',sans-serif;">Runde 4</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">81</div>
-          <div style="padding:10px 12px;font-size:16px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">121</div>
-          <div style="padding:10px 12px;font-size:14px;color:var(--accent-lt);font-family:'Druk Wide Bold',sans-serif;">Woche 7–8</div>
-        </div>
-      </div>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:14px;justify-content:center;height:100%;">
-      <div style="text-align:center;padding:32px 24px;border:1px solid var(--border);background:var(--panel);position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
-        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:80px;line-height:1;color:var(--accent-lt);text-shadow:0 0 50px var(--accent-glow);">121</span>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.3em;color:var(--accent);margin-top:10px;opacity:.7;">Personen in der Struktur</p>
-        <div style="margin:18px auto;height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
-        <p style="font-size:16px;font-family:'Druk Wide Bold',sans-serif;text-transform:uppercase;color:var(--white);letter-spacing:.05em;">Nach 2 Monaten</p>
-        <p style="font-size:13px;opacity:.5;margin-top:8px;font-style:italic;">Wenn jeder nur 3 Leute mitbringt</p>
-      </div>
-      <div style="padding:14px 18px;border:1px solid var(--border);background:var(--panel);text-align:center;">
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-lt);">Pioneer-Vorteil: Du stehst oben in dieser Struktur.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════
      SLIDE — SALES FORCE ONE
      ══════════════════════════════════════════════════════ -->
 <div class="slide-container" id="slide-sfo" style="background-image:linear-gradient(110deg, rgba(12,10,7,0.98) 52%, rgba(12,10,7,0.6) 100%), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:right center;">
@@ -1861,7 +1717,6 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
     <span class="chapter-label" style="margin-bottom:16px;">Euer Cockpit</span>
     <h2 style="font-size:48px;margin-bottom:8px;line-height:1.05;">Sales Force One</h2>
     <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.25em;color:var(--accent);opacity:.7;margin-bottom:28px;">Das Verkäufer-Dashboard</p>
-
     <div class="two-col" style="gap:20px;margin-bottom:32px;">
       <div class="info-box" style="padding:18px 20px;">
         <span class="box-head">Was ihr seht</span>
@@ -1880,7 +1735,6 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
         </ul>
       </div>
     </div>
-
     <a href="https://sales-force-one.pages.dev/" target="_blank" class="ext-btn" style="align-self:flex-start;padding:16px 32px;font-size:12px;">
       <span class="btn-icon">◈</span>
       Sales Force One öffnen
@@ -1896,16 +1750,13 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 <div class="slide-container" id="slide-gemeinnuetzig" style="background-image:linear-gradient(rgba(12,10,7,0.9) 0%, rgba(12,10,7,0.95) 100%), url('https://images.unsplash.com/photo-1593113630400-ea4288922559?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center;">
   <div class="chapter-indicator">Werte & Mission</div>
   <h2 class="slide-title">Gemeinnützigkeit</h2>
-
   <div class="two-col" style="gap:32px;align-items:stretch;">
-
     <div style="display:flex;flex-direction:column;gap:18px;">
       <div class="info-box" style="border-left-color:var(--accent);padding:24px 26px;flex:1;">
         <span class="box-head">1% für das Gute</span>
         <p style="font-size:17px;line-height:1.75;margin-top:10px;">Von jeder Zahlung, die über <strong>Stripe</strong> abgewickelt wird, gehen automatisch <em>1%</em> an gemeinnützige Organisationen und Vereine.</p>
-        <p style="font-size:15px;margin-top:10px;opacity:.7;">Kein Aufwand für euch — es passiert im Hintergrund, bei jedem Abschluss, bei jeder Hosting-Zahlung.</p>
+        <p style="font-size:15px;margin-top:10px;opacity:.7;">Kein Aufwand für euch — es passiert im Hintergrund, bei jedem Abschluss.</p>
       </div>
-
       <div style="padding:16px 20px;border:1px solid var(--border);background:var(--panel);display:flex;align-items:center;gap:16px;">
         <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);line-height:1;">1%</span>
         <div>
@@ -1914,17 +1765,12 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
         </div>
       </div>
     </div>
-
     <div style="display:flex;flex-direction:column;gap:16px;">
       <h3 style="margin-bottom:4px;">Unterstützte Organisationen</h3>
-
       <div style="border:1px solid var(--border);overflow:hidden;flex:1;">
         <div style="height:130px;overflow:hidden;position:relative;">
           <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2940&auto=format&fit=crop" alt="Gemeinnützig" style="width:100%;height:100%;object-fit:cover;filter:grayscale(30%) brightness(0.45) contrast(1.1);">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(12,10,7,0.9));"></div>
-          <div style="position:absolute;bottom:12px;left:16px;">
-            <p style="font-family:'Druk Wide Bold',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);opacity:.9;">Echte Menschen. Echter Impact.</p>
-          </div>
         </div>
         <div style="padding:18px 20px;">
           <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid var(--border-faint);">
@@ -1944,49 +1790,92 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — NACHHALTIGES HOSTING
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-green-hosting" style="background-image:linear-gradient(rgba(12,10,7,0.88) 0%, rgba(12,10,7,0.95) 100%), url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center;">
+  <div class="chapter-indicator">Werte & Mission</div>
+  <h2 class="slide-title">Nachhaltiges Hosting</h2>
+  <div class="two-col" style="gap:32px;align-items:stretch;">
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div class="info-box" style="border-left-color:var(--accent);padding:24px 26px;flex:1;">
+        <span class="box-head">Zertifizierte grüne Energie</span>
+        <p style="font-size:17px;line-height:1.75;margin-top:10px;">Unsere Infrastruktur wird von einem Anbieter betrieben, der <strong>erneuerbare Energiezertifikate</strong> einsetzt — jede Website läuft auf grünem Strom.</p>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);background:var(--panel);display:flex;align-items:center;gap:16px;">
+        <span style="font-size:28px;line-height:1;">🌿</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin:0;">100% Zertifiziert Erneuerbar</p>
+      </div>
+    </div>
+    <div>
+      <ul class="bullet-list">
+        <li>Nachhaltige digitale Infrastruktur — <strong>kein Aufpreis</strong></li>
+        <li>Unternehmen können das als <em>ESG-Argument</em> nutzen</li>
+        <li>Kombination mit dem <strong>1%-Modell</strong>: Doppelter Beitrag</li>
+        <li style="font-family:'Druk Wide Bold',sans-serif;color:var(--accent-lt);">Digital wachsen — ohne die Erde dafür zu bezahlen.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — VORTEILE ÜBERBLICK
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-vorteile">
+  <div class="chapter-indicator">Zusammenfassung</div>
+  <h2 class="slide-title">Eure Vorteile auf einen Blick</h2>
+  <div class="two-col" style="gap:28px;align-items:start;">
+
+    <div>
+      <h3 style="margin-bottom:16px;">Für den Kunden</h3>
+      <ul class="bullet-list">
+        <li>Gewissenhaftigkeit — kein Pixel, kein Fehler</li>
+        <li>Individuelles Design — kein Template</li>
+        <li>Mobiloptimierung — responsiv. Immer.</li>
+        <li>Barrierefreiheit — rechtssicher, Standard</li>
+        <li>Schnellste Ladezeiten — Nr. 1 in PageSpeed</li>
+        <li>Smart Websites — KI-gestützt, Zukunft</li>
+        <li>Pflege & Support — langfristig, verlässlich</li>
+        <li>Preiswert — kein Aufpreis, faire Preise</li>
+        <li>Gemeinnützigkeit — 1% geht an das Gute</li>
+        <li>Grünes Hosting — erneuerbare Energie</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:16px;">Für den Vertriebler</h3>
+      <ul class="bullet-list">
+        <li>Eigenes Dashboard — Sales Force One</li>
+        <li>Seminar-Schulungen — regelmäßig, strukturiert</li>
+        <li>Aktive Provision — 50% sofort bei Abschluss</li>
+        <li>Passives Einkommen — monatlicher Hosting-Anteil, für immer</li>
+        <li>Digitale Unterlagen — immer aktuell, jederzeit abrufbar</li>
+        <li style="border-bottom:none;">
+          <strong style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;color:var(--accent-lt);text-shadow:0 0 15px var(--accent-glow);letter-spacing:.03em;text-transform:uppercase;">Kostenlos.</strong>
+        </li>
+      </ul>
+    </div>
 
   </div>
 </div>
 
 
 <!-- ══════════════════════════════════════════════════════
-     SLIDE — GRÜNES HOSTING
+     SLIDE — HAKEN STOCKBILD
      ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-green-hosting" style="background-image:linear-gradient(rgba(12,10,7,0.88) 0%, rgba(12,10,7,0.95) 100%), url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center;">
-  <div class="chapter-indicator">Werte & Mission</div>
-  <h2 class="slide-title">Nachhaltiges Hosting</h2>
-
-  <div class="two-col" style="gap:32px;align-items:stretch;">
-
-    <div style="display:flex;flex-direction:column;gap:18px;">
-      <div class="info-box" style="border-left-color:var(--accent);padding:24px 26px;flex:1;">
-        <span class="box-head">Zertifizierte grüne Energie</span>
-        <p style="font-size:17px;line-height:1.75;margin-top:10px;">Unsere Infrastruktur wird von einem Anbieter betrieben, der <strong>erneuerbare Energiezertifikate</strong> einsetzt — jede Website, die wir hosten, läuft auf grünem Strom.</p>
-        <p style="font-size:15px;margin-top:10px;opacity:.7;">Keine zusätzlichen Kosten für unsere Kunden — Nachhaltigkeit ist bei uns kein Aufpreis, sondern Standard.</p>
-      </div>
-
-      <div style="padding:16px 20px;border:1px solid var(--border);background:var(--panel);display:flex;align-items:center;gap:16px;">
-        <span style="font-size:28px;line-height:1;">🌿</span>
-        <div>
-          <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:4px;">100% Zertifiziert Erneuerbar</p>
-          <p style="font-size:14px;opacity:.65;">Serverinfrastruktur mit verifizierten Energiezertifikaten</p>
-        </div>
-      </div>
+<div class="slide-container" id="slide-haken-bild" style="padding:0;">
+  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop" alt="Haken" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:grayscale(20%) brightness(0.7);">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(12,10,7,0.7) 100%);z-index:1;"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;">
+    <div style="text-align:center;">
+      <span style="font-size:120px;line-height:1;filter:drop-shadow(0 0 40px rgba(201,168,76,0.6)) drop-shadow(0 4px 20px rgba(0,0,0,0.8));">✓</span>
+      <p style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.3em;color:var(--accent);margin-top:24px;text-shadow:0 0 20px var(--accent-glow);opacity:.9;">NetGains</p>
     </div>
-
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <h3 style="margin-bottom:4px;">Was das für unsere Kunden bedeutet</h3>
-      <ul class="bullet-list">
-        <li>Jede Website, die über uns läuft, ist Teil einer <strong>nachhaltigeren digitalen Infrastruktur</strong></li>
-        <li>Unternehmen können das als <em>ESG-Argument</em> gegenüber ihren eigenen Kunden nutzen</li>
-        <li>Nachhaltigkeit wird für Auftraggeber und Investoren immer relevanter — wir liefern das Fundament</li>
-        <li>Kombination mit unserem <strong>1%-Modell</strong>: Doppelter Beitrag, kein Mehraufwand</li>
-      </ul>
-      <div style="padding:16px 20px;border:1px solid var(--border);background:var(--panel);border-left:3px solid var(--accent);margin-top:auto;">
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-lt);">Digital wachsen — ohne die Erde dafür zu bezahlen.</p>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -2005,7 +1894,7 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 
 <!-- ── UI CHROME ──────────────────────────────── -->
 <div class="progress-bar" id="progress-bar"></div>
-<div class="slide-counter" id="slide-counter">1 / 42</div>
+<div class="slide-counter" id="slide-counter">1 / 44</div>
 <div class="controls">
   <button id="btn-theme" title="Theme">◑</button>
   <button id="btn-prev"  title="Zurück">‹</button>
@@ -2016,7 +1905,7 @@ body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8
 
 <!-- Mobile controls bar (inside outer-shell) -->
 <div id="mobile-controls">
-  <div id="mob-counter" style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;letter-spacing:.2em;opacity:.4;">1 / 42</div>
+  <div id="mob-counter" style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;letter-spacing:.2em;opacity:.4;">1 / 44</div>
   <div style="display:flex;gap:10px;">
     <button id="mob-theme" style="width:48px;height:48px;font-size:20px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;">◑</button>
     <button id="mob-prev"  style="width:48px;height:48px;font-size:24px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
