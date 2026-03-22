@@ -48,6 +48,7 @@ body {
   width: 1280px; height: 720px;
   position: relative; transform-origin: center center;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 /* Mobile controls bar — shown only on mobile */
@@ -2082,37 +2083,51 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
 <script>
   function resize() {
     const wrapper = document.getElementById('presentation-wrapper');
+    const outer   = document.getElementById('outer-shell');
     const mobCtrl = document.getElementById('mobile-controls');
+    const mobProg = document.getElementById('mobile-progress-wrap');
     const isMobile = window.innerWidth < 900;
 
     if (isMobile) {
-      const ctrlH = mobCtrl ? mobCtrl.offsetHeight : 64;
-      const progH = 3;
+      // Show mobile chrome
+      if (mobCtrl) mobCtrl.style.display = 'flex';
+      if (mobProg) mobProg.style.display = 'block';
+
+      // Calculate scale: fit full width, leave room for controls
+      const ctrlH  = mobCtrl ? mobCtrl.offsetHeight || 64 : 64;
       const availW = window.innerWidth;
-      const availH = window.innerHeight - ctrlH - progH;
-      const s = Math.min(availW / 1280, availH / 720);
-      const scaledH = 720 * s;
-      const scaledW = 1280 * s;
+      const availH = window.innerHeight - ctrlH;
+      const s      = Math.min(availW / 1280, availH / 720);
+      const scaledH = Math.round(720 * s);
 
-      wrapper.style.transformOrigin = 'top left';
-      wrapper.style.transform = `scale(${s})`;
-      wrapper.style.marginLeft = `${(availW - scaledW) / 2}px`;
-      wrapper.style.marginBottom = `-${720 - scaledH}px`;
+      // Scale from top-center — outer-shell centers horizontally via flex
+      wrapper.style.transformOrigin = 'top center';
+      wrapper.style.transform       = `scale(${s})`;
+      // Collapse the dead space below the scaled slide
+      wrapper.style.height          = scaledH + 'px';
+      wrapper.style.marginBottom    = '0';
+      wrapper.style.marginLeft      = '0';
 
-      document.body.style.overflowX = 'hidden';
-      mobCtrl.style.display = 'flex';
+      // Outer shell: stack slide then controls
+      outer.style.justifyContent  = 'flex-start';
+      outer.style.alignItems      = 'center';
+      document.body.style.overflow = 'hidden';
 
-      const mobProg = document.getElementById('mobile-progress-wrap');
-      if (mobProg) { mobProg.style.display = 'block'; }
     } else {
+      // Desktop: center in viewport
+      if (mobCtrl) mobCtrl.style.display = 'none';
+      if (mobProg) mobProg.style.display = 'none';
+
       const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
       wrapper.style.transformOrigin = 'center center';
-      wrapper.style.transform = `scale(${s})`;
-      wrapper.style.marginLeft = '0';
-      wrapper.style.marginBottom = '0';
-      if (mobCtrl) mobCtrl.style.display = 'none';
-      const mobProg = document.getElementById('mobile-progress-wrap');
-      if (mobProg) mobProg.style.display = 'none';
+      wrapper.style.transform       = `scale(${s})`;
+      wrapper.style.height          = '720px';
+      wrapper.style.marginBottom    = '0';
+      wrapper.style.marginLeft      = '0';
+
+      outer.style.justifyContent = 'center';
+      outer.style.alignItems     = 'center';
+      document.body.style.overflow = 'hidden';
     }
   }
   window.addEventListener('resize', resize);
