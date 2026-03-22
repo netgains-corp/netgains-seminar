@@ -25,15 +25,58 @@
 }
 
 body {
-  margin: 0; height: 100vh; width: 100vw;
-  display: flex; align-items: center; justify-content: center;
+  margin: 0;
+  background-color: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   overflow: hidden;
   transition: background .5s ease;
+  height: 100dvh; width: 100vw;
+}
+
+#outer-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 #presentation-wrapper {
   width: 1280px; height: 720px;
   position: relative; transform-origin: center center;
+  flex-shrink: 0;
+}
+
+/* Mobile controls bar — shown only on mobile */
+#mobile-controls {
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  flex-shrink: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--border, rgba(201,168,76,.1));
+}
+
+#mobile-progress {
+  height: 2px; width: 100%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  body { justify-content: flex-start; overflow-x: hidden; }
+  #outer-shell { justify-content: flex-start; }
+  #mobile-controls { display: flex; }
+  #mobile-progress { display: block; }
+  .controls { display: none !important; }
+  .progress-bar { display: none !important; }
+  .slide-counter { display: none !important; }
+  .chapter-indicator { display: none !important; }
 }
 
 /* ── SLIDES ───────────────────────────────────── */
@@ -369,9 +412,20 @@ body.theme-ng .progress-bar { background: linear-gradient(90deg,var(--accent-dk)
 body.theme-ng .slide-counter,body.theme-ng .chapter-indicator { color: rgba(45,212,191,.35); }
 body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
+/* Mindmap teal overrides */
+body.theme-ng #slide-usp-mindmap svg rect { fill: rgba(45,212,191,0.04) !important; stroke: rgba(45,212,191,0.25) !important; }
+body.theme-ng #slide-usp-mindmap svg rect:first-of-type { fill: rgba(45,212,191,0.1) !important; stroke: rgba(45,212,191,0.5) !important; }
+body.theme-ng #slide-usp-mindmap svg line { stroke: rgba(45,212,191,0.2) !important; }
+body.theme-ng #slide-usp-mindmap svg text[font-family*="Druk"] { fill: rgba(45,212,191,0.65) !important; }
+body.theme-ng #slide-usp-mindmap svg text[font-family*="Garamond"] { fill: #6db8a8 !important; }
+
 </style>
 </head>
 <body>
+<div id="outer-shell">
+<div id="mobile-progress-wrap" style="width:100%;height:2px;flex-shrink:0;display:none;" id="mob-prog-wrap">
+  <div id="mobile-progress" style="height:100%;width:0%;transition:width .35s ease;"></div>
+</div>
 <div id="presentation-wrapper">
 
 
@@ -381,7 +435,7 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 <div class="slide-container active" id="slide1" style="display:flex;align-items:center;justify-content:center;">
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:32px;">
     <img src="logo_transparent.webp" alt="NetGains Logo" style="max-width:540px;max-height:380px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 0 40px var(--accent-glow));">
-    <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.5em;color:var(--accent);opacity:.5;margin:0;">netgains.de</p>
+    <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.5em;color:var(--accent);opacity:.5;margin:0;">NetGains</p>
   </div>
 </div>
 
@@ -553,18 +607,18 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
      SLIDE — HEALTH TRIPTYCH
      ══════════════════════════════════════════════════════ -->
 <div class="slide-container" id="slide-health-triptych" style="padding:0;gap:0;">
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;height:100%;gap:2px;background:var(--bg);">
-    <div style="overflow:hidden;position:relative;">
+  <div style="display:grid;grid-template-rows:1fr 1fr;grid-template-columns:1fr 1fr;height:100%;gap:2px;background:var(--bg);">
+    <div style="overflow:hidden;position:relative;grid-column:1;grid-row:1;">
       <img src="health1.webp" alt="Gesundheitskrise 1" style="width:100%;height:100%;object-fit:cover;display:block;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.5) 0%,transparent 50%);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(12,10,7,0.45));"></div>
     </div>
-    <div style="overflow:hidden;position:relative;">
+    <div style="overflow:hidden;position:relative;grid-column:2;grid-row:1;">
       <img src="health2.webp" alt="Gesundheitskrise 2" style="width:100%;height:100%;object-fit:cover;display:block;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.5) 0%,transparent 50%);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(12,10,7,0.45));"></div>
     </div>
-    <div style="overflow:hidden;position:relative;">
-      <img src="health3.webp" alt="Gesundheitskrise 3" style="width:100%;height:100%;object-fit:cover;display:block;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.5) 0%,transparent 50%);"></div>
+    <div style="overflow:hidden;position:relative;grid-column:1 / span 2;grid-row:2;">
+      <img src="health3.webp" alt="Gesundheitskrise 3" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.45) 0%,transparent 60%);"></div>
     </div>
   </div>
 </div>
@@ -612,35 +666,150 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
   <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
   <h2 class="slide-title">Kein deutsches Problem</h2>
 
-  <div class="two-col" style="gap:28px;">
-    <div>
-      <h3>Internationale Signale</h3>
-      <ul class="bullet-list">
-        <li><strong>USA:</strong> Seit 2021 <em>38% mehr Schwerbehinderte</em> — statistisch unwahrscheinlicher als ein Blitzeinschlag</li>
-        <li><strong>UK:</strong> Erwerbstätige mit Einschränkungen um <em>95% gestiegen</em></li>
-        <li><strong>USA:</strong> Beschäftigungszahlen seit 2023 <em>monatlich rückläufig</em></li>
-      </ul>
-      <h3 style="margin-top:20px;">Was laut Walter Homm folgt</h3>
-      <div class="info-box">
-        <span class="box-head">Die Konsequenzen für jeden Einzelnen</span>
-        <ul class="bullet-list" style="padding:0;">
-          <li>Betrifft nicht nur das Vermögen — sondern das <strong>gesamte Leben</strong> durch schlechtere Versorgung</li>
-          <li>PKV & GKV Beiträge um <strong>+20%</strong> gestiegen, Leistungen sinken weiter</li>
-          <li>Höhere Steuern — der Staat braucht Kapital, das er nicht hat</li>
-          <li><strong>Reallöhne sinken</strong>, Kaufkraft wird systematisch abgebaut</li>
-        </ul>
+  <div class="two-col" style="gap:28px;align-items:start;">
+    <ul class="bullet-list">
+      <li><strong>USA:</strong> Seit 2021 <em>38% mehr Schwerbehinderte</em> — unwahrscheinlicher als ein Blitzeinschlag</li>
+      <li><strong>UK:</strong> Erwerbstätige mit Einschränkungen um <em>95% gestiegen</em></li>
+      <li><strong>USA:</strong> Beschäftigungszahlen seit 2023 <em>monatlich rückläufig</em></li>
+    </ul>
+    <ul class="bullet-list">
+      <li>PKV & GKV Beiträge um <strong>+20%</strong> gestiegen, Leistungen sinken</li>
+      <li>Höhere Steuern — der Staat braucht Kapital, das er nicht hat</li>
+      <li><strong>Reallöhne sinken</strong>, Kaufkraft wird abgebaut</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — WELCHE MÖGLICHKEITEN GIBT ES?
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-moeglichkeiten-frage" style="background-image:linear-gradient(rgba(12,10,7,0.93) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2940&auto=format&fit=crop');background-size:cover;">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Welche Möglichkeiten gibt es?</h2>
+  <div class="two-col" style="gap:28px;align-items:stretch;">
+    <div class="info-box" style="border-left-color:var(--accent);padding:32px;">
+      <span class="box-head" style="margin-bottom:20px;">Lotto 6 aus 49 — Jackpot</span>
+      <div style="text-align:center;margin:20px 0;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:52px;color:var(--accent-lt);text-shadow:0 0 30px var(--accent-glow);line-height:1;display:block;">1 : 140 Mio.</span>
+        <p style="font-size:13px;margin-top:8px;opacity:.55;font-style:italic;">Wahrscheinlichkeit, den Jackpot zu knacken</p>
       </div>
+      <ul class="bullet-list" style="padding:0;">
+        <li>Jeder zweite Deutsche hat schon mal Lotto gespielt</li>
+        <li>Rund <strong>6,5 Millionen</strong> spielen regelmäßig</li>
+        <li>Ein Gewinner pro Jahr im Schnitt — bei Millionen Spielern</li>
+      </ul>
     </div>
-    <div style="overflow:hidden;border:1px solid var(--border);position:relative;">
-      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2940&auto=format&fit=crop" alt="Wirtschaft" style="width:100%;height:100%;object-fit:cover;filter:grayscale(60%) contrast(1.1) brightness(0.5);">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(12,10,7,0.85) 0%, transparent 60%);"></div>
-      <div style="position:absolute;bottom:20px;left:20px;right:20px;">
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);opacity:.8;">Globale Systemkrise</p>
+    <div class="info-box" style="border-left-color:rgba(201,168,76,0.3);padding:32px;">
+      <span class="box-head" style="margin-bottom:20px;">Blitzeinschlag — Ein Leben lang</span>
+      <div style="text-align:center;margin:20px 0;">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:52px;color:var(--white);text-shadow:0 0 20px rgba(255,255,255,0.2);line-height:1;display:block;">1 : 15.300</span>
+        <p style="font-size:13px;margin-top:8px;opacity:.55;font-style:italic;">Lebenszeit-Wahrscheinlichkeit, vom Blitz getroffen zu werden</p>
+      </div>
+      <div style="padding:14px 18px;background:rgba(201,168,76,0.06);border:1px solid var(--border);margin-top:12px;">
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);">Vom Blitz getroffen zu werden ist <em style="color:var(--white);">9.000× wahrscheinlicher</em> als der Lotto-Jackpot.</p>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — DIE SELBSTSTÄNDIGKEIT (INSOLVENZEN)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-insolvenzen" style="background-image:linear-gradient(rgba(12,10,7,0.91) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center top;">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <h2 class="slide-title">Die Selbstständigkeit</h2>
+  <div class="stat-grid cols-3" style="margin-bottom:20px;">
+    <div class="stat-card">
+      <span class="big-num">24.064</span>
+      <span class="card-label">Unternehmensinsolvenzen 2025</span>
+      <p>Der höchste Wert seit <strong>2014</strong>. Zum dritten Jahr in Folge ein starker Anstieg.</p>
+    </div>
+    <div class="stat-card">
+      <span class="big-num">~2.000</span>
+      <span class="card-label">Firmenpleiten pro Monat</span>
+      <p>Monatlich scheitern rund <strong>2.000 Unternehmen</strong> in Deutschland — und die Kurve zeigt weiter nach oben.</p>
+    </div>
+    <div class="stat-card">
+      <span class="big-num">77.219</span>
+      <span class="card-label">Verbraucherinsolvenzen 2025</span>
+      <p>Privatpersonen, die zahlungsunfähig wurden — <strong>+8,4%</strong> gegenüber dem Vorjahr.</p>
+    </div>
+  </div>
+  <div class="info-box" style="border-left-color:#b91c1c;">
+    <span class="box-head" style="color:#f87171;">Die Realität der Selbstständigkeit</span>
+    <ul class="bullet-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0;">
+      <li>Kapital, Haftung, Risiko — alles auf deinen Schultern</li>
+      <li>+10,3% mehr Insolvenzen 2025 gegenüber 2024 (Destatis)</li>
+      <li>Drei Jahre in Folge starke Anstiege: 2023: +22%, 2024: +22%, 2025: +10%</li>
+      <li>320.000 Arbeitsplätze 2024 durch Insolvenzen gefährdet oder verloren</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — W.T.H.Z.
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-wthz">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:20px;">
+    <h2 style="font-size:54px;letter-spacing:.08em;text-shadow:0 0 40px var(--accent-glow);">W.T.H.Z.</h2>
+    <div class="stat-grid cols-5" style="gap:14px;">
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">⌚</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Uhr</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">🚗</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Auto</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">✈️</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Reise</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">🏠</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Haus</p>
+      </div>
+      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">👔</div>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Klamotten</p>
+      </div>
+    </div>
+    <div style="margin-top:6px;padding:20px 28px;border:1px solid var(--border);background:var(--panel);position:relative;">
+      <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
+      <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--white);text-shadow:0 2px 12px rgba(0,0,0,0.6);margin:0;">Ist normal — aber warum erreichen nur wenige ihre Ziele?</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE — MÖGLICHKEITEN (ÜBERBLICK)
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-moeglichkeiten-liste">
+  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px;">
+    <h2 style="font-size:44px;">Möglichkeiten</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:600px;">
+      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--border-faint);background:var(--panel);border-left:3px solid rgba(201,168,76,0.2);">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent);opacity:.35;min-width:50px;line-height:1;">01</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--text);margin:0;">Arbeiten</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--border-faint);background:var(--panel);border-left:3px solid rgba(201,168,76,0.2);">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent);opacity:.35;min-width:50px;line-height:1;">02</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--text);margin:0;">Lotto</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--accent);background:rgba(201,168,76,0.05);border-left:3px solid var(--accent);position:relative;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent-lt);min-width:50px;line-height:1;text-shadow:0 0 20px var(--accent-glow);">03</span>
+        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--accent-lt);margin:0;text-shadow:0 0 15px var(--accent-glow);">Selbstständigkeit</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════════════════
      SLIDE 13 — KAPITEL 2 COVER: NETGAINS USPs
@@ -696,25 +865,33 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
   <div class="chapter-indicator">Kapitel 2 — USPs</div>
   <h2 class="slide-title">Was da draußen passiert</h2>
 
-  <div class="bad-site-grid">
-    <div class="bad-site-card">
-      <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1200&auto=format&fit=crop" alt="Bad website example">
-      <div class="warn-tag">Verschoben</div>
-      <div class="site-label">Text überlappt Navigation, Abstände inkonsistent</div>
+  <!-- Three bad site images -->
+  <div class="bad-site-grid" style="flex:1;min-height:0;">
+    <div class="bad-site-card" style="overflow:hidden;">
+      <img src="ex_bad1.webp" alt="Schlechte Website 1" style="width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
-    <div class="bad-site-card">
-      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop" alt="Bad mobile website">
-      <div class="warn-tag">Nicht Mobil</div>
-      <div class="site-label">Desktop-Layout auf Handy — 65% aller Besucher sehen das</div>
+    <div class="bad-site-card" style="overflow:hidden;">
+      <img src="ex_bad2.webp" alt="Schlechte Website 2" style="width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
-    <div class="bad-site-card">
-      <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop" alt="Outdated website">
-      <div class="warn-tag">Veraltet</div>
-      <div class="site-label">Fonts fehlen, Bilder nicht geladen, Rechtschreibfehler sichtbar</div>
+    <div class="bad-site-card" style="overflow:hidden;">
+      <img src="ex_bad3.webp" alt="Schlechte Website 3" style="width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
   </div>
 
-  <p style="margin-top:18px;font-size:14px;text-align:center;opacity:.5;font-style:italic;">Das ist die Konkurrenz unserer Kunden. Und die Chance, die wir für sie nutzen.</p>
+  <!-- Question shown always -->
+  <div id="scherer-question" style="margin-top:18px;padding:16px 24px;border:1px solid var(--border);background:var(--panel);text-align:center;">
+    <p style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.06em;color:var(--white);margin:0;">Wie bucht man Hermann Scherer?</p>
+  </div>
+
+  <!-- Good example — revealed on next click -->
+  <div id="scherer-reveal" style="display:none;margin-top:14px;display:none;flex-direction:column;gap:12px;opacity:0;transition:opacity .5s ease;">
+    <div style="overflow:hidden;border:1px solid var(--border);height:180px;">
+      <img src="ex_good1.webp" alt="Gute Website" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+    </div>
+    <div style="padding:14px 24px;border:1px solid var(--accent);background:rgba(201,168,76,0.05);text-align:center;">
+      <p style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-lt);margin:0;text-shadow:0 0 15px var(--accent-glow);">Wissen Sie es jetzt?</p>
+    </div>
+  </div>
 </div>
 
 
@@ -890,6 +1067,119 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
 
 <!-- ══════════════════════════════════════════════════════
+     SLIDE — USP MINDMAP
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide-usp-mindmap">
+  <div class="chapter-indicator">Kapitel 2 — USPs</div>
+  <h2 class="slide-title">Alle USPs auf einen Blick</h2>
+
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0;">
+    <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible;">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Center node -->
+      <g>
+        <rect x="390" y="195" width="320" height="90" rx="2" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
+        <text x="550" y="233" text-anchor="middle" font-family="'Druk Wide Bold',sans-serif" font-size="15" fill="#e4cc82" text-transform="uppercase" letter-spacing="1">NETGAINS</text>
+        <text x="550" y="257" text-anchor="middle" font-family="'Druk Wide Bold',sans-serif" font-size="11" fill="rgba(201,168,76,0.6)" letter-spacing="3">USPs</text>
+      </g>
+
+      <!-- Connector lines -->
+      <!-- Top left cluster -->
+      <line x1="390" y1="215" x2="295" y2="160" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+      <line x1="390" y1="215" x2="200" y2="90" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+      <line x1="390" y1="215" x2="130" y2="175" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+
+      <!-- Bottom left cluster -->
+      <line x1="390" y1="265" x2="280" y2="320" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+      <line x1="390" y1="265" x2="155" y2="355" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+
+      <!-- Top right cluster -->
+      <line x1="710" y1="215" x2="810" y2="130" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+      <line x1="710" y1="215" x2="900" y2="200" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+
+      <!-- Bottom right cluster -->
+      <line x1="710" y1="265" x2="820" y2="330" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+      <line x1="710" y1="265" x2="780" y2="410" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+
+      <!-- USP Nodes — left side -->
+
+      <!-- Gewissenhaftigkeit -->
+      <g>
+        <rect x="180" y="128" width="230" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="195" y="148" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">GEWISSENHAFTIGKEIT</text>
+        <text x="195" y="168" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Kein Pixel. Kein Fehler.</text>
+      </g>
+
+      <!-- Design -->
+      <g>
+        <rect x="40" y="58" width="200" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="55" y="78" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">DESIGN</text>
+        <text x="55" y="98" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Trendsetter. Individuell.</text>
+      </g>
+
+      <!-- Mobiloptimierung -->
+      <g>
+        <rect x="20" y="148" width="200" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="35" y="168" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">MOBILOPTIMIERUNG</text>
+        <text x="35" y="188" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Responsiv. Immer.</text>
+      </g>
+
+      <!-- Barrierefreiheit -->
+      <g>
+        <rect x="150" y="295" width="220" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="165" y="315" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">BARRIEREFREIHEIT</text>
+        <text x="165" y="335" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Rechtssicher. Standard.</text>
+      </g>
+
+      <!-- Pflege -->
+      <g>
+        <rect x="20" y="325" width="190" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="35" y="345" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">PFLEGE</text>
+        <text x="35" y="365" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Support. Langfristig.</text>
+      </g>
+
+      <!-- USP Nodes — right side -->
+
+      <!-- Ladezeiten / PageSpeed -->
+      <g>
+        <rect x="720" y="100" width="230" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="735" y="120" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">LADEZEITEN</text>
+        <text x="735" y="140" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">Nr. 1 in PageSpeed.</text>
+      </g>
+
+      <!-- Smart Websites -->
+      <g>
+        <rect x="810" y="168" width="230" height="52" rx="1" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="825" y="188" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(201,168,76,0.7)" letter-spacing="2">SMART WEBSITES</text>
+        <text x="825" y="208" font-family="'EB Garamond',serif" font-size="13" fill="#9e8c72">KI-gestützt. Zukunft.</text>
+      </g>
+
+      <!-- Preiswert -->
+      <g>
+        <rect x="730" y="300" width="200" height="52" rx="1" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.45)" stroke-width="1.5" filter="url(#glow)"/>
+        <text x="745" y="320" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(228,204,130,0.9)" letter-spacing="2">PREISWERT</text>
+        <text x="745" y="340" font-family="'EB Garamond',serif" font-size="13" fill="#b8a070">Kein Aufpreis. Fair.</text>
+      </g>
+
+      <!-- Gemeinnützigkeit -->
+      <g>
+        <rect x="690" y="378" width="230" height="52" rx="1" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.45)" stroke-width="1.5" filter="url(#glow)"/>
+        <text x="705" y="398" font-family="'Druk Wide Bold',sans-serif" font-size="10" fill="rgba(228,204,130,0.9)" letter-spacing="2">GEMEINNÜTZIGKEIT</text>
+        <text x="705" y="418" font-family="'EB Garamond',serif" font-size="13" fill="#b8a070">1% für das Gute.</text>
+      </g>
+
+    </svg>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
      SLIDE 13 — BISHERIGE ERFOLGE
      ══════════════════════════════════════════════════════ -->
 <div class="slide-container" id="slide13">
@@ -932,136 +1222,6 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE — WELCHE MÖGLICHKEITEN GIBT ES?
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-moeglichkeiten-frage" style="background-image:linear-gradient(rgba(12,10,7,0.93) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2940&auto=format&fit=crop');background-size:cover;">
-  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
-  <h2 class="slide-title">Welche Möglichkeiten gibt es?</h2>
-  <div class="two-col" style="gap:28px;align-items:stretch;">
-    <div class="info-box" style="border-left-color:var(--accent);padding:32px;">
-      <span class="box-head" style="margin-bottom:20px;">Lotto 6 aus 49 — Jackpot</span>
-      <div style="text-align:center;margin:20px 0;">
-        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:52px;color:var(--accent-lt);text-shadow:0 0 30px var(--accent-glow);line-height:1;display:block;">1 : 140 Mio.</span>
-        <p style="font-size:13px;margin-top:8px;opacity:.55;font-style:italic;">Wahrscheinlichkeit, den Jackpot zu knacken</p>
-      </div>
-      <ul class="bullet-list" style="padding:0;">
-        <li>Jeder zweite Deutsche hat schon mal Lotto gespielt</li>
-        <li>Rund <strong>6,5 Millionen</strong> spielen regelmäßig</li>
-        <li>Ein Gewinner pro Jahr im Schnitt — bei Millionen Spielern</li>
-      </ul>
-    </div>
-    <div class="info-box" style="border-left-color:rgba(201,168,76,0.3);padding:32px;">
-      <span class="box-head" style="margin-bottom:20px;">Blitzeinschlag — Ein Leben lang</span>
-      <div style="text-align:center;margin:20px 0;">
-        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:52px;color:var(--white);text-shadow:0 0 20px rgba(255,255,255,0.2);line-height:1;display:block;">1 : 15.300</span>
-        <p style="font-size:13px;margin-top:8px;opacity:.55;font-style:italic;">Lebenszeit-Wahrscheinlichkeit, vom Blitz getroffen zu werden</p>
-      </div>
-      <div style="padding:14px 18px;background:rgba(201,168,76,0.06);border:1px solid var(--border);margin-top:12px;">
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);">Vom Blitz getroffen zu werden ist <em style="color:var(--white);">9.000× wahrscheinlicher</em> als der Lotto-Jackpot.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE — DIE SELBSTSTÄNDIGKEIT (INSOLVENZEN)
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-insolvenzen" style="background-image:linear-gradient(rgba(12,10,7,0.91) 0%,rgba(12,10,7,0.97) 100%),url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2940&auto=format&fit=crop');background-size:cover;background-position:center top;">
-  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
-  <h2 class="slide-title">Die Selbstständigkeit</h2>
-  <div class="stat-grid cols-3" style="margin-bottom:20px;">
-    <div class="stat-card">
-      <span class="big-num">24.064</span>
-      <span class="card-label">Unternehmensinsolvenzen 2025</span>
-      <p>Der höchste Wert seit <strong>2014</strong>. Zum dritten Jahr in Folge ein starker Anstieg.</p>
-    </div>
-    <div class="stat-card">
-      <span class="big-num">~2.000</span>
-      <span class="card-label">Firmenpleiten pro Monat</span>
-      <p>Monatlich scheitern rund <strong>2.000 Unternehmen</strong> in Deutschland — und die Kurve zeigt weiter nach oben.</p>
-    </div>
-    <div class="stat-card">
-      <span class="big-num">77.219</span>
-      <span class="card-label">Verbraucherinsolvenzen 2025</span>
-      <p>Privatpersonen, die zahlungsunfähig wurden — <strong>+8,4%</strong> gegenüber dem Vorjahr.</p>
-    </div>
-  </div>
-  <div class="info-box" style="border-left-color:#b91c1c;">
-    <span class="box-head" style="color:#f87171;">Die Realität der Selbstständigkeit</span>
-    <ul class="bullet-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0;">
-      <li>Kapital, Haftung, Risiko — alles auf deinen Schultern</li>
-      <li>+10,3% mehr Insolvenzen 2025 gegenüber 2024 (Destatis)</li>
-      <li>Drei Jahre in Folge starke Anstiege: 2023: +22%, 2024: +22%, 2025: +10%</li>
-      <li>320.000 Arbeitsplätze 2024 durch Insolvenzen gefährdet oder verloren</li>
-    </ul>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE — W.T.H.Z.
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-wthz">
-  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
-  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:20px;">
-    <h2 style="font-size:54px;letter-spacing:.08em;text-shadow:0 0 40px var(--accent-glow);">W.T.H.Z.</h2>
-    <div class="stat-grid cols-5" style="gap:14px;">
-      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:10px;">⌚</div>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Uhr</p>
-      </div>
-      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:10px;">🚗</div>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Auto</p>
-      </div>
-      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:10px;">✈️</div>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Reise</p>
-      </div>
-      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:10px;">🏠</div>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Haus</p>
-      </div>
-      <div style="border:1px solid var(--border);background:var(--panel);padding:18px 14px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:10px;">👔</div>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin:0;">Klamotten</p>
-      </div>
-    </div>
-    <div style="margin-top:6px;padding:20px 28px;border:1px solid var(--border);background:var(--panel);position:relative;">
-      <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
-      <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--white);text-shadow:0 2px 12px rgba(0,0,0,0.6);margin:0;">Ist normal — aber warum erreichen nur wenige ihre Ziele?</p>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE — MÖGLICHKEITEN (ÜBERBLICK)
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-moeglichkeiten-liste">
-  <div class="chapter-indicator">Kapitel 1 — Wirtschaft</div>
-  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px;">
-    <h2 style="font-size:44px;">Möglichkeiten</h2>
-    <div style="display:flex;flex-direction:column;gap:16px;max-width:600px;">
-      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--border-faint);background:var(--panel);border-left:3px solid rgba(201,168,76,0.2);">
-        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent);opacity:.35;min-width:50px;line-height:1;">01</span>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--text);margin:0;">Arbeiten</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--border-faint);background:var(--panel);border-left:3px solid rgba(201,168,76,0.2);">
-        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent);opacity:.35;min-width:50px;line-height:1;">02</span>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--text);margin:0;">Lotto</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:24px;padding:20px 28px;border:1px solid var(--accent);background:rgba(201,168,76,0.05);border-left:3px solid var(--accent);position:relative;">
-        <div style="position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--accent),transparent);"></div>
-        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:var(--accent-lt);min-width:50px;line-height:1;text-shadow:0 0 20px var(--accent-glow);">03</span>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--accent-lt);margin:0;text-shadow:0 0 15px var(--accent-glow);">Selbstständigkeit</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <!-- ══════════════════════════════════════════════════════
@@ -1119,6 +1279,15 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
         <li><strong>Strukturvertrieb:</strong> Zwei Fundamente — Produkte verkaufen <em>und</em> ein Team aufbauen, das dasselbe tut</li>
         <li>Komplett <strong>ohne eigenes Risiko</strong> — kein Kapital, keine Haftung, kein Lager</li>
       </ul>
+
+      <!-- Millionaire stat -->
+      <div style="margin-top:18px;border:1px solid var(--border);background:var(--panel);display:flex;align-items:center;gap:20px;padding:16px 20px;border-left:3px solid var(--accent);">
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:40px;color:var(--accent-lt);text-shadow:0 0 20px var(--accent-glow);line-height:1;flex-shrink:0;">74%</span>
+        <div>
+          <p style="font-family:'Druk Wide Bold',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:4px;opacity:.75;">Millionäre durch Vertrieb</p>
+          <p style="font-size:13px;line-height:1.5;margin:0;">Laut Thomas C. Corley (<em>Rich Habits</em>, 2010, Studie mit 233 Millionären) waren <strong>74% der Millionäre</strong> zuvor im Direktvertrieb oder Netzwerkvertrieb tätig.</p>
+        </div>
+      </div>
     </div>
     <div>
       <h3>Der schlechte Ruf — und warum er stimmt</h3>
@@ -1131,7 +1300,7 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
           <li>Unser Ansatz: <strong>Strukturvertrieb auf Augenhöhe</strong> — volle Transparenz, volle Beteiligung</li>
         </ul>
       </div>
-      <div style="margin-top:16px;overflow:hidden;border:1px solid var(--border);height:140px;position:relative;">
+      <div style="margin-top:16px;overflow:hidden;border:1px solid var(--border);height:130px;position:relative;">
         <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2940&auto=format&fit=crop" alt="Handshake" style="width:100%;height:100%;object-fit:cover;filter:grayscale(50%) contrast(1.1) brightness(0.5);">
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,10,7,0.7),transparent);"></div>
       </div>
@@ -1274,43 +1443,6 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
       </div>
     </div>
 
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE 11 — WO IST DER HAKEN?
-     ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide11-haken">
-  <div class="chapter-indicator">Kapitel 3 — Vertrieb</div>
-  <h2 class="slide-title">Wo ist der Haken?</h2>
-  <div class="two-col" style="gap:32px;align-items:center;">
-    <div>
-      <div class="info-box" style="border-left-color:#e2c97e;margin-bottom:18px;">
-        <span class="box-head">Die ehrliche Antwort</span>
-        <p style="font-size:17px;line-height:1.7;margin-top:8px;">Ganz einfach: Die meisten Menschen kommen entweder <strong>nicht ins Handeln</strong> — oder sie bleiben <strong>nicht lange genug am Ball</strong>.</p>
-      </div>
-      <div class="info-box">
-        <span class="box-head">Was das bedeutet</span>
-        <ul class="bullet-list" style="padding:0;">
-          <li>Euer Erfolg ist <strong>einzig und allein von euch</strong> abhängig — niemand kann das für euch tun</li>
-          <li>Das System funktioniert — aber nur, wenn ihr es konsequent anwendet</li>
-          <li>Kein Erfolg ohne Umsetzung — <em>das ist der einzige Haken</em></li>
-        </ul>
-      </div>
-    </div>
-    <div style="text-align:center;display:flex;flex-direction:column;gap:14px;">
-      <div style="overflow:hidden;border:1px solid var(--border);height:160px;position:relative;">
-        <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?q=80&w=2940&auto=format&fit=crop" alt="Entschlossenheit" style="width:100%;height:100%;object-fit:cover;filter:grayscale(40%) contrast(1.1) brightness(0.4);">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.95) 0%,transparent 60%);"></div>
-      </div>
-      <div style="padding:28px 24px;border:1px solid var(--border);background:var(--panel);position:relative;">
-        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
-        <p style="font-family:'Druk Wide Bold',sans-serif;font-size:28px;text-transform:uppercase;color:var(--accent-lt);line-height:1.25;text-shadow:0 0 30px var(--accent-glow);">NetGains ist<br>ein<br>Cheatcode</p>
-        <div style="margin:20px auto;height:1px;width:80px;background:linear-gradient(90deg,transparent,var(--accent),transparent);"></div>
-        <p style="font-size:14px;opacity:.55;font-style:italic;">Aber auch ein Cheatcode bringt nichts,<br>wenn du das Spiel nicht spielst.</p>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1807,10 +1939,52 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
 </div><!-- /wrapper -->
 
+<!-- Mobile controls bar (inside outer-shell) -->
+<div id="mobile-controls">
+  <div id="mob-counter" style="font-family:'Druk Wide Bold',sans-serif;font-size:11px;letter-spacing:.2em;opacity:.4;">1 / 38</div>
+  <div style="display:flex;gap:10px;">
+    <button id="mob-theme" style="width:48px;height:48px;font-size:20px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;">◑</button>
+    <button id="mob-prev"  style="width:48px;height:48px;font-size:24px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+    <button id="mob-next"  style="width:48px;height:48px;font-size:24px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+  </div>
+</div>
+</div><!-- /outer-shell -->
+
 <script>
   function resize() {
-    const s = Math.min(window.innerWidth/1280, window.innerHeight/720);
-    document.getElementById('presentation-wrapper').style.transform = `scale(${s})`;
+    const wrapper = document.getElementById('presentation-wrapper');
+    const mobCtrl = document.getElementById('mobile-controls');
+    const isMobile = window.innerWidth < 900;
+
+    if (isMobile) {
+      const ctrlH = mobCtrl ? mobCtrl.offsetHeight : 64;
+      const progH = 3;
+      const availW = window.innerWidth;
+      const availH = window.innerHeight - ctrlH - progH;
+      const s = Math.min(availW / 1280, availH / 720);
+      const scaledH = 720 * s;
+      const scaledW = 1280 * s;
+
+      wrapper.style.transformOrigin = 'top left';
+      wrapper.style.transform = `scale(${s})`;
+      wrapper.style.marginLeft = `${(availW - scaledW) / 2}px`;
+      wrapper.style.marginBottom = `-${720 - scaledH}px`;
+
+      document.body.style.overflowX = 'hidden';
+      mobCtrl.style.display = 'flex';
+
+      const mobProg = document.getElementById('mobile-progress-wrap');
+      if (mobProg) { mobProg.style.display = 'block'; }
+    } else {
+      const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      wrapper.style.transformOrigin = 'center center';
+      wrapper.style.transform = `scale(${s})`;
+      wrapper.style.marginLeft = '0';
+      wrapper.style.marginBottom = '0';
+      if (mobCtrl) mobCtrl.style.display = 'none';
+      const mobProg = document.getElementById('mobile-progress-wrap');
+      if (mobProg) mobProg.style.display = 'none';
+    }
   }
   window.addEventListener('resize', resize);
   resize();
@@ -1820,6 +1994,29 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
   const total  = slides.length;
   const bar    = document.getElementById('progress-bar');
   const ctr    = document.getElementById('slide-counter');
+
+  // --- Slide 7 (Hermann Scherer) reveal ---
+  const SCHERER_ID = 'slide7';
+  let schererRevealed = false;
+
+  function getSchererIndex() {
+    return Array.from(slides).findIndex(s => s.id === SCHERER_ID);
+  }
+
+  function resetScherer() {
+    schererRevealed = false;
+    const el = document.getElementById('scherer-reveal');
+    if (el) { el.style.display = 'none'; el.style.opacity = '0'; }
+  }
+
+  function revealScherer() {
+    schererRevealed = true;
+    const el = document.getElementById('scherer-reveal');
+    if (el) {
+      el.style.display = 'flex';
+      setTimeout(() => { el.style.opacity = '1'; }, 30);
+    }
+  }
 
   // --- Eure Rolle reveal logic ---
   const EURE_ROLLE_ID = 'slide-eure-rolle';
@@ -1852,6 +2049,19 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
   function go(n) {
     const erIdx = getEureRolleIndex();
+    const scIdx = getSchererIndex();
+
+    // Scherer slide: first forward click reveals good example
+    if (n > cur && cur === scIdx && !schererRevealed) {
+      revealScherer();
+      updateUI();
+      return;
+    }
+    // Going back onto scherer: reset
+    if (n === scIdx && n < cur) resetScherer();
+    // Going forward past scherer
+    if (n > scIdx && cur === scIdx && schererRevealed) { /* proceed */ }
+
     // Going forward on Eure Rolle: reveal bars one by one first
     if (n > cur && cur === erIdx && eureRolleRevealed < EURE_ROLLE_BARS) {
       revealNextBar();
@@ -1862,28 +2072,29 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
     if (n === erIdx && n < cur) {
       resetEureRolle();
     }
-    // Going forward past Eure Rolle, reset for re-entry
-    if (n > erIdx && cur < erIdx) {
-      // already handled
-    }
     slides[cur].classList.remove('active');
     cur = Math.max(0, Math.min(total-1, n));
     slides[cur].classList.add('active');
-    // Reset Eure Rolle if we jumped past it forward
     if (cur === erIdx) resetEureRolle();
+    if (cur === scIdx) resetScherer();
     updateUI();
   }
 
   function updateUI() {
     const erIdx = getEureRolleIndex();
-    // Progress: count eure-rolle bars as sub-steps
     const totalSteps = total - 1 + EURE_ROLLE_BARS;
     let step;
     if (cur < erIdx) step = cur;
     else if (cur === erIdx) step = erIdx + eureRolleRevealed;
     else step = erIdx + EURE_ROLLE_BARS + (cur - erIdx);
-    bar.style.width = ((step / totalSteps) * 100) + '%';
+    const pct = ((step / totalSteps) * 100) + '%';
+    bar.style.width = pct;
     ctr.textContent = (cur + 1) + ' / ' + total;
+    // Sync mobile UI
+    const mobCtr = document.getElementById('mob-counter');
+    if (mobCtr) mobCtr.textContent = (cur + 1) + ' / ' + total;
+    const mobProg = document.getElementById('mobile-progress');
+    if (mobProg) mobProg.style.width = pct;
   }
 
   document.getElementById('btn-next').addEventListener('click', () => go(cur+1));
@@ -1900,6 +2111,35 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
     }
   });
   document.getElementById('btn-theme').addEventListener('click', () => document.body.classList.toggle('theme-ng'));
+
+  // Mobile controls
+  const mobNext  = document.getElementById('mob-next');
+  const mobPrev  = document.getElementById('mob-prev');
+  const mobTheme = document.getElementById('mob-theme');
+  if (mobNext)  mobNext.addEventListener('click',  () => document.getElementById('btn-next').click());
+  if (mobPrev)  mobPrev.addEventListener('click',  () => document.getElementById('btn-prev').click());
+  if (mobTheme) mobTheme.addEventListener('click', () => {
+    document.body.classList.toggle('theme-ng');
+    stylesMobileButtons();
+  });
+
+  function stylesMobileButtons() {
+    const isTeal = document.body.classList.contains('theme-ng');
+    const accent = isTeal ? '#2dd4bf' : '#c9a84c';
+    const bg     = isTeal ? 'rgba(45,212,191,0.06)' : 'rgba(201,168,76,0.07)';
+    const border = isTeal ? 'rgba(45,212,191,0.2)' : 'rgba(201,168,76,0.25)';
+    [mobNext, mobPrev, mobTheme].forEach(b => {
+      if (!b) return;
+      b.style.background = bg;
+      b.style.border = `1px solid ${border}`;
+      b.style.color = accent;
+    });
+    const mobCtr = document.getElementById('mob-counter');
+    if (mobCtr) mobCtr.style.color = accent;
+    const mobProgEl = document.getElementById('mobile-progress');
+    if (mobProgEl) mobProgEl.style.background = accent;
+  }
+  stylesMobileButtons();
 
   document.addEventListener('keydown', e => {
     if (e.key==='ArrowRight'||e.key===' '||e.key==='Enter') document.getElementById('btn-next').click();
