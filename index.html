@@ -38,7 +38,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   height: 100dvh;
   overflow: hidden;
@@ -415,7 +415,7 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
 </style>
 </head>
-<body>
+<body class="theme-ng">
 <div id="outer-shell">
 <div id="mobile-progress-wrap" style="width:100%;height:2px;flex-shrink:0;display:none;" id="mob-prog-wrap">
   <div id="mobile-progress" style="height:100%;width:0%;transition:width .35s ease;"></div>
@@ -2087,49 +2087,37 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
     const outer   = document.getElementById('outer-shell');
     const mobCtrl = document.getElementById('mobile-controls');
     const mobProg = document.getElementById('mobile-progress-wrap');
-    const isMobile = window.innerWidth < 900;
 
-    if (isMobile) {
-      // Show mobile chrome
+    // Always scale to fit both width and height — never overflow
+    const ctrlH  = (mobCtrl && window.innerWidth < 900) ? (mobCtrl.offsetHeight || 60) : 0;
+    const availW = window.innerWidth;
+    const availH = window.innerHeight - ctrlH;
+    const s      = Math.min(availW / 1280, availH / 720);
+    const scaledH = Math.round(720 * s);
+    const scaledW = Math.round(1280 * s);
+
+    // Always use top center so we never overflow horizontally
+    wrapper.style.transformOrigin = 'top center';
+    wrapper.style.transform       = `scale(${s})`;
+    wrapper.style.width           = '1280px';
+    wrapper.style.height          = scaledH + 'px';
+    wrapper.style.marginLeft      = '0';
+    wrapper.style.marginBottom    = '0';
+
+    if (window.innerWidth < 900) {
       if (mobCtrl) mobCtrl.style.display = 'flex';
       if (mobProg) mobProg.style.display = 'block';
-
-      // Calculate scale: fit full width, leave room for controls
-      const ctrlH  = mobCtrl ? mobCtrl.offsetHeight || 64 : 64;
-      const availW = window.innerWidth;
-      const availH = window.innerHeight - ctrlH;
-      const s      = Math.min(availW / 1280, availH / 720);
-      const scaledH = Math.round(720 * s);
-
-      // Scale from top-center — outer-shell centers horizontally via flex
-      wrapper.style.transformOrigin = 'top center';
-      wrapper.style.transform       = `scale(${s})`;
-      // Collapse the dead space below the scaled slide
-      wrapper.style.height          = scaledH + 'px';
-      wrapper.style.marginBottom    = '0';
-      wrapper.style.marginLeft      = '0';
-
-      // Outer shell: stack slide then controls
-      outer.style.justifyContent  = 'flex-start';
-      outer.style.alignItems      = 'center';
-      document.body.style.overflow = 'hidden';
-
+      outer.style.justifyContent = 'flex-start';
     } else {
-      // Desktop: center in viewport
       if (mobCtrl) mobCtrl.style.display = 'none';
       if (mobProg) mobProg.style.display = 'none';
-
-      const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
-      wrapper.style.transformOrigin = 'center center';
-      wrapper.style.transform       = `scale(${s})`;
-      wrapper.style.height          = '720px';
-      wrapper.style.marginBottom    = '0';
-      wrapper.style.marginLeft      = '0';
-
-      outer.style.justifyContent = 'center';
-      outer.style.alignItems     = 'center';
-      document.body.style.overflow = 'hidden';
+      // Vertically center by padding top
+      const topPad = Math.max(0, Math.floor((availH - scaledH) / 2));
+      wrapper.style.marginTop = topPad + 'px';
+      outer.style.justifyContent = 'flex-start';
     }
+    outer.style.alignItems = 'center';
+    document.body.style.overflow = 'hidden';
   }
   window.addEventListener('resize', resize);
   resize();
