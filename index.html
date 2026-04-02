@@ -27,8 +27,6 @@
 body {
   margin: 0;
   background-color: var(--bg);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
   overflow: hidden;
   transition: background .5s ease;
   height: 100dvh; width: 100vw;
@@ -37,16 +35,18 @@ body {
 #outer-shell {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
   height: 100dvh;
   overflow: hidden;
+  position: relative;
 }
 
 #presentation-wrapper {
   width: 1280px; height: 720px;
-  position: relative; transform-origin: center center;
+  position: relative;
+  transform-origin: top left;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -70,10 +70,6 @@ body {
 }
 
 @media (max-width: 900px) {
-  body { justify-content: flex-start; overflow-x: hidden; }
-  #outer-shell { justify-content: flex-start; }
-  #mobile-controls { display: flex; }
-  #mobile-progress { display: block; }
   .controls { display: none !important; }
   .progress-bar { display: none !important; }
   .slide-counter { display: none !important; }
@@ -600,19 +596,23 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 <!-- ══════════════════════════════════════════════════════
      SLIDE — HEALTH TRIPTYCH
      ══════════════════════════════════════════════════════ -->
-<div class="slide-container" id="slide-health-triptych" style="padding:0;gap:0;">
-  <div style="display:grid;grid-template-rows:360px 360px;grid-template-columns:1fr 1fr;height:720px;gap:2px;background:var(--bg);">
-    <div style="overflow:hidden;position:relative;grid-column:1;grid-row:1;">
+<div class="slide-container" id="slide-health-triptych" style="padding:20px;gap:0;display:flex;flex-direction:column;justify-content:center;background:#020a08;">
+  <!-- Top row: two images side by side -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+    <div style="height:310px;overflow:hidden;border:1px solid rgba(45,212,191,0.15);position:relative;flex-shrink:0;">
       <img src="health1.webp" alt="Gesundheitskrise 1" style="width:100%;height:100%;object-fit:cover;display:block;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(12,10,7,0.45));"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(2,10,8,0.5));"></div>
     </div>
-    <div style="overflow:hidden;position:relative;grid-column:2;grid-row:1;">
+    <div style="height:310px;overflow:hidden;border:1px solid rgba(45,212,191,0.15);position:relative;flex-shrink:0;">
       <img src="health2.webp" alt="Gesundheitskrise 2" style="width:100%;height:100%;object-fit:cover;display:block;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(12,10,7,0.45));"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(2,10,8,0.5));"></div>
     </div>
-    <div style="overflow:hidden;position:relative;grid-column:1 / span 2;grid-row:2;">
+  </div>
+  <!-- Bottom: one centered image, same width as one top image -->
+  <div style="display:flex;justify-content:center;">
+    <div style="height:310px;overflow:hidden;border:1px solid rgba(45,212,191,0.15);position:relative;flex-shrink:0;width:50%;max-width:50%;">
       <img src="health3.webp" alt="Gesundheitskrise 3" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,0.45) 0%,transparent 60%);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(2,10,8,0.4) 0%,transparent 60%);"></div>
     </div>
   </div>
 </div>
@@ -937,15 +937,15 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
   <div class="chapter-indicator">Kapitel 2 — USPs</div>
   <h2 class="slide-title">Was da draußen passiert</h2>
 
-  <!-- Three bad site images — equal size, fixed 4:3 height -->
+  <!-- Three bad site images — strict 4:3 frames, pre-assigned space -->
   <div style="display:flex;gap:18px;margin-top:4px;">
-    <div style="flex:1;height:350px;overflow:hidden;border:1px solid var(--border);position:relative;flex-shrink:0;">
+    <div style="width:calc(33.333% - 12px);flex-shrink:0;padding-top:25%;position:relative;border:1px solid var(--border);overflow:hidden;">
       <img src="ex_bad1.webp" alt="Schlechte Website 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
-    <div style="flex:1;height:350px;overflow:hidden;border:1px solid var(--border);position:relative;flex-shrink:0;">
+    <div style="width:calc(33.333% - 12px);flex-shrink:0;padding-top:25%;position:relative;border:1px solid var(--border);overflow:hidden;">
       <img src="ex_bad2.webp" alt="Schlechte Website 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
-    <div style="flex:1;height:350px;overflow:hidden;border:1px solid var(--border);position:relative;flex-shrink:0;">
+    <div style="width:calc(33.333% - 12px);flex-shrink:0;padding-top:25%;position:relative;border:1px solid var(--border);overflow:hidden;">
       <img src="ex_bad3.webp" alt="Schlechte Website 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
   </div>
@@ -957,10 +957,10 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 
   <!-- Good example — revealed on next click -->
   <div id="scherer-reveal" style="display:none;margin-top:14px;display:none;flex-direction:column;gap:12px;opacity:0;transition:opacity .5s ease;">
-    <div style="overflow:hidden;border:1px solid var(--border);height:180px;">
-      <img src="ex_good1.webp" alt="Gute Website" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+    <div style="width:33.333%;padding-top:25%;position:relative;border:1px solid var(--border);overflow:hidden;margin:0 auto;">
+      <img src="ex_good1.webp" alt="Gute Website" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
     </div>
-    <div style="padding:14px 24px;border:1px solid var(--accent);background:rgba(201,168,76,0.05);text-align:center;">
+    <div style="padding:14px 24px;border:1px solid var(--accent);background:rgba(45,212,191,0.05);text-align:center;">
       <p style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-lt);margin:0;text-shadow:0 0 15px var(--accent-glow);">Wissen Sie es jetzt?</p>
     </div>
   </div>
@@ -1145,10 +1145,10 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
   <div class="chapter-indicator">Kapitel 2 — USPs</div>
   <h2 class="slide-title">Alle USPs auf einen Blick</h2>
 
-  <div style="flex:1;display:grid;grid-template-columns:1fr 160px 1fr;gap:0;align-items:center;min-height:0;">
+  <div style="flex:1;display:grid;grid-template-columns:1fr 200px 1fr;gap:0;align-items:center;min-height:0;">
 
     <!-- LEFT NODES -->
-    <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-end;">
       <div class="usp-node">Gewissenhaftigkeit</div>
       <div class="usp-node">Design</div>
       <div class="usp-node">Mobiloptimierung</div>
@@ -1182,7 +1182,7 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
     </div>
 
     <!-- RIGHT NODES -->
-    <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start;">
       <div class="usp-node">Ladezeiten</div>
       <div class="usp-node">Smart Websites</div>
       <div class="usp-node">Preiswert</div>
@@ -1196,17 +1196,17 @@ body.theme-ng .achievement-card h4 { color: var(--accent-lt); }
 <style>
 .usp-node {
   font-family: 'Druk Wide Bold', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   color: var(--accent-lt);
   background: var(--bg);
-  border: 1px solid rgba(201,168,76,0.45);
-  padding: 11px 20px;
+  border: 1px solid rgba(45,212,191,0.45);
+  padding: 13px 22px;
   text-align: center;
-  width: 240px;
+  width: 270px;
   text-shadow: 0 0 12px var(--accent-glow);
-  box-shadow: 0 0 10px rgba(201,168,76,0.08), inset 0 1px 0 rgba(201,168,76,0.08);
+  box-shadow: 0 0 12px rgba(45,212,191,0.08), inset 0 1px 0 rgba(45,212,191,0.08);
   position: relative;
   z-index: 2;
 }
@@ -1628,12 +1628,12 @@ body.theme-ng .usp-node::before {
 
       <div>
         <h3 style="margin-bottom:14px;">Verteilung pro Abschluss</h3>
-        <!-- Bar breakdown -->
+        <!-- Bar breakdown showing differences -->
         <div style="border:1px solid var(--border);overflow:hidden;">
           <div style="display:grid;grid-template-columns:160px 1fr 80px;background:var(--panel);border-bottom:1px solid var(--border);">
             <div style="padding:8px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.65;">Stufe</div>
             <div style="padding:8px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.65;">Anteil</div>
-            <div style="padding:8px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.65;">Betrag</div>
+            <div style="padding:8px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.65;">Differenz</div>
           </div>
           <div style="display:grid;grid-template-columns:160px 1fr 80px;border-bottom:1px solid var(--border-faint);">
             <div style="padding:11px 14px;font-size:14px;">Berater</div>
@@ -1643,17 +1643,17 @@ body.theme-ng .usp-node::before {
           <div style="display:grid;grid-template-columns:160px 1fr 80px;border-bottom:1px solid var(--border-faint);">
             <div style="padding:11px 14px;font-size:14px;">Teamleader</div>
             <div style="padding:11px 14px;"><div style="height:8px;background:var(--accent);width:27%;border-radius:1px;opacity:.6;"></div></div>
-            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--white);">600 €</div>
+            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--white);">200 €</div>
           </div>
           <div style="display:grid;grid-template-columns:160px 1fr 80px;border-bottom:1px solid var(--border-faint);">
             <div style="padding:11px 14px;font-size:14px;">Direktor</div>
             <div style="padding:11px 14px;"><div style="height:8px;background:var(--accent-dk);width:13%;border-radius:1px;opacity:.8;"></div></div>
-            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--text);">700 €</div>
+            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--text);">100 €</div>
           </div>
-          <div style="display:grid;grid-template-columns:160px 1fr 80px;background:rgba(201,168,76,0.04);">
-            <div style="padding:11px 14px;font-size:14px;opacity:.6;">NetGains</div>
-            <div style="padding:11px 14px;"><div style="height:8px;background:rgba(201,168,76,0.2);width:53%;border-radius:1px;"></div></div>
-            <div style="padding:11px 14px;font-size:14px;opacity:.55;">790 €</div>
+          <div style="display:grid;grid-template-columns:160px 1fr 80px;">
+            <div style="padding:11px 14px;font-size:14px;">Senior Direktor</div>
+            <div style="padding:11px 14px;"><div style="height:8px;background:var(--accent-dk);width:7%;border-radius:1px;opacity:.5;"></div></div>
+            <div style="padding:11px 14px;font-family:'Druk Wide Bold',sans-serif;font-size:14px;color:var(--text);opacity:.7;">50 €</div>
           </div>
         </div>
       </div>
@@ -1702,74 +1702,74 @@ body.theme-ng .usp-node::before {
     <!-- Row 1 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;">
       <div class="wtcell" style="opacity:1;">1</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;">4</div>
-      <div class="wtcell wthl wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;">1.600 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;color:var(--text);opacity:0;">—</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">—</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;">1.600 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;">4</div>
+      <div class="wtcell wthl wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;">1.600 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;color:var(--text);opacity:0;">—</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">—</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;">1.600 €</div>
     </div>
     <!-- Row 2 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;">
       <div class="wtcell">2</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;">4</div>
-      <div class="wtcell wthl wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;">1.600 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;">—</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">—</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;">1.600 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;">4</div>
+      <div class="wtcell wthl wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;">1.600 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;">—</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">—</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;">1.600 €</div>
     </div>
     <!-- Row 3 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;">
       <div class="wtcell">3</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;">4</div>
-      <div class="wtcell wthl wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;">800 + 1.200 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;">—</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">—</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;">2.000 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;">4</div>
+      <div class="wtcell wthl wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;">800 + 1.200 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;">—</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">—</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;">2.000 €</div>
     </div>
     <!-- Row 4 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;">
       <div class="wtcell">4</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;">4</div>
-      <div class="wtcell wthl wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;">1</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">800 €</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;">3.200 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;">4</div>
+      <div class="wtcell wthl wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;">1</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">800 €</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;">3.200 €</div>
     </div>
     <!-- Row 5 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;">
       <div class="wtcell">5</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;">4</div>
-      <div class="wtcell wthl wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;">2</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">1.600 €</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;">4.000 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;">4</div>
+      <div class="wtcell wthl wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;">2</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">1.600 €</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;">4.000 €</div>
     </div>
     <!-- Row 6 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;">
       <div class="wtcell">6</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;">4</div>
-      <div class="wtcell wthl wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;">4</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">3.200 €</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;">5.600 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;">4</div>
+      <div class="wtcell wthl wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;">4</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">3.200 €</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;">5.600 €</div>
     </div>
     <!-- Row 7 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);border-bottom:none;">
       <div class="wtcell">7</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;">4</div>
-      <div class="wtcell wthl wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;">5</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">4.000 €</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;">6.400 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;">4</div>
+      <div class="wtcell wthl wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;">2.400 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;">5</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">4.000 €</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;">6.400 €</div>
     </div>
     <!-- Row 8 -->
     <div style="display:grid;grid-template-columns:80px 90px 120px 110px 130px 160px;border:1px solid var(--border);background:rgba(201,168,76,0.04);">
       <div class="wtcell">8</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease;color:var(--text);">0</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.05s;color:var(--text);">0 €</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.1s;">5</div>
-      <div class="wtcell wt-data" style="opacity:0;transition:opacity .4s ease 0.15s;">4.000 €</div>
-      <div class="wtcell wttotal wt-data" style="opacity:0;transition:opacity .4s ease 0.2s;font-size:20px;">4.000 €</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease;color:var(--text);">0</div>
+      <div class="wtcell wt-data wt-data-a" style="opacity:0;transition:opacity .4s ease 0.05s;color:var(--text);">0 €</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.1s;">5</div>
+      <div class="wtcell wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.15s;">4.000 €</div>
+      <div class="wtcell wttotal wt-data wt-data-b" style="opacity:0;transition:opacity .4s ease 0.2s;font-size:20px;">4.000 €</div>
     </div>
 
   </div>
@@ -2023,10 +2023,11 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
         <li>Aktive Provision</li>
         <li>Passives Einkommen</li>
         <li>Digitale Unterlagen</li>
-        <li style="border-bottom:none;">
-          <strong style="font-family:'Druk Wide Bold',sans-serif;font-size:18px;color:var(--accent-lt);text-shadow:0 0 15px var(--accent-glow);letter-spacing:.03em;text-transform:uppercase;">Kostenlos.</strong>
-        </li>
       </ul>
+      <div id="vorteile-kostenlos" style="margin-top:16px;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease;padding:16px 22px;border:1px solid #22c55e;background:rgba(34,197,94,0.06);position:relative;">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,#22c55e,transparent);"></div>
+        <span style="font-family:'Druk Wide Bold',sans-serif;font-size:36px;color:#4ade80;text-shadow:0 0 25px rgba(34,197,94,0.5);letter-spacing:.04em;text-transform:uppercase;line-height:1;">KOSTENLOS.</span>
+      </div>
     </div>
 
   </div>
@@ -2088,35 +2089,36 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
     const mobCtrl = document.getElementById('mobile-controls');
     const mobProg = document.getElementById('mobile-progress-wrap');
 
-    // Always scale to fit both width and height — never overflow
-    const ctrlH  = (mobCtrl && window.innerWidth < 900) ? (mobCtrl.offsetHeight || 60) : 0;
-    const availW = window.innerWidth;
-    const availH = window.innerHeight - ctrlH;
-    const s      = Math.min(availW / 1280, availH / 720);
-    const scaledH = Math.round(720 * s);
-    const scaledW = Math.round(1280 * s);
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const ctrlH = (vw < 900 && mobCtrl) ? (mobCtrl.offsetHeight || 60) : 0;
+    const availW = vw;
+    const availH = vh - ctrlH;
 
-    // Always use top center so we never overflow horizontally
-    wrapper.style.transformOrigin = 'top center';
+    const s       = Math.min(availW / 1280, availH / 720);
+    const sw      = Math.round(1280 * s);   // scaled width
+    const sh      = Math.round(720  * s);   // scaled height
+
+    // Scale from top-left, then shift right to center horizontally
+    wrapper.style.transformOrigin = 'top left';
     wrapper.style.transform       = `scale(${s})`;
     wrapper.style.width           = '1280px';
-    wrapper.style.height          = scaledH + 'px';
-    wrapper.style.marginLeft      = '0';
-    wrapper.style.marginBottom    = '0';
+    wrapper.style.height          = '720px';
+    wrapper.style.marginLeft      = Math.floor((availW - sw) / 2) + 'px';
+    wrapper.style.marginTop       = Math.floor((availH - sh) / 2) + 'px';
+    wrapper.style.marginBottom    = -Math.ceil(720 * (1 - s)) + 'px';
 
-    if (window.innerWidth < 900) {
+    if (vw < 900) {
       if (mobCtrl) mobCtrl.style.display = 'flex';
       if (mobProg) mobProg.style.display = 'block';
       outer.style.justifyContent = 'flex-start';
+      outer.style.alignItems     = 'flex-start';
     } else {
       if (mobCtrl) mobCtrl.style.display = 'none';
       if (mobProg) mobProg.style.display = 'none';
-      // Vertically center by padding top
-      const topPad = Math.max(0, Math.floor((availH - scaledH) / 2));
-      wrapper.style.marginTop = topPad + 'px';
       outer.style.justifyContent = 'flex-start';
+      outer.style.alignItems     = 'flex-start';
     }
-    outer.style.alignItems = 'center';
     document.body.style.overflow = 'hidden';
   }
   window.addEventListener('resize', resize);
@@ -2128,18 +2130,45 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
   const bar    = document.getElementById('progress-bar');
   const ctr    = document.getElementById('slide-counter');
 
+  // --- Vorteile Kostenlos reveal ---
+  const VORTEILE_ID = 'slide-vorteile';
+  let vorteilRevealed = false;
+
+  function getVorteilIndex() {
+    return Array.from(slides).findIndex(s => s.id === VORTEILE_ID);
+  }
+  function resetVorteil() {
+    vorteilRevealed = false;
+    const el = document.getElementById('vorteile-kostenlos');
+    if (el) { el.style.opacity = '0'; el.style.transform = 'translateY(8px)'; }
+  }
+  function revealVorteil() {
+    vorteilRevealed = true;
+    const el = document.getElementById('vorteile-kostenlos');
+    if (el) { setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 30); }
+  }
+
   // --- Wachstum table row reveal ---
   const WACHSTUM_ID = 'slide-wachstum';
-  let wachstumRevealed = 0;
+  let wachstumRevealed = 0;  // counts half-steps: 0-1 = row1A/B, 2-3 = row2A/B ...
 
   function getWachstumIndex() {
     return Array.from(slides).findIndex(s => s.id === WACHSTUM_ID);
   }
 
-  function getWachstumGroups() {
-    const all = Array.from(document.querySelectorAll('#' + WACHSTUM_ID + ' .wt-data'));
+  function getWachstumSubGroups() {
+    // Returns array of groups in order: row1A, row1B, row2A, row2B ...
+    const aGroups = Array.from(document.querySelectorAll('#' + WACHSTUM_ID + ' .wt-data-a'));
+    const bGroups = Array.from(document.querySelectorAll('#' + WACHSTUM_ID + ' .wt-data-b'));
     const groups = [];
-    for (let i = 0; i < all.length; i += 5) groups.push(all.slice(i, i + 5));
+    const rowsA = [], rowsB = [];
+    for (let i = 0; i < aGroups.length; i += 2) rowsA.push(aGroups.slice(i, i+2));
+    for (let i = 0; i < bGroups.length; i += 3) rowsB.push(bGroups.slice(i, i+3));
+    const total = Math.max(rowsA.length, rowsB.length);
+    for (let i = 0; i < total; i++) {
+      if (rowsA[i]) groups.push(rowsA[i]);
+      if (rowsB[i]) groups.push(rowsB[i]);
+    }
     return groups;
   }
 
@@ -2151,7 +2180,7 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
   }
 
   function revealWachstumRow() {
-    const groups = getWachstumGroups();
+    const groups = getWachstumSubGroups();
     if (wachstumRevealed < groups.length) {
       groups[wachstumRevealed].forEach(c => { c.style.opacity = '1'; });
       wachstumRevealed++;
@@ -2238,6 +2267,14 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
     const npuIdx = getNpuIndex();
     const wtIdx  = getWachstumIndex();
 
+    const vtIdx  = getVorteilIndex();
+
+    // Vorteile: reveal Kostenlos on first forward click
+    if (n > cur && cur === vtIdx && !vorteilRevealed) {
+      revealVorteil(); updateUI(); return;
+    }
+    if (n === vtIdx && n < cur) resetVorteil();
+
     // Wachstum: reveal rows one by one before advancing
     if (n > cur && cur === wtIdx) {
       if (revealWachstumRow()) { updateUI(); return; }
@@ -2269,6 +2306,7 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
     if (cur === scIdx) resetScherer();
     if (cur === npuIdx) resetNpu();
     if (cur === wtIdx) resetWachstum();
+    if (cur === vtIdx) resetVorteil();
     updateUI();
   }
 
@@ -2295,7 +2333,7 @@ body.theme-ng .wttotal { font-family: 'Druk Wide Bold', sans-serif; }
     const wtIdx  = getWachstumIndex();
     if (cur === wtIdx && wachstumRevealed > 0) {
       wachstumRevealed--;
-      const groups = getWachstumGroups();
+      const groups = getWachstumSubGroups();
       groups[wachstumRevealed].forEach(c => { c.style.opacity = '0'; });
       updateUI();
     } else if (cur === erIdx && eureRolleRevealed > 0) {
